@@ -17,10 +17,10 @@ export default async function HomePage() {
           {t('title')}
         </h1>
         <p className="text-xl text-gray-300 mb-8">
-          {t('description')}
+          Your journey to a healthier lifestyle starts here
         </p>
-        <button className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
-          Get Started
+        <button className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+          {t('getStarted')}
         </button>
       </div>
 
