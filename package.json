@@ -1,0 +1,19 @@
+{
+  "name": "fitpersona",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "prisma": "^5.22.0",
+    "typescript": "^5.3.3"
+  }
+}

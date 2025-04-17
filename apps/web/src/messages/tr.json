@@ -1,0 +1,60 @@
+{
+  "profile": {
+    "create": {
+      "title": "Profil Oluştur",
+      "gender": {
+        "label": "Cinsiyet",
+        "male": "Erkek",
+        "female": "Kadın"
+      },
+      "age": {
+        "label": "Yaş"
+      },
+      "weight": {
+        "label": "Kilo (kg)"
+      },
+      "height": {
+        "label": "Boy (cm)"
+      },
+      "goal": {
+        "label": "Hedef",
+        "lose_weight": "Kilo Vermek",
+        "gain_muscle": "Kas Kazanmak",
+        "maintain": "Korumak"
+      },
+      "activityLevel": {
+        "label": "Aktivite Düzeyi",
+        "sedentary": "Hareketsiz",
+        "light": "Hafif Aktif",
+        "moderate": "Orta Aktif",
+        "active": "Aktif",
+        "very_active": "Çok Aktif"
+      },
+      "workoutLocation": {
+        "label": "Spor Yapma Yeri",
+        "home": "Ev",
+        "gym": "Spor Salonu"
+      },
+      "equipment": {
+        "label": "Mevcut Ekipmanlar",
+        "dumbbells": "Dumbbells",
+        "resistance_bands": "Resistance Bands",
+        "yoga_mat": "Yoga Mat",
+        "pull_up_bar": "Pull-up Bar",
+        "kettlebell": "Kettlebell",
+        "jump_rope": "Jump Rope",
+        "none": "Yok"
+      },
+      "medicalConditions": {
+        "label": "Spor Yapmaya Engel Hastalıklar",
+        "hypertension": "Hipertansiyon",
+        "diabetes": "Diyabet",
+        "heart_disease": "Kalp Rahatsızlığı",
+        "joint_problems": "Eklem Problemleri",
+        "back_pain": "Sırt Ağrısı",
+        "none": "Yok"
+      },
+      "submit": "Profili Oluştur"
+    }
+  }
+} 

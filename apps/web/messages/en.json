@@ -1,0 +1,20 @@
+{
+  "Index": {
+    "title": "Welcome to FitPersona",
+    "description": "Your journey to a healthier lifestyle starts here",
+    "features": {
+      "track": {
+        "title": "Track Your Progress",
+        "description": "Monitor your fitness journey with detailed insights and analytics"
+      },
+      "plans": {
+        "title": "Personalized Plans",
+        "description": "Get customized workout and nutrition plans tailored to your goals"
+      },
+      "community": {
+        "title": "Community Support",
+        "description": "Connect with like-minded individuals on their fitness journey"
+      }
+    }
+  }
+} 

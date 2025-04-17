@@ -1,0 +1,20 @@
+{
+  "Index": {
+    "title": "Willkommen bei FitPersona",
+    "description": "Ihre Reise zu einem gesünderen Lebensstil beginnt hier",
+    "features": {
+      "track": {
+        "title": "Verfolgen Sie Ihren Fortschritt",
+        "description": "Überwachen Sie Ihre Fitnessreise mit detaillierten Einblicken und Analysen"
+      },
+      "plans": {
+        "title": "Personalisierte Pläne",
+        "description": "Erhalten Sie maßgeschneiderte Trainings- und Ernährungspläne, die auf Ihre Ziele abgestimmt sind"
+      },
+      "community": {
+        "title": "Community-Unterstützung",
+        "description": "Verbinden Sie sich mit Gleichgesinnten auf ihrer Fitnessreise"
+      }
+    }
+  }
+} 

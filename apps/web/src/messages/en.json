@@ -1,0 +1,60 @@
+{
+  "profile": {
+    "create": {
+      "title": "Create Profile",
+      "gender": {
+        "label": "Gender",
+        "male": "Male",
+        "female": "Female"
+      },
+      "age": {
+        "label": "Age"
+      },
+      "weight": {
+        "label": "Weight (kg)"
+      },
+      "height": {
+        "label": "Height (cm)"
+      },
+      "goal": {
+        "label": "Goal",
+        "lose_weight": "Lose Weight",
+        "gain_muscle": "Gain Muscle",
+        "maintain": "Maintain"
+      },
+      "activityLevel": {
+        "label": "Activity Level",
+        "sedentary": "Sedentary",
+        "light": "Lightly Active",
+        "moderate": "Moderately Active",
+        "active": "Active",
+        "very_active": "Very Active"
+      },
+      "workoutLocation": {
+        "label": "Workout Location",
+        "home": "Home",
+        "gym": "Gym"
+      },
+      "equipment": {
+        "label": "Available Equipment",
+        "dumbbells": "Dumbbells",
+        "resistance_bands": "Resistance Bands",
+        "yoga_mat": "Yoga Mat",
+        "pull_up_bar": "Pull-up Bar",
+        "kettlebell": "Kettlebell",
+        "jump_rope": "Jump Rope",
+        "none": "None"
+      },
+      "medicalConditions": {
+        "label": "Medical Conditions",
+        "hypertension": "Hypertension",
+        "diabetes": "Diabetes",
+        "heart_disease": "Heart Disease",
+        "joint_problems": "Joint Problems",
+        "back_pain": "Back Pain",
+        "none": "None"
+      },
+      "submit": "Create Profile"
+    }
+  }
+} 

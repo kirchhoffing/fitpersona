@@ -1,0 +1,20 @@
+{
+  "Index": {
+    "title": "FitPersona'ya Hoş Geldiniz",
+    "description": "Daha sağlıklı bir yaşam yolculuğunuz burada başlıyor",
+    "features": {
+      "track": {
+        "title": "İlerlemenizi Takip Edin",
+        "description": "Detaylı içgörüler ve analizlerle fitness yolculuğunuzu izleyin"
+      },
+      "plans": {
+        "title": "Kişiselleştirilmiş Planlar",
+        "description": "Hedeflerinize uygun özelleştirilmiş antrenman ve beslenme planları alın"
+      },
+      "community": {
+        "title": "Topluluk Desteği",
+        "description": "Fitness yolculuğunuzda benzer düşünen bireylerle bağlantı kurun"
+      }
+    }
+  }
+} 

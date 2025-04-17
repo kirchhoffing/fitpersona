@@ -1,0 +1,60 @@
+{
+  "profile": {
+    "create": {
+      "title": "Profil erstellen",
+      "gender": {
+        "label": "Geschlecht",
+        "male": "Männlich",
+        "female": "Weiblich"
+      },
+      "age": {
+        "label": "Alter"
+      },
+      "weight": {
+        "label": "Gewicht (kg)"
+      },
+      "height": {
+        "label": "Größe (cm)"
+      },
+      "goal": {
+        "label": "Ziel",
+        "lose_weight": "Abnehmen",
+        "gain_muscle": "Muskeln aufbauen",
+        "maintain": "Erhalten"
+      },
+      "activityLevel": {
+        "label": "Aktivitätsniveau",
+        "sedentary": "Sitzend",
+        "light": "Leicht aktiv",
+        "moderate": "Mäßig aktiv",
+        "active": "Aktiv",
+        "very_active": "Sehr aktiv"
+      },
+      "workoutLocation": {
+        "label": "Trainingsort",
+        "home": "Zuhause",
+        "gym": "Fitnessstudio"
+      },
+      "equipment": {
+        "label": "Verfügbare Ausrüstung",
+        "dumbbells": "Hanteln",
+        "resistance_bands": "Widerstandsbänder",
+        "yoga_mat": "Yogamatte",
+        "pull_up_bar": "Klimmzugstange",
+        "kettlebell": "Kettlebell",
+        "jump_rope": "Springseil",
+        "none": "Keine"
+      },
+      "medicalConditions": {
+        "label": "Medizinische Bedingungen",
+        "hypertension": "Bluthochdruck",
+        "diabetes": "Diabetes",
+        "heart_disease": "Herzerkrankung",
+        "joint_problems": "Gelenkprobleme",
+        "back_pain": "Rückenschmerzen",
+        "none": "Keine"
+      },
+      "submit": "Profil erstellen"
+    }
+  }
+} 
