@@ -14,6 +14,22 @@ A full-stack TypeScript application for creating personalized fitness and nutrit
 - **Package Manager**: pnpm (for efficient monorepo management)
 - **Internationalization**: next-intl (for multi-language support)
 
+## 🛠️ Recent Updates
+
+### User Profile & Authentication
+- Added user profile creation with detailed fitness information
+- Implemented secure authentication using NextAuth.js
+- Created multi-step onboarding form with state management
+- Added type-safe form validation and API endpoints
+
+### Database Schema
+- Added Profile model with fields:
+  - Personal info (gender, birth year)
+  - Physical metrics (height, weight)
+  - Fitness goals and preferences
+  - Activity level and equipment availability
+  - Dietary preferences
+
 ## 🌍 Internationalization
 
 The application supports three languages:
@@ -41,6 +57,10 @@ fitpersona/
 │   └── api/          # Express backend
 ├── packages/
 │   ├── database/     # Prisma schema & client
+│   │   └── prisma/
+│   │       └── schema.prisma
+│   │   └── src/
+│   │       └── client.ts
 │   ├── ui/           # Shared UI components
 │   └── config/       # Shared configuration
 ├── pnpm-workspace.yaml

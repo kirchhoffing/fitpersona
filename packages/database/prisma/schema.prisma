@@ -11,24 +11,52 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String?
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  profile       Profile?
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  workouts  Workout[]
+  profile   Profile?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Workout {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  exercises   Exercise[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Exercise {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  sets        Int
+  reps        Int
+  weight      Float?
+  workoutId   String
+  workout     Workout  @relation(fields: [workoutId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Profile {
-  id        String   @id @default(cuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id])
-  age       Int?
-  height    Float?
-  weight    Float?
-  goals     String[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id])
+  gender            String
+  birthYear         Int
+  height            Int
+  weight            Float
+  goal              String
+  activityLevel     String
+  equipment         String
+  dietaryPreferences String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 } 
