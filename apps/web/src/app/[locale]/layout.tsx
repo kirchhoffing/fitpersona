@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider } from 'next-intl/client';
 import { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import '../globals.css';
