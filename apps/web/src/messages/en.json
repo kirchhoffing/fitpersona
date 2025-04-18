@@ -57,6 +57,42 @@
           "title": "Stay Fit",
           "description": "I want to maintain my current fitness level and stay healthy"
         }
+      },
+      "activityLevel": {
+        "title": "What is your activity level?",
+        "sedentary": "Sedentary",
+        "sedentary_description": "I mostly work sitting down and do very little exercise",
+        "lightly_active": "Lightly Active",
+        "lightly_active_description": "Light exercise or daily walks 1-3 days per week",
+        "active": "Active",
+        "active_description": "Moderate intensity exercise 3-5 days per week",
+        "very_active": "Very Active",
+        "very_active_description": "Intense exercise or physical work 6-7 days per week"
+      },
+      "equipment": {
+        "title": "Choose your workout location",
+        "body_weight": "Bodyweight Only",
+        "body_weight_description": "I want to exercise using just my body weight",
+        "home_equipment": "Home Equipment",
+        "home_equipment_description": "I have some fitness equipment at home",
+        "gym": "Gym",
+        "gym_description": "I will work out at a gym"
+      },
+      "health": {
+        "title": "Do you have any health conditions or allergies?",
+        "description": "Select any health conditions or allergies you may have. Leave empty if none.",
+        "back_pain": "Back Pain",
+        "neck_pain": "Neck Pain",
+        "knee_problem": "Knee Problem",
+        "shoulder_pain": "Shoulder Pain",
+        "diabetes": "Diabetes",
+        "heart_condition": "Heart Condition",
+        "high_blood_pressure": "High Blood Pressure",
+        "asthma": "Asthma",
+        "gluten_allergy": "Gluten Allergy",
+        "lactose_intolerance": "Lactose Intolerance",
+        "nut_allergy": "Nut Allergy",
+        "pregnancy": "Pregnancy"
       }
     },
     "navigation": {
@@ -90,6 +126,7 @@
       },
       "activityLevel": {
         "label": "Activity Level",
+        "title": "What is your activity level?",
         "sedentary": "Sedentary",
         "light": "Lightly Active",
         "moderate": "Moderately Active",
@@ -106,7 +143,7 @@
         "dumbbells": "Dumbbells",
         "resistance_bands": "Resistance Bands",
         "yoga_mat": "Yoga Mat",
-        "pull_up_bar": "Pull-up Bar",
+        "pull_up_bar": "Pull‑up Bar",
         "kettlebell": "Kettlebell",
         "jump_rope": "Jump Rope",
         "none": "None"
@@ -123,4 +160,4 @@
       "submit": "Create Profile"
     }
   }
-} 
+}

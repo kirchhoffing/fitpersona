@@ -44,7 +44,7 @@
         "example": "Beispiel: 75.5 kg"
       },
       "goal": {
-        "title": "Was ist dein Ziel?",
+        "title": "Was ist Ihr Ziel?",
         "lose_weight": {
           "title": "Abnehmen",
           "description": "Ich möchte Gewicht verlieren und Fett verbrennen"
@@ -57,6 +57,42 @@
           "title": "Fit bleiben",
           "description": "Ich möchte mein aktuelles Fitnessniveau halten und gesund bleiben"
         }
+      },
+      "activityLevel": {
+        "title": "Wie aktiv sind Sie?",
+        "sedentary": "Sitzend",
+        "sedentary_description": "Ich arbeite hauptsächlich im Sitzen und mache sehr wenig Bewegung",
+        "lightly_active": "Leicht Aktiv",
+        "lightly_active_description": "Leichte Bewegung oder tägliche Spaziergänge 1-3 Tage pro Woche",
+        "active": "Aktiv",
+        "active_description": "Moderate Bewegung 3-5 Tage pro Woche",
+        "very_active": "Sehr Aktiv",
+        "very_active_description": "Intensive Bewegung oder körperliche Arbeit 6-7 Tage pro Woche"
+      },
+      "equipment": {
+        "title": "Wählen Sie Ihren Trainingsort",
+        "body_weight": "Nur Körpergewicht",
+        "body_weight_description": "Ich möchte nur mit meinem Körpergewicht trainieren",
+        "home_equipment": "Heim-Equipment",
+        "home_equipment_description": "Ich habe Fitnessgeräte zu Hause",
+        "gym": "Fitnessstudio",
+        "gym_description": "Ich werde im Fitnessstudio trainieren"
+      },
+      "health": {
+        "title": "Haben Sie gesundheitliche Einschränkungen oder Allergien?",
+        "description": "Wählen Sie vorhandene gesundheitliche Einschränkungen oder Allergien aus. Lassen Sie es leer, wenn keine vorhanden sind.",
+        "back_pain": "Rückenschmerzen",
+        "neck_pain": "Nackenschmerzen",
+        "knee_problem": "Knieprobleme",
+        "shoulder_pain": "Schulterschmerzen",
+        "diabetes": "Diabetes",
+        "heart_condition": "Herzerkrankung",
+        "high_blood_pressure": "Bluthochdruck",
+        "asthma": "Asthma",
+        "gluten_allergy": "Glutenallergie",
+        "lactose_intolerance": "Laktoseintoleranz",
+        "nut_allergy": "Nussallergie",
+        "pregnancy": "Schwangerschaft"
       }
     },
     "navigation": {
@@ -90,6 +126,7 @@
       },
       "activityLevel": {
         "label": "Aktivitätsniveau",
+        "title": "Was ist Ihr Aktivitätsniveau?",
         "sedentary": "Sitzend",
         "light": "Leicht aktiv",
         "moderate": "Mäßig aktiv",
@@ -123,4 +160,4 @@
       "submit": "Profil erstellen"
     }
   }
-} 
+}

@@ -1,149 +1,112 @@
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { stepSchemas } from '@/schemas/onboardingSchema'
 import { StepNavigator } from '../StepNavigator'
+import { useTranslations } from 'next-intl'
 
 type FormData = {
   activityLevel: 'sedentary' | 'lightly_active' | 'active' | 'very_active'
 }
 
 export function Step6() {
-  const { activityLevel, setActivityLevel } = useOnboardingStore()
+  const { activityLevel: initialLevel, setActivityLevel } = useOnboardingStore()
+  const t = useTranslations('onboarding.steps.activityLevel')
 
   const {
+    register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(stepSchemas[6]),
-    defaultValues: { activityLevel: activityLevel || undefined },
+    defaultValues: { activityLevel: initialLevel ?? undefined },
   })
 
-  const onSubmit = (data: FormData) => {
-    setActivityLevel(data.activityLevel)
-  }
+  // Seçim değiştiğinde store'u güncelle
+  useEffect(() => {
+    const sub = watch((v) => {
+      if (v.activityLevel) setActivityLevel(v.activityLevel)
+    })
+    return () => sub.unsubscribe()
+  }, [watch, setActivityLevel])
+
+  const selected = watch('activityLevel')
+
+  const options = [
+    {
+      value: 'sedentary' as const,
+      emoji: '🪑',
+      title: t('sedentary'),
+      description: t('sedentary_description'),
+    },
+    {
+      value: 'lightly_active' as const,
+      emoji: '🚶‍♂️',
+      title: t('lightly_active'),
+      description: t('lightly_active_description'),
+    },
+    {
+      value: 'active' as const,
+      emoji: '🏃‍♂️',
+      title: t('active'),
+      description: t('active_description'),
+    },
+    {
+      value: 'very_active' as const,
+      emoji: '💪',
+      title: t('very_active'),
+      description: t('very_active_description'),
+    },
+  ]
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Aktivite düzeyiniz nedir?</h2>
-      
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {/* Başlığı beyaz yaptık */}
+      <h2 className="text-2xl font-bold text-white mb-6">
+        {t('title')}
+      </h2>
+
+      <form
+        onSubmit={handleSubmit(({ activityLevel }) =>
+          setActivityLevel(activityLevel)
+        )}
+        className="space-y-6"
+      >
         <div className="space-y-4">
-          {/* Sedentary Option */}
-          <label
-            className={`block p-4 border-2 rounded-lg cursor-pointer transition-all ${
-              activityLevel === 'sedentary'
-                ? 'border-blue-600 bg-blue-50'
-                : 'border-gray-200 hover:border-blue-400'
-            }`}
-          >
-            <input
-              type="radio"
-              name="activityLevel"
-              value="sedentary"
-              className="sr-only"
-              onChange={() => setActivityLevel('sedentary')}
-              checked={activityLevel === 'sedentary'}
-            />
-            <div className="flex items-center">
-              <div className="text-2xl mr-4">🪑</div>
+          {options.map(({ value, emoji, title, description }) => (
+            <label
+              key={value}
+              className={`flex items-center w-full p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                selected === value
+                  ? 'border-blue-600 bg-green-600'
+                  : 'border-gray-200 hover:border-blue-400'
+              }`}
+            >
+              <input
+                {...register('activityLevel')}
+                type="radio"
+                value={value}
+                className="sr-only"
+              />
+              <div className="text-2xl mr-4">{emoji}</div>
               <div>
-                <span className="font-medium block">Sedanter</span>
-                <p className="text-sm text-gray-600">
-                  Çoğunlukla oturarak çalışıyorum ve çok az egzersiz yapıyorum
-                </p>
+                <span className="font-medium block">{title}</span>
+                <p className="text-sm text-white">{description}</p>
               </div>
-            </div>
-          </label>
-
-          {/* Lightly Active Option */}
-          <label
-            className={`block p-4 border-2 rounded-lg cursor-pointer transition-all ${
-              activityLevel === 'lightly_active'
-                ? 'border-blue-600 bg-blue-50'
-                : 'border-gray-200 hover:border-blue-400'
-            }`}
-          >
-            <input
-              type="radio"
-              name="activityLevel"
-              value="lightly_active"
-              className="sr-only"
-              onChange={() => setActivityLevel('lightly_active')}
-              checked={activityLevel === 'lightly_active'}
-            />
-            <div className="flex items-center">
-              <div className="text-2xl mr-4">🚶‍♂️</div>
-              <div>
-                <span className="font-medium block">Hafif Aktif</span>
-                <p className="text-sm text-gray-600">
-                  Haftada 1-3 gün hafif egzersiz yapıyorum veya günlük yürüyüş yapıyorum
-                </p>
-              </div>
-            </div>
-          </label>
-
-          {/* Active Option */}
-          <label
-            className={`block p-4 border-2 rounded-lg cursor-pointer transition-all ${
-              activityLevel === 'active'
-                ? 'border-blue-600 bg-blue-50'
-                : 'border-gray-200 hover:border-blue-400'
-            }`}
-          >
-            <input
-              type="radio"
-              name="activityLevel"
-              value="active"
-              className="sr-only"
-              onChange={() => setActivityLevel('active')}
-              checked={activityLevel === 'active'}
-            />
-            <div className="flex items-center">
-              <div className="text-2xl mr-4">🏃‍♂️</div>
-              <div>
-                <span className="font-medium block">Aktif</span>
-                <p className="text-sm text-gray-600">
-                  Haftada 3-5 gün orta yoğunlukta egzersiz yapıyorum
-                </p>
-              </div>
-            </div>
-          </label>
-
-          {/* Very Active Option */}
-          <label
-            className={`block p-4 border-2 rounded-lg cursor-pointer transition-all ${
-              activityLevel === 'very_active'
-                ? 'border-blue-600 bg-blue-50'
-                : 'border-gray-200 hover:border-blue-400'
-            }`}
-          >
-            <input
-              type="radio"
-              name="activityLevel"
-              value="very_active"
-              className="sr-only"
-              onChange={() => setActivityLevel('very_active')}
-              checked={activityLevel === 'very_active'}
-            />
-            <div className="flex items-center">
-              <div className="text-2xl mr-4">💪</div>
-              <div>
-                <span className="font-medium block">Çok Aktif</span>
-                <p className="text-sm text-gray-600">
-                  Haftada 6-7 gün yoğun egzersiz yapıyorum veya fiziksel işte çalışıyorum
-                </p>
-              </div>
-            </div>
-          </label>
+            </label>
+          ))}
         </div>
 
         {errors.activityLevel && (
-          <p className="text-red-500 text-sm mt-2">{errors.activityLevel.message}</p>
+          <p className="text-red-500 text-sm">
+            {errors.activityLevel.message}
+          </p>
         )}
 
         <StepNavigator />
       </form>
     </div>
   )
-} 
+}

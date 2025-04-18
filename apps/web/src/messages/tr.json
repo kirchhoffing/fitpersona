@@ -57,6 +57,42 @@
           "title": "Formda Kalmak",
           "description": "Mevcut formumu korumak ve sağlıklı kalmak istiyorum"
         }
+      },
+      "activityLevel": {
+        "title": "Aktivite Seviyeniz nedir?",
+        "sedentary": "Sedanter",
+        "sedentary_description": "Çoğunlukla oturarak çalışıyorum ve çok az egzersiz yapıyorum",
+        "lightly_active": "Hafif Aktif",
+        "lightly_active_description": "Haftada 1-3 gün hafif egzersiz veya günlük yürüyüş",
+        "active": "Aktif",
+        "active_description": "Haftada 3-5 gün orta yoğunlukta egzersiz yapıyorum",
+        "very_active": "Çok Aktif",
+        "very_active_description": "Haftada 6-7 gün yoğun egzersiz veya fiziksel iş"
+      },
+      "equipment": {
+        "title": "Antrenman yerinizi seçin",
+        "body_weight": "Vücut Ağırlığı",
+        "body_weight_description": "Sadece vücut ağırlığımla egzersiz yapmak istiyorum",
+        "home_equipment": "Ev Ekipmanları",
+        "home_equipment_description": "Evde bazı fitness ekipmanlarım var",
+        "gym": "Spor Salonu",
+        "gym_description": "Spor salonunda antrenman yapacağım"
+      },
+      "health": {
+        "title": "Sağlık durumunuz veya alerjileriniz var mı?",
+        "description": "Varsa sağlık durumunuzu veya alerjilerinizi seçin. Yoksa boş bırakabilirsiniz.",
+        "back_pain": "Bel Fıtığı",
+        "neck_pain": "Boyun Fıtığı",
+        "knee_problem": "Diz Problemi",
+        "shoulder_pain": "Omuz Problemi",
+        "diabetes": "Diyabet",
+        "heart_condition": "Kalp Rahatsızlığı",
+        "high_blood_pressure": "Yüksek Tansiyon",
+        "asthma": "Astım",
+        "gluten_allergy": "Gluten Alerjisi",
+        "lactose_intolerance": "Laktoz İntoleransı",
+        "nut_allergy": "Fıstık/Kuruyemiş Alerjisi",
+        "pregnancy": "Hamilelik"
       }
     },
     "navigation": {
@@ -90,6 +126,7 @@
       },
       "activityLevel": {
         "label": "Aktivite Seviyesi",
+        "title": "Aktivite Seviyeniz nedir?",
         "sedentary": "Hareketsiz",
         "light": "Az Hareketli",
         "moderate": "Orta Düzeyde Hareketli",
@@ -123,4 +160,4 @@
       "submit": "Profil Oluştur"
     }
   }
-} 
+}

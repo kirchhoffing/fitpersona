@@ -1,109 +1,89 @@
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { stepSchemas } from '@/schemas/onboardingSchema'
 import { StepNavigator } from '../StepNavigator'
 import { useTranslations } from 'next-intl'
+import { Mars, Venus, NonBinary } from 'lucide-react'
 
-type FormData = {
-  gender: 'male' | 'female' | 'other'
-}
+type FormData = { gender: 'male' | 'female' | 'other' }
 
 export function Step1() {
-  const { gender, setGender } = useOnboardingStore()
+  const { gender: initialGender, setGender } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.gender')
 
   const {
+    register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(stepSchemas[1]),
-    defaultValues: { gender: gender || undefined },
+    // initialGender null değilse { gender: ... }, aksi takdirde boş obje
+    defaultValues: initialGender != null 
+      ? { gender: initialGender } 
+      : {},
   })
+  
+
+  // Eğer kullanıcının seçimini anlık store'a da yansıtmak istersen:
+  useEffect(() => {
+    const subscription = watch((value) => {
+      if (value.gender) setGender(value.gender)
+    })
+    return () => subscription.unsubscribe()
+  }, [watch, setGender])
+
+  const selected = watch('gender')
+
+  const options: {
+    value: FormData['gender']
+    Icon: React.ComponentType<{ className?: string }>
+    label: string
+  }[] = [
+    { value: 'male',   Icon: Mars,      label: t('male')   },
+    { value: 'female', Icon: Venus,     label: t('female') },
+    { value: 'other',  Icon: NonBinary, label: t('other')  },
+  ]
 
   const onSubmit = (data: FormData) => {
+    // Store zaten useEffect ile güncelleniyor, ama burayı da boş bırakmamak için:
     setGender(data.gender)
   }
 
   return (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-2xl font-bold text-white mb-6">{t('title')}</h2>
-      
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-3 gap-4">
-          {/* Male Option */}
-          <label
-            className={`relative p-6 border-2 rounded-lg cursor-pointer transition-all ${
-              gender === 'male'
-                ? 'border-blue-500 bg-blue-900/30'
-                : 'border-gray-700 hover:border-blue-700 bg-gray-700/50'
-            }`}
-          >
-            <input
-              type="radio"
-              name="gender"
-              value="male"
-              className="sr-only"
-              onChange={() => setGender('male')}
-              checked={gender === 'male'}
-            />
-            <div className="text-center">
-              <div className="text-4xl mb-3">👨</div>
-              <span className="font-medium text-gray-200">{t('male')}</span>
-            </div>
-          </label>
-
-          {/* Female Option */}
-          <label
-            className={`relative p-6 border-2 rounded-lg cursor-pointer transition-all ${
-              gender === 'female'
-                ? 'border-blue-500 bg-blue-900/30'
-                : 'border-gray-700 hover:border-blue-700 bg-gray-700/50'
-            }`}
-          >
-            <input
-              type="radio"
-              name="gender"
-              value="female"
-              className="sr-only"
-              onChange={() => setGender('female')}
-              checked={gender === 'female'}
-            />
-            <div className="text-center">
-              <div className="text-4xl mb-3">👩</div>
-              <span className="font-medium text-gray-200">{t('female')}</span>
-            </div>
-          </label>
-
-          {/* Other Option */}
-          <label
-            className={`relative p-6 border-2 rounded-lg cursor-pointer transition-all ${
-              gender === 'other'
-                ? 'border-blue-500 bg-blue-900/30'
-                : 'border-gray-700 hover:border-blue-700 bg-gray-700/50'
-            }`}
-          >
-            <input
-              type="radio"
-              name="gender"
-              value="other"
-              className="sr-only"
-              onChange={() => setGender('other')}
-              checked={gender === 'other'}
-            />
-            <div className="text-center">
-              <div className="text-4xl mb-3">🧑</div>
-              <span className="font-medium text-gray-200">{t('other')}</span>
-            </div>
-          </label>
+        <div className="grid grid-cols-3 gap-4 justify-items-center">
+          {options.map(({ value, Icon, label }) => (
+            <label
+              key={value}
+              className={`flex flex-col items-center justify-center w-full p-6 border-2 rounded-lg cursor-pointer transition-all ${
+                selected === value
+                  ? 'border-blue-500 bg-green-600'
+                  : 'border-gray-700 hover:border-blue-700 bg-gray-700/50'
+              }`}
+            >
+              <input
+                {...register('gender')}
+                type="radio"
+                value={value}
+                className="sr-only"
+              />
+              <Icon className="text-4xl mb-3" />
+              <span className="font-medium text-white">{label}</span>
+            </label>
+          ))}
         </div>
 
         {errors.gender && (
-          <p className="text-red-400 text-sm mt-2">{errors.gender.message}</p>
+          <p className="text-red-400 text-sm">{errors.gender.message}</p>
         )}
 
         <StepNavigator />
       </form>
     </div>
   )
-} 
+}
