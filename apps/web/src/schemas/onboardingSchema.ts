@@ -10,10 +10,10 @@ export const onboardingSchema = z.object({
     required_error: 'Lütfen cinsiyetinizi seçin',
   }),
 
-  // Step 2: Birth Year
-  birthYear: z.number()
-    .min(1900, 'Geçerli bir doğum yılı girin')
-    .max(currentYear, 'Geçerli bir doğum yılı girin'),
+  // Step 2: Age
+  age: z.number()
+    .min(13, 'Geçerli bir yaş girin')
+    .max(120, 'Geçerli bir yaş girin'),
 
   // Step 3: Height
   height: z.number()
@@ -49,12 +49,28 @@ export type OnboardingFormData = z.infer<typeof onboardingSchema>
 
 // Individual step schemas for step-by-step validation
 export const stepSchemas = {
-  1: z.object({ gender: onboardingSchema.shape.gender }),
-  2: z.object({ birthYear: onboardingSchema.shape.birthYear }),
-  3: z.object({ height: onboardingSchema.shape.height }),
-  4: z.object({ weight: onboardingSchema.shape.weight }),
-  5: z.object({ goal: onboardingSchema.shape.goal }),
-  6: z.object({ activityLevel: onboardingSchema.shape.activityLevel }),
-  7: z.object({ equipment: onboardingSchema.shape.equipment }),
-  8: z.object({ dietaryPreferences: onboardingSchema.shape.dietaryPreferences }),
+  1: z.object({
+    gender: z.enum(['male', 'female', 'other']),
+  }),
+  2: z.object({
+    age: z.number().min(13).max(120),
+  }),
+  3: z.object({
+    height: z.number().min(100).max(250),
+  }),
+  4: z.object({
+    weight: z.number().min(30).max(300),
+  }),
+  5: z.object({
+    goal: z.enum(['lose_weight', 'gain_muscle', 'maintain_fitness']),
+  }),
+  6: z.object({
+    activityLevel: z.enum(['sedentary', 'lightly_active', 'active', 'very_active']),
+  }),
+  7: z.object({
+    workoutLocation: z.enum(['home', 'gym']),
+  }),
+  8: z.object({
+    dietaryPreferences: z.string().max(500).optional(),
+  }),
 } 

@@ -1,7 +1,13 @@
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
+import { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import '../globals.css';
+
+export const metadata: Metadata = {
+  title: "FitPersona - Home",
+  description: "Your personal fitness companion",
+};
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'tr' }, { locale: 'de' }];
@@ -22,8 +28,8 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
-      <body>
+    <html lang={locale} className="dark">
+      <body className="bg-gray-900 text-white">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
           <main>{children}</main>

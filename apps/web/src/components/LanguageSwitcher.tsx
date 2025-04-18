@@ -7,17 +7,17 @@ const languages = [
   {
     code: 'en',
     name: 'EN',
-    flag: '/flags/us.svg'
+    flag: 'https://flagcdn.com/w40/gb.png'
   },
   {
     code: 'tr',
     name: 'TR',
-    flag: '/flags/tr.svg'
+    flag: 'https://flagcdn.com/w40/tr.png'
   },
   {
     code: 'de',
     name: 'DE',
-    flag: '/flags/de.svg'
+    flag: 'https://flagcdn.com/w40/de.png'
   }
 ];
 
@@ -28,6 +28,10 @@ export default function LanguageSwitcher() {
   const currentLocale = pathname.split('/')[1] || 'en';
 
   const handleLanguageChange = (locale: string) => {
+    // Save the selected language to localStorage
+    localStorage.setItem('preferredLanguage', locale);
+    
+    // Update the URL
     const newPath = pathname.replace(`/${currentLocale}`, `/${locale}`);
     router.push(newPath);
   };
@@ -40,8 +44,8 @@ export default function LanguageSwitcher() {
           onClick={() => handleLanguageChange(lang.code)}
           className={`flex items-center space-x-1 px-2 py-1 rounded-md transition-colors ${
             currentLocale === lang.code
-              ? 'bg-primary-100 text-primary-700'
-              : 'hover:bg-gray-100'
+              ? 'bg-primary-600 text-white'
+              : 'hover:bg-gray-700'
           }`}
         >
           <Image
@@ -50,8 +54,9 @@ export default function LanguageSwitcher() {
             width={20}
             height={15}
             className="rounded-sm"
+            unoptimized
           />
-          <span className="text-sm font-bold text-black">{lang.name}</span>
+          <span className="text-sm font-bold text-white">{lang.name}</span>
         </button>
       ))}
     </div>

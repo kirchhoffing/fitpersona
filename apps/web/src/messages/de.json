@@ -1,4 +1,70 @@
 {
+  "Index": {
+    "title": "Willkommen bei FitPersona",
+    "description": "Ihre Reise zu einem gesünderen Lebensstil beginnt hier",
+    "getStarted": "Loslegen",
+    "features": {
+      "track": {
+        "title": "Verfolgen Sie Ihren Fortschritt",
+        "description": "Überwachen Sie Ihre Fitness-Reise mit detaillierter Verfolgung von Workouts, Messungen und Erfolgen"
+      },
+      "plans": {
+        "title": "Personalisierte Pläne",
+        "description": "Erhalten Sie maßgeschneiderte Trainings- und Ernährungspläne, die auf Ihre Ziele und Vorlieben abgestimmt sind"
+      },
+      "community": {
+        "title": "Werden Sie Teil der Community",
+        "description": "Vernetzen Sie sich mit Gleichgesinnten, teilen Sie Erfahrungen und bleiben Sie gemeinsam motiviert"
+      }
+    }
+  },
+  "onboarding": {
+    "title": "Erstellen Sie Ihr persönliches Fitnessprofil",
+    "description": "Helfen Sie uns, einen personalisierten Fitness- und Ernährungsplan zu erstellen, indem Sie einige Fragen beantworten.",
+    "steps": {
+      "gender": {
+        "title": "Was ist Ihr Geschlecht?",
+        "male": "Männlich",
+        "female": "Weiblich",
+        "other": "Andere"
+      },
+      "age": {
+        "title": "Wie alt sind Sie?",
+        "placeholder": "Geben Sie Ihr Alter ein",
+        "example": "Beispiel: 25"
+      },
+      "height": {
+        "title": "Wie groß sind Sie?",
+        "placeholder": "Geben Sie Ihre Größe in cm ein",
+        "example": "Beispiel: 175 cm"
+      },
+      "weight": {
+        "title": "Wie viel wiegen Sie?",
+        "placeholder": "Geben Sie Ihr Gewicht in kg ein",
+        "example": "Beispiel: 75.5 kg"
+      },
+      "goal": {
+        "title": "Was ist dein Ziel?",
+        "lose_weight": {
+          "title": "Abnehmen",
+          "description": "Ich möchte Gewicht verlieren und Fett verbrennen"
+        },
+        "gain_muscle": {
+          "title": "Muskeln aufbauen",
+          "description": "Ich möchte Muskelmasse aufbauen und Kraft gewinnen"
+        },
+        "maintain_fitness": {
+          "title": "Fit bleiben",
+          "description": "Ich möchte mein aktuelles Fitnessniveau halten und gesund bleiben"
+        }
+      }
+    },
+    "navigation": {
+      "back": "Zurück",
+      "next": "Weiter",
+      "complete": "Abschließen"
+    }
+  },
   "profile": {
     "create": {
       "title": "Profil erstellen",
@@ -19,7 +85,7 @@
       "goal": {
         "label": "Ziel",
         "lose_weight": "Abnehmen",
-        "gain_muscle": "Muskeln aufbauen",
+        "gain_muscle": "Muskelaufbau",
         "maintain": "Erhalten"
       },
       "activityLevel": {
@@ -46,7 +112,7 @@
         "none": "Keine"
       },
       "medicalConditions": {
-        "label": "Medizinische Bedingungen",
+        "label": "Gesundheitszustand",
         "hypertension": "Bluthochdruck",
         "diabetes": "Diabetes",
         "heart_disease": "Herzerkrankung",

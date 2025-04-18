@@ -1,4 +1,70 @@
 {
+  "Index": {
+    "title": "FitPersona'ya Hoş Geldiniz",
+    "description": "Daha sağlıklı bir yaşam tarzına giden yolculuğunuz burada başlıyor",
+    "getStarted": "Başla",
+    "features": {
+      "track": {
+        "title": "İlerlemenizi Takip Edin",
+        "description": "Antrenmanlarınızı, ölçümlerinizi ve başarılarınızı detaylı bir şekilde takip edin"
+      },
+      "plans": {
+        "title": "Kişiselleştirilmiş Planlar",
+        "description": "Hedeflerinize ve tercihlerinize göre özelleştirilmiş antrenman ve beslenme planları alın"
+      },
+      "community": {
+        "title": "Topluluğa Katılın",
+        "description": "Benzer düşünen insanlarla bağlantı kurun, deneyimlerinizi paylaşın ve birlikte motive olun"
+      }
+    }
+  },
+  "onboarding": {
+    "title": "Kişisel Fitness Profilinizi Oluşturun",
+    "description": "Birkaç soruyu yanıtlayarak size özel fitness ve beslenme planı oluşturmamıza yardımcı olun.",
+    "steps": {
+      "gender": {
+        "title": "Cinsiyetiniz nedir?",
+        "male": "Erkek",
+        "female": "Kadın",
+        "other": "Diğer"
+      },
+      "age": {
+        "title": "Yaşınız nedir?",
+        "placeholder": "Yaşınızı girin",
+        "example": "Örnek: 25"
+      },
+      "height": {
+        "title": "Boyunuz nedir?",
+        "placeholder": "Boyunuzu cm cinsinden girin",
+        "example": "Örnek: 175 cm"
+      },
+      "weight": {
+        "title": "Kilonuz nedir?",
+        "placeholder": "Kilonuzu kg cinsinden girin",
+        "example": "Örnek: 75.5 kg"
+      },
+      "goal": {
+        "title": "Hedefiniz nedir?",
+        "lose_weight": {
+          "title": "Kilo Vermek",
+          "description": "Kilo vermek ve yağ yakmak istiyorum"
+        },
+        "gain_muscle": {
+          "title": "Kas Kazanmak",
+          "description": "Kas kütlesini artırmak ve güç kazanmak istiyorum"
+        },
+        "maintain_fitness": {
+          "title": "Formda Kalmak",
+          "description": "Mevcut formumu korumak ve sağlıklı kalmak istiyorum"
+        }
+      }
+    },
+    "navigation": {
+      "back": "Geri",
+      "next": "İleri",
+      "complete": "Tamamla"
+    }
+  },
   "profile": {
     "create": {
       "title": "Profil Oluştur",
@@ -23,38 +89,38 @@
         "maintain": "Korumak"
       },
       "activityLevel": {
-        "label": "Aktivite Düzeyi",
+        "label": "Aktivite Seviyesi",
         "sedentary": "Hareketsiz",
-        "light": "Hafif Aktif",
-        "moderate": "Orta Aktif",
-        "active": "Aktif",
-        "very_active": "Çok Aktif"
+        "light": "Az Hareketli",
+        "moderate": "Orta Düzeyde Hareketli",
+        "active": "Hareketli",
+        "very_active": "Çok Hareketli"
       },
       "workoutLocation": {
-        "label": "Spor Yapma Yeri",
+        "label": "Antrenman Yeri",
         "home": "Ev",
         "gym": "Spor Salonu"
       },
       "equipment": {
         "label": "Mevcut Ekipmanlar",
-        "dumbbells": "Dumbbells",
-        "resistance_bands": "Resistance Bands",
-        "yoga_mat": "Yoga Mat",
-        "pull_up_bar": "Pull-up Bar",
+        "dumbbells": "Dambıl",
+        "resistance_bands": "Direnç Bandı",
+        "yoga_mat": "Yoga Matı",
+        "pull_up_bar": "Barfiks Barı",
         "kettlebell": "Kettlebell",
-        "jump_rope": "Jump Rope",
-        "none": "Yok"
+        "jump_rope": "İp Atlama",
+        "none": "Hiçbiri"
       },
       "medicalConditions": {
-        "label": "Spor Yapmaya Engel Hastalıklar",
+        "label": "Sağlık Durumları",
         "hypertension": "Hipertansiyon",
         "diabetes": "Diyabet",
-        "heart_disease": "Kalp Rahatsızlığı",
+        "heart_disease": "Kalp Hastalığı",
         "joint_problems": "Eklem Problemleri",
         "back_pain": "Sırt Ağrısı",
-        "none": "Yok"
+        "none": "Hiçbiri"
       },
-      "submit": "Profili Oluştur"
+      "submit": "Profil Oluştur"
     }
   }
 } 

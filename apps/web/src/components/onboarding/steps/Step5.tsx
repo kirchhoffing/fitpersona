@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { stepSchemas } from '@/schemas/onboardingSchema'
 import { StepNavigator } from '../StepNavigator'
+import { useTranslations } from 'next-intl'
 
 type FormData = {
   goal: 'lose_weight' | 'gain_muscle' | 'maintain_fitness'
@@ -10,6 +11,7 @@ type FormData = {
 
 export function Step5() {
   const { goal, setGoal } = useOnboardingStore()
+  const t = useTranslations('onboarding.steps.goal')
 
   const {
     handleSubmit,
@@ -25,7 +27,7 @@ export function Step5() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Hedefiniz nedir?</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">{t('title')}</h2>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -47,9 +49,9 @@ export function Step5() {
             />
             <div className="text-center">
               <div className="text-4xl mb-3">🏃‍♂️</div>
-              <span className="font-medium block mb-2">Zayıflamak</span>
+              <span className="font-medium block mb-2">{t('lose_weight.title')}</span>
               <p className="text-sm text-gray-600">
-                Kilo vermek ve yağ yakmak istiyorum
+                {t('lose_weight.description')}
               </p>
             </div>
           </label>
@@ -72,9 +74,9 @@ export function Step5() {
             />
             <div className="text-center">
               <div className="text-4xl mb-3">💪</div>
-              <span className="font-medium block mb-2">Kas Kazanmak</span>
+              <span className="font-medium block mb-2">{t('gain_muscle.title')}</span>
               <p className="text-sm text-gray-600">
-                Kas kütlesi artırmak ve güç kazanmak istiyorum
+                {t('gain_muscle.description')}
               </p>
             </div>
           </label>
@@ -97,9 +99,9 @@ export function Step5() {
             />
             <div className="text-center">
               <div className="text-4xl mb-3">⚖️</div>
-              <span className="font-medium block mb-2">Formda Kalmak</span>
+              <span className="font-medium block mb-2">{t('maintain_fitness.title')}</span>
               <p className="text-sm text-gray-600">
-                Mevcut formumu korumak ve sağlıklı kalmak istiyorum
+                {t('maintain_fitness.description')}
               </p>
             </div>
           </label>

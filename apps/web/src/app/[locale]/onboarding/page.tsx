@@ -11,10 +11,12 @@ import { Step7 } from '@/components/onboarding/steps/Step7'
 import { Step8 } from '@/components/onboarding/steps/Step8'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function OnboardingPage() {
   const { currentStep } = useOnboardingStore()
   const router = useRouter()
+  const t = useTranslations('onboarding')
 
   // Handle form submission
   const handleSubmit = async () => {
@@ -67,18 +69,18 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            Kişisel Fitness Profilinizi Oluşturun
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-start pt-16">
+      <div className="w-full max-w-4xl mx-auto px-4">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-white mb-4">
+            {t('title')}
           </h1>
-          <p className="text-gray-600">
-            Size özel fitness ve beslenme planı oluşturmak için birkaç soru yanıtlamanız gerekiyor.
+          <p className="text-xl text-gray-300 mb-8">
+            {t('description')}
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6">
+        <div className="bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 p-8">
           {renderStep()}
         </div>
       </div>

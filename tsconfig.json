@@ -11,7 +11,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": { "@fitpersona/database": ["packages/database/src"] }
   },
   "exclude": ["node_modules"]
 } 

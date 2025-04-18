@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { stepSchemas } from '@/schemas/onboardingSchema'
 import { StepNavigator } from '../StepNavigator'
+import { useTranslations } from 'next-intl'
 
 type FormData = {
   height: number
@@ -10,6 +11,7 @@ type FormData = {
 
 export function Step3() {
   const { height, setHeight } = useOnboardingStore()
+  const t = useTranslations('onboarding.steps.height')
 
   const {
     register,
@@ -26,14 +28,14 @@ export function Step3() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Boyunuz nedir?</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">{t('title')}</h2>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="relative">
           <input
             type="number"
             {...register('height', { valueAsNumber: true })}
-            placeholder="Boyunuzu cm cinsinden girin"
+            placeholder={t('placeholder')}
             className={`w-full p-4 border-2 rounded-lg ${
               errors.height ? 'border-red-500' : 'border-gray-200'
             } focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors`}
@@ -52,7 +54,7 @@ export function Step3() {
         )}
 
         <div className="text-sm text-gray-500">
-          Örnek: 175 cm
+          {t('example')}
         </div>
 
         <StepNavigator />

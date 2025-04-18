@@ -1,4 +1,70 @@
 {
+  "Index": {
+    "title": "Welcome to FitPersona",
+    "description": "Your journey to a healthier lifestyle starts here",
+    "getStarted": "Get Started",
+    "features": {
+      "track": {
+        "title": "Track Your Progress",
+        "description": "Monitor your fitness journey with detailed tracking of workouts, measurements, and achievements"
+      },
+      "plans": {
+        "title": "Personalized Plans",
+        "description": "Get customized workout and nutrition plans tailored to your goals and preferences"
+      },
+      "community": {
+        "title": "Join the Community",
+        "description": "Connect with like-minded people, share experiences, and stay motivated together"
+      }
+    }
+  },
+  "onboarding": {
+    "title": "Create Your Personal Fitness Profile",
+    "description": "Help us create a personalized fitness and nutrition plan by answering a few questions.",
+    "steps": {
+      "gender": {
+        "title": "What is your gender?",
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      },
+      "age": {
+        "title": "How old are you?",
+        "placeholder": "Enter your age",
+        "example": "Example: 25"
+      },
+      "height": {
+        "title": "What is your height?",
+        "placeholder": "Enter your height in cm",
+        "example": "Example: 175 cm"
+      },
+      "weight": {
+        "title": "What is your weight?",
+        "placeholder": "Enter your weight in kg",
+        "example": "Example: 75.5 kg"
+      },
+      "goal": {
+        "title": "What is your goal?",
+        "lose_weight": {
+          "title": "Lose Weight",
+          "description": "I want to lose weight and burn fat"
+        },
+        "gain_muscle": {
+          "title": "Gain Muscle",
+          "description": "I want to increase muscle mass and gain strength"
+        },
+        "maintain_fitness": {
+          "title": "Stay Fit",
+          "description": "I want to maintain my current fitness level and stay healthy"
+        }
+      }
+    },
+    "navigation": {
+      "back": "Back",
+      "next": "Next",
+      "complete": "Complete"
+    }
+  },
   "profile": {
     "create": {
       "title": "Create Profile",

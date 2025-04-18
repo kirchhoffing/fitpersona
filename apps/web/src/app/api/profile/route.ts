@@ -1,56 +1,67 @@
 import { NextResponse } from 'next/server'
-import { onboardingSchema } from '@/schemas/onboardingSchema'
-import { prisma } from '@fitpersona/database/src/client'
+import { prisma } from '@fitpersona/database'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 
-export async function POST(request: Request) {
+// Define the expected request body type
+type ProfileData = {
+  gender: 'male' | 'female' | 'other'
+  birthYear: number
+  height: number
+  weight: number
+  fitnessGoals: string[]
+  activityLevel: string
+  availableEquipment: string[]
+  dietaryPreferences: string[]
+}
+
+export async function POST(req: Request) {
   try {
+    // Get the current user's session
     const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       )
     }
 
-    const body = await request.json()
+    // Parse and validate the request body
+    const body = await req.json() as ProfileData
 
-    // Validate the incoming data
-    const validatedData = onboardingSchema.parse(body)
-
-    // Save to database
-    const profile = await prisma.profile.create({
-      data: {
+    // Create or update the user's profile
+    const profile = await prisma.profile.upsert({
+      where: {
         userId: session.user.id,
-        gender: validatedData.gender,
-        birthYear: validatedData.birthYear,
-        height: validatedData.height,
-        weight: validatedData.weight,
-        goal: validatedData.goal,
-        activityLevel: validatedData.activityLevel,
-        equipment: validatedData.equipment,
-        dietaryPreferences: validatedData.dietaryPreferences,
-        // Add any additional fields as needed
+      },
+      update: {
+        gender: body.gender,
+        birthYear: body.birthYear,
+        height: body.height,
+        weight: body.weight,
+        goal: body.fitnessGoals[0], // Using first goal since schema expects single string
+        activityLevel: body.activityLevel,
+        equipment: body.availableEquipment.join(','), // Converting array to string
+        dietaryPreferences: body.dietaryPreferences.join(','), // Converting array to string
+      },
+      create: {
+        userId: session.user.id,
+        gender: body.gender,
+        birthYear: body.birthYear,
+        height: body.height,
+        weight: body.weight,
+        goal: body.fitnessGoals[0],
+        activityLevel: body.activityLevel,
+        equipment: body.availableEquipment.join(','),
+        dietaryPreferences: body.dietaryPreferences.join(','),
       },
     })
 
-    return NextResponse.json(
-      { message: 'Profile created successfully', profile },
-      { status: 201 }
-    )
+    return NextResponse.json(profile)
   } catch (error) {
-    console.error('Error creating profile:', error)
-    
-    if (error instanceof Error) {
-      return NextResponse.json(
-        { error: error.message },
-        { status: 400 }
-      )
-    }
-
+    console.error('Error creating/updating profile:', error)
     return NextResponse.json(
-      { error: 'An unexpected error occurred' },
+      { error: 'Failed to create/update profile' },
       { status: 500 }
     )
   }
