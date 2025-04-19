@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import '../globals.css';
@@ -22,15 +22,19 @@ export default async function LocaleLayout({
 }) {
   let messages;
   try {
-    messages = (await import(`@/messages/${locale}.json`)).default;
+    messages = (await import(`../../../messages/${locale}.json`)).default;
   } catch (error) {
+    notFound();
+  }
+
+  if (!messages) {
     notFound();
   }
 
   return (
     <html lang={locale} className="dark">
       <body className="bg-gray-900 text-white">
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
           <Header />
           <main>{children}</main>
         </NextIntlClientProvider>

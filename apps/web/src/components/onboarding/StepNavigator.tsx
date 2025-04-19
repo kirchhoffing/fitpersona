@@ -1,5 +1,6 @@
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { useTranslations } from 'next-intl'
+import { Button } from '@/components/ui/button'
 
 export function StepNavigator() {
   const { currentStep, totalSteps, nextStep, prevStep } = useOnboardingStore()
@@ -17,28 +18,25 @@ export function StepNavigator() {
 
       {/* Navigation Buttons */}
       <div className="flex justify-between items-center">
-        <button
+        <Button
           onClick={prevStep}
           disabled={currentStep === 1}
-          className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-            currentStep === 1
-              ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
-              : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-          }`}
+          variant={currentStep === 1 ? 'secondary' : 'outline'}
+          className={currentStep === 1 ? 'cursor-not-allowed' : ''}
         >
           {t('back')}
-        </button>
+        </Button>
 
         <span className="text-sm text-gray-400">
           Step {currentStep} / {totalSteps}
         </span>
 
-        <button
+        <Button
           onClick={nextStep}
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          variant="default"
         >
           {currentStep === totalSteps ? t('complete') : t('next')}
-        </button>
+        </Button>
       </div>
     </div>
   )

@@ -159,5 +159,11 @@
       },
       "submit": "Create Profile"
     }
+  },
+  "WorkoutProgram": {
+    "locale": "en",
+    "sets": "sets",
+    "reps": "reps",
+    "cardio": "Cardio"
   }
 }

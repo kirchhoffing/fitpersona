@@ -17,5 +17,12 @@
         "description": "Fitness yolculuğunuzda benzer düşünen bireylerle bağlantı kurun"
       }
     }
+  },
+  "WorkoutProgram": {
+    "locale": "tr",
+    "sets": "set",
+    "reps": "tekrar",
+    "cardio": "Kardiyo",
+    "watchVideo": "Video eğitimini izle"
   }
 } 

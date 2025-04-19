@@ -30,6 +30,12 @@ A full-stack TypeScript application for creating personalized fitness and nutrit
   - Activity level and equipment availability
   - Dietary preferences
 
+### Workout Programs
+- Added 3-Day Full Body Program with bilingual support
+- Implemented workout program creation and management
+- Added exercise tracking and progress monitoring
+- Integrated with user profiles and preferences
+
 ## 🌍 Internationalization
 
 The application supports three languages:
@@ -50,11 +56,17 @@ fitpersona/
 │   │   │   │   └── [locale]/    # Internationalized routes
 │   │   │   ├── components/
 │   │   │   │   ├── layout/      # Layout components
-│   │   │   │   └── profile/     # Profile-related components
+│   │   │   │   ├── profile/     # Profile-related components
+│   │   │   │   └── workouts/    # Workout-related components
 │   │   │   └── messages/        # Translation files
 │   │   └── public/
 │   │       └── flags/           # Country flag SVGs
 │   └── api/          # Express backend
+│       ├── src/
+│       │   ├── routes/          # API routes
+│       │   │   └── workouts.ts  # Workout program endpoints
+│       │   └── workouts/        # Workout program definitions
+│       │       └── 3dayFullBody.ts
 ├── packages/
 │   ├── database/     # Prisma schema & client
 │   │   └── prisma/
@@ -76,6 +88,14 @@ fitpersona/
 - Medical conditions tracking
 - Equipment availability
 - Multi-language support
+
+### Workout Programs
+- Pre-built workout templates
+- Exercise variations
+- Progress tracking
+- Bilingual support
+- Detailed exercise instructions
+- Cardio recommendations
 
 ### Internationalization
 - Seamless language switching

@@ -17,5 +17,12 @@
         "description": "Verbinden Sie sich mit Gleichgesinnten auf ihrer Fitnessreise"
       }
     }
+  },
+  "WorkoutProgram": {
+    "locale": "de",
+    "sets": "Sätze",
+    "reps": "Wiederholungen",
+    "cardio": "Kardio",
+    "watchVideo": "Video-Tutorial ansehen"
   }
 } 

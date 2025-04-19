@@ -159,5 +159,11 @@
       },
       "submit": "Profil erstellen"
     }
+  },
+  "WorkoutProgram": {
+    "locale": "de",
+    "sets": "Sätze",
+    "reps": "Wiederholungen",
+    "cardio": "Cardio"
   }
 }

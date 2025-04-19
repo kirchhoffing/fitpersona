@@ -159,5 +159,11 @@
       },
       "submit": "Profil Oluştur"
     }
+  },
+  "WorkoutProgram": {
+    "locale": "tr",
+    "sets": "set",
+    "reps": "tekrar",
+    "cardio": "Kardiyo"
   }
 }

@@ -17,5 +17,12 @@
         "description": "Connect with like-minded individuals on their fitness journey"
       }
     }
+  },
+  "WorkoutProgram": {
+    "locale": "en",
+    "sets": "sets",
+    "reps": "reps",
+    "cardio": "Cardio",
+    "watchVideo": "Watch video tutorial"
   }
 } 
