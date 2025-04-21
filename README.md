@@ -3,6 +3,15 @@
 A full-stack TypeScript application for creating personalized fitness and nutrition plans.
 
 > 📋 **Setup Instructions**: For detailed setup and installation guide, please refer to [SETUP.md](./SETUP.md)
+> 
+> 📚 **Project Overview**: For detailed technical documentation and development guidelines, please refer to [OVERVIEW.md](./OVERVIEW.md)
+
+## 🚀 Quick Start
+
+1. Clone the repository
+2. Install dependencies: `pnpm install`
+3. Set up environment variables (see SETUP.md)
+4. Start the development server: `pnpm dev`
 
 ## 🚀 Tech Stack
 
@@ -14,70 +23,12 @@ A full-stack TypeScript application for creating personalized fitness and nutrit
 - **Package Manager**: pnpm (for efficient monorepo management)
 - **Internationalization**: next-intl (for multi-language support)
 
-## 🛠️ Recent Updates
+## 🌍 Languages
 
-### User Profile & Authentication
-- Added user profile creation with detailed fitness information
-- Implemented secure authentication using NextAuth.js
-- Created multi-step onboarding form with state management
-- Added type-safe form validation and API endpoints
-
-### Database Schema
-- Added Profile model with fields:
-  - Personal info (gender, birth year)
-  - Physical metrics (height, weight)
-  - Fitness goals and preferences
-  - Activity level and equipment availability
-  - Dietary preferences
-
-### Workout Programs
-- Added 3-Day Full Body Program with bilingual support
-- Implemented workout program creation and management
-- Added exercise tracking and progress monitoring
-- Integrated with user profiles and preferences
-
-## 🌍 Internationalization
-
-The application supports three languages:
+The application supports:
 - English (default)
 - Turkish
 - German
-
-Language switching is available through a user-friendly interface with country flags. Translations are managed through JSON files in the `src/messages` directory.
-
-## 📦 Project Structure
-
-```
-fitpersona/
-├── apps/
-│   ├── web/          # Next.js frontend
-│   │   ├── src/
-│   │   │   ├── app/
-│   │   │   │   └── [locale]/    # Internationalized routes
-│   │   │   ├── components/
-│   │   │   │   ├── layout/      # Layout components
-│   │   │   │   ├── profile/     # Profile-related components
-│   │   │   │   └── workouts/    # Workout-related components
-│   │   │   └── messages/        # Translation files
-│   │   └── public/
-│   │       └── flags/           # Country flag SVGs
-│   └── api/          # Express backend
-│       ├── src/
-│       │   ├── routes/          # API routes
-│       │   │   └── workouts.ts  # Workout program endpoints
-│       │   └── workouts/        # Workout program definitions
-│       │       └── 3dayFullBody.ts
-├── packages/
-│   ├── database/     # Prisma schema & client
-│   │   └── prisma/
-│   │       └── schema.prisma
-│   │   └── src/
-│   │       └── client.ts
-│   ├── ui/           # Shared UI components
-│   └── config/       # Shared configuration
-├── pnpm-workspace.yaml
-└── package.json
-```
 
 ## ✨ Key Features
 
@@ -97,12 +48,18 @@ fitpersona/
 - Detailed exercise instructions
 - Cardio recommendations
 
-### Internationalization
-- Seamless language switching
-- Country flag indicators
-- URL-based locale routing
-- Translation management
-- Fallback to default language
+### Nutrition Planning
+- Personalized meal plans
+- Dietary restriction support
+- Calorie and macro tracking
+- Recipe suggestions
+
+## 🌍 Languages
+
+The application supports:
+- English (default)
+- Turkish
+- German
 
 ## 📝 License
 
