@@ -17,7 +17,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['barbell'],
     muscleGroups: ['quadriceps', 'glutes', 'hamstrings', 'core'],
-    difficulty: 'intermediate'
+    difficulty: 'intermediate',
+    healthRisks: ['back_pain', 'knee_problem']
   },
   'bench-press': {
     id: 'bench-press',
@@ -34,7 +35,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['barbell', 'bench'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
-    difficulty: 'intermediate'
+    difficulty: 'intermediate',
+    healthRisks: ['shoulder_pain', 'heart_condition']
   },
   'bent-over-row': {
     id: 'bent-over-row',
@@ -51,7 +53,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['barbell'],
     muscleGroups: ['back', 'biceps', 'forearms'],
-    difficulty: 'intermediate'
+    difficulty: 'intermediate',
+    healthRisks: ['back_pain', 'neck_pain']
   },
   'plank': {
     id: 'plank',
@@ -68,7 +71,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'core',
     equipment: ['bodyweight'],
     muscleGroups: ['core', 'abdominals'],
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    healthRisks: ['back_pain', 'shoulder_pain', 'pregnancy']
   },
   'romanian-deadlift': {
     id: 'romanian-deadlift',
@@ -85,7 +89,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['barbell'],
     muscleGroups: ['hamstrings', 'glutes', 'back'],
-    difficulty: 'intermediate'
+    difficulty: 'intermediate',
+    healthRisks: ['back_pain', 'knee_problem']
   },
   'shoulder-press': {
     id: 'shoulder-press',
@@ -102,7 +107,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['dumbbell'],
     muscleGroups: ['shoulders', 'triceps'],
-    difficulty: 'intermediate'
+    difficulty: 'intermediate',
+    healthRisks: ['shoulder_pain', 'neck_pain']
   },
   'pullup': {
     id: 'pullup',
@@ -119,7 +125,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['pullup bar', 'bodyweight'],
     muscleGroups: ['back', 'biceps', 'forearms'],
-    difficulty: 'intermediate'
+    difficulty: 'intermediate',
+    healthRisks: ['shoulder_pain', 'back_pain']
   },
   'cable-biceps-curl': {
     id: 'cable-biceps-curl',
@@ -136,7 +143,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'isolation',
     equipment: ['cable'],
     muscleGroups: ['biceps', 'forearms'],
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    healthRisks: []
   },
   'cable-triceps-pushdown': {
     id: 'cable-triceps-pushdown',
@@ -153,7 +161,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'isolation',
     equipment: ['cable'],
     muscleGroups: ['triceps'],
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    healthRisks: ['shoulder_pain']
   },
   'kettlebell-goblet-squat': {
     id: 'kettlebell-goblet-squat',
@@ -170,7 +179,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'functional',
     equipment: ['kettlebell'],
     muscleGroups: ['quadriceps', 'glutes', 'core'],
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    healthRisks: ['knee_problem', 'back_pain']
   },
   'pushup': {
     id: 'pushup',
@@ -187,7 +197,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'bodyweight',
     equipment: ['bodyweight'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    healthRisks: ['shoulder_pain', 'wrist_pain']
   },
   'dumbbell-row': {
     id: 'dumbbell-row',
@@ -204,7 +215,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['dumbbell'],
     muscleGroups: ['back', 'biceps'],
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    healthRisks: ['back_pain', 'shoulder_pain']
   },
   'leg-raise': {
     id: 'leg-raise',
@@ -221,7 +233,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'core',
     equipment: ['bodyweight'],
     muscleGroups: ['abdominals', 'core'],
-    difficulty: 'intermediate'
+    difficulty: 'intermediate',
+    healthRisks: ['back_pain', 'pregnancy']
   },
   'russian-twist': {
     id: 'russian-twist',
@@ -238,6 +251,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'core',
     equipment: ['bodyweight'],
     muscleGroups: ['obliques', 'core'],
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    healthRisks: ['back_pain', 'neck_pain', 'pregnancy']
   }
 }; 

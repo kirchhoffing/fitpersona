@@ -3,6 +3,7 @@
     "title": "Willkommen bei FitPersona",
     "description": "Ihre Reise zu einem gesünderen Lebensstil beginnt hier",
     "getStarted": "Loslegen",
+    "exercises": "Übungen",
     "login": "Anmelden",
     "register": "Registrieren",
     "features": {
@@ -124,6 +125,28 @@
       "next": "Weiter",
       "complete": "Abschließen"
     }
+  },
+  "labels": {
+    "exercisesTitle": "Übungen",
+    "searchPlaceholder": "Übungen nach Name oder Muskelgruppe suchen...",
+    "targetArea": "Zielbereich",
+    "riskConditions": "Risikozustände"
+  },
+  "muscle": {
+    "back": "Rücken",
+    "chest": "Brust",
+    "shoulders": "Schultern",
+    "legs": "Beine",
+    "core": "Rumpf",
+    "abdominals": "Bauchmuskeln",
+    "obliques": "Schräge Bauchmuskeln",
+    "glutes": "Gesäß",
+    "calves": "Waden",
+    "biceps": "Bizeps",
+    "triceps": "Trizeps",
+    "quadriceps": "Quadrizeps",
+    "hamstrings": "Hamstrings",
+    "forearms": "Unterarme"
   },
   "dashboard": {
     "title": "Ihr Fitness-Dashboard",

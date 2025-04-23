@@ -15,7 +15,8 @@ Monorepo architecture is used for better modularization, scalability, and team c
 ## 📝 Recent Notable Changes (April 2025)
 
 - Replaced magic link authentication with custom email/password registration and login using bcryptjs for hashing (no native bindings, SSR compatible).
-- Fixed Next.js dashboard routing: dashboard page is now locale-aware (`/[locale]/dashboard`) and inherits the correct layout and styling.
+- Dashboard page is fully locale-aware (`/[locale]/dashboard`) with next-intl-based translations and inherits the correct layout and styling.
+- All user profile fields (including workout location and dietary preferences) are now stored as string values and displayed using localized translation keys.
 - Removed login and register buttons from the home page ("Get Started" remains).
 - Improved error handling and user feedback for registration and login flows.
 - Ensured all authentication and dashboard redirects are locale-aware.
@@ -38,11 +39,23 @@ Monorepo architecture is used for better modularization, scalability, and team c
 ## 🛠️ Features & Architecture
 
 ### 🧑‍💼 User Profile & Authentication
-- Magic link login & register
+- Email/password registration and login (bcryptjs, SSR compatible)
 - Multi-step onboarding form with state persistence
 - Type-safe Zod validation for all user inputs
 - Secure session-based authentication
 - User preferences and settings management
+
+---
+
+### 🚦 Onboarding & Step System
+- **Multi-step onboarding flow** guides users through profile creation, preferences, and fitness goals.
+- Each onboarding step is managed by a centralized step system (step IDs, progress, and state are tracked).
+- Steps are fully localized: all prompts, questions, and labels use translation keys from language JSON files.
+- Step logic is modular, so new steps or questions can be added easily.
+- Onboarding data is persisted between steps and can be resumed if interrupted.
+- Health conditions, risk factors, and all user-facing strings are sourced from translation files.
+
+---
 
 ### 🧬 Database Schema
 **Profile Model**:
@@ -83,21 +96,43 @@ model User {
 
 ### 🏋️ Workout Programs
 - Predefined 3-Day Full Body workout template
-- Localized workout names & descriptions
+- Localized workout names & descriptions (next-intl)
+- **All exercise names, muscle groups, and health risk conditions are fully localized via JSON language files** (no hardcoded UI strings)
 - Progress tracking integration
 - Program assignment based on onboarding data
 - Exercise library with detailed instructions
 - Workout history and progress tracking
+- "watchVideo" translation key added for exercise video links
+
+---
+
+### 🏋️‍♂️ Exercises Page
+- Dedicated multilingual page listing all exercises with images, names, muscle groups, and risk conditions.
+- All exercise-related strings (names, muscle groups, risk conditions, section titles) are fully localized via JSON language files.
+- Users can search and filter exercises by name or muscle group in their selected language.
+- UI is styled with Tailwind CSS for a modern, accessible experience.
+- Navigation from the home page is locale-aware and uses a localized button label.
 
 ### 🥗 Nutrition Features
 - Personalized meal plans based on goals
-- Dietary restriction support
+- Dietary restriction support (dietary preferences are localized)
 - Calorie and macro tracking
 - Recipe suggestions and meal planning
 
 ---
 
 ## 🌍 Internationalization
+
+### Translation Key Structure
+- All onboarding and dashboard fields use translation keys from `apps/web/src/messages/{locale}.json`.
+- Workout location keys: `onboarding.steps.equipment.body_weight`, `onboarding.steps.equipment.home_equipment`, `onboarding.steps.equipment.gym`.
+- Dietary preferences keys: `onboarding.steps.health.{preference}` (e.g., `back_pain`, `diabetes`, etc.).
+- Dashboard fallback: `dashboard.none` for empty dietary preferences.
+- WorkoutProgram: `WorkoutProgram.watchVideo` for "Watch Video" links.
+
+### Notes
+- All user-facing strings in the dashboard and onboarding are now locale-aware and never display raw translation keys.
+- If a translation is missing, the key will be added to the corresponding JSON file for consistency.
 
 - **Languages Supported**:
   - English (default)
@@ -118,39 +153,65 @@ model User {
 ```plaintext
 fitpersona/
 ├── apps/
-│   ├── web/                         # Next.js frontend
-│   │   └── src/
-│   │       ├── app/
-│   │       │   └── [locale]/        # i18n routes
-│   │       ├── components/
-│   │       │   ├── layout/          # Header, layout components
-│   │       │   ├── profile/         # Profile UI components
-│   │       │   └── workouts/        # Workout-related UI
-│   │       └── messages/            # Translation JSON files
-│   └── api/                         # Express backend
-│       └── src/
-│           ├── routes/              # API route handlers
-│           │   ├── onboarding.ts
-│           │   └── workouts.ts
-│           └── workouts/            # Workout logic files
-│               └── 3dayFullBody.ts
+│   ├── web/                         # Next.js frontend app
+│   │   ├── public/
+│   │   │   └── flags/               # Flag icons for language switcher
+│   │   ├── prisma/
+│   │   │   ├── migrations/
+│   │   │   └── schema.prisma        # Prisma schema for web app
+│   │   ├── src/
+│   │   │   ├── app/
+│   │   │   │   ├── [locale]/        # Locale-based routes (dashboard, onboarding, exercises, etc)
+│   │   │   │   ├── api/             # API routes (Next.js)
+│   │   │   │   ├── auth/            # Auth pages
+│   │   │   │   ├── onboarding/      # Onboarding pages
+│   │   │   │   └── profile/         # Profile pages
+│   │   │   ├── components/
+│   │   │   │   ├── layout/          # Layout components
+│   │   │   │   ├── profile/         # Profile UI components
+│   │   │   │   ├── onboarding/      # Onboarding UI (including steps/)
+│   │   │   │   ├── workouts/        # Workout UI components
+│   │   │   │   └── ui/              # Shared UI components (badge, button, card)
+│   │   │   ├── config/              # App-level config
+│   │   │   ├── i18n/                # i18n config and helpers
+│   │   │   ├── lib/
+│   │   │   │   ├── workouts/        # Exercise/workout logic (exercise-data.ts, 3dayFullBody.ts, etc)
+│   │   │   │   └── ...
+│   │   │   ├── messages/            # Translation JSON files (en.json, tr.json, de.json)
+│   │   │   ├── schemas/             # Zod schemas
+│   │   │   ├── store/               # State management
+│   │   │   └── types/               # Local TypeScript types
+│   │   ├── .env                     # Env vars for web app
+│   │   ├── package.json
+│   │   ├── tailwind.config.js
+│   │   └── tsconfig.json
+│   └── api/                         # Express backend app
+│       ├── src/
+│       │   ├── routes/              # API route handlers
+│       │   └── workouts/            # Workout logic files
+│       ├── .env
+│       └── package.json
 ├── packages/
 │   ├── database/
 │   │   ├── prisma/
-│   │   │   └── schema.prisma        # Prisma schema
-│   │   └── src/
-│   │       └── client.ts            # PrismaClient setup
-│   ├── exercises/                   # Exercise library and logic
+│   │   │   ├── migrations/
+│   │   │   └── schema.prisma        # Shared Prisma schema
 │   │   ├── src/
-│   │   │   ├── exercises.ts         # Exercise definitions
-│   │   │   └── types.ts             # Type definitions
-│   │   └── package.json
-│   └── config/                      # Shared app config
-├── types/                           # Global TypeScript types
+│   │   │   └── client.ts            # PrismaClient setup
+│   │   ├── package.json
+│   ├── exercises/
+│   │   ├── src/
+│   │   │   ├── exercise-data.ts     # Central exercise data
+│   │   │   ├── index.ts
+│   │   │   └── types.ts             # Exercise types
+│   │   ├── package.json
+├── types/
+│   └── next-intl.d.ts               # Global TypeScript types for i18n
+├── scripts/                         # (Reserved for custom scripts)
 ├── pnpm-workspace.yaml              # Monorepo workspace
 ├── package.json                     # Root package.json
 ├── tsconfig.json                    # TypeScript configuration
-├── docker-compose.yml               # Docker configuration
+├── docker-compose.yml               # Docker Compose config
 └── .gitignore                       # Git ignore rules
 ```
 

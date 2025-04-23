@@ -12,6 +12,7 @@ export interface Exercise {
   equipment?: Equipment[];
   muscleGroups?: MuscleGroup[];
   difficulty?: Difficulty;
+  healthRisks?: string[];
 }
 
 export type ExerciseCategory = 

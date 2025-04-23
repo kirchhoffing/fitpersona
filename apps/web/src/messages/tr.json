@@ -3,6 +3,7 @@
     "title": "FitPersona'ya Hoş Geldiniz",
     "description": "Daha sağlıklı bir yaşam tarzına giden yolculuğunuz burada başlıyor",
     "getStarted": "Başla",
+    "exercises": "Egzersizler",
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
     "features": {
@@ -124,6 +125,28 @@
       "next": "İleri",
       "complete": "Tamamla"
     }
+  },
+  "labels": {
+    "exercisesTitle": "Egzersizler",
+    "searchPlaceholder": "Egzersizleri ada veya kas grubuna göre ara...",
+    "targetArea": "Hedef Bölge",
+    "riskConditions": "Riskli Durumlar"
+  },
+  "muscle": {
+    "back": "Sırt",
+    "chest": "Göğüs",
+    "shoulders": "Omuzlar",
+    "legs": "Bacaklar",
+    "core": "Core",
+    "abdominals": "Abdomen",
+    "obliques": "Oblik",
+    "glutes": "Kalça",
+    "calves": "Baldır",
+    "biceps": "Biseps",
+    "triceps": "Triseps",
+    "quadriceps": "Kuadriseps",
+    "hamstrings": "Hamstring",
+    "forearms": "Ön Kol"
   },
   "dashboard": {
     "title": "Fitness Kontrol Paneliniz",

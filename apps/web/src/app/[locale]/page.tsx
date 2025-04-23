@@ -40,6 +40,12 @@ export default function HomePage() {
           >
             {t('getStarted')}
           </button>
+          <button 
+            onClick={() => router.push(`/${currentLocale}/exercises`)}
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+          >
+            {t('exercises')}
+          </button>
         </div>
       </div>
 

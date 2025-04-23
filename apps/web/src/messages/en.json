@@ -3,6 +3,7 @@
     "title": "Welcome to FitPersona",
     "description": "Your journey to a healthier lifestyle starts here",
     "getStarted": "Get Started",
+    "exercises": "Exercises",
     "login": "Login",
     "register": "Register",
     "features": {
@@ -124,6 +125,28 @@
       "next": "Next",
       "complete": "Complete"
     }
+  },
+  "labels": {
+    "exercisesTitle": "Exercises",
+    "searchPlaceholder": "Search exercises by name or muscle group...",
+    "targetArea": "Target Area",
+    "riskConditions": "Risk Conditions"
+  },
+  "muscle": {
+    "back": "Back",
+    "chest": "Chest",
+    "shoulders": "Shoulders",
+    "legs": "Legs",
+    "core": "Core",
+    "abdominals": "Abdominals",
+    "obliques": "Obliques",
+    "glutes": "Glutes",
+    "calves": "Calves",
+    "biceps": "Biceps",
+    "triceps": "Triceps",
+    "quadriceps": "Quadriceps",
+    "hamstrings": "Hamstrings",
+    "forearms": "Forearms"
   },
   "dashboard": {
     "title": "Your Fitness Dashboard",
