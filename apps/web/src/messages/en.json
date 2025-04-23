@@ -3,6 +3,8 @@
     "title": "Welcome to FitPersona",
     "description": "Your journey to a healthier lifestyle starts here",
     "getStarted": "Get Started",
+    "login": "Login",
+    "register": "Register",
     "features": {
       "track": {
         "title": "Track Your Progress",
@@ -17,6 +19,28 @@
         "description": "Connect with like-minded people, share experiences, and stay motivated together"
       }
     }
+  },
+  "auth": {
+    "loginTitle": "Sign in to your account",
+    "loginSubtitle": "Enter your credentials to access your account",
+    "registerTitle": "Create your account",
+    "registerSubtitle": "Join FitPersona and start your fitness journey",
+    "email": "Email address",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "login": "Sign in",
+    "register": "Create account",
+    "loggingIn": "Signing in...",
+    "registering": "Creating account...",
+    "passwordsDontMatch": "Passwords do not match",
+    "forgotPassword": "Forgot your password?",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign up"
   },
   "onboarding": {
     "title": "Create Your Personal Fitness Profile",

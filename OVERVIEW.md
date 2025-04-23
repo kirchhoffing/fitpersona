@@ -37,13 +37,40 @@ Monorepo architecture is used for better modularization, scalability, and team c
 
 ### 🧬 Database Schema
 **Profile Model**:
-- `gender`, `birthYear`
-- `height`, `weight`
-- `goal`: lose_weight, gain_muscle, maintain_fitness
-- `activityLevel`, `equipment`
-- `dietary`: dietary restrictions
-- `preferences`: user preferences and settings
-- `createdAt`, `updatedAt` timestamps
+```prisma
+model Profile {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  email         String   @unique
+  gender        String?
+  birthYear     Int?
+  height        Float?
+  weight        Float?
+  goal          String?  // lose_weight, gain_muscle, maintain_fitness
+  activityLevel String?
+  equipment     String[]
+  dietary       String[]
+  preferences   Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+```
+
+**User Model**:
+```prisma
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String?
+  name          String?
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  profile       Profile?
+}
+```
 
 ### 🏋️ Workout Programs
 - Predefined 3-Day Full Body workout template

@@ -12,11 +12,17 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20.11.19",
     "prisma": "^5.22.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "lucide-react": "^0.500.0"
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.500.0",
+    "zod": "^3.22.4"
   }
 }

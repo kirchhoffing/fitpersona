@@ -3,6 +3,8 @@
     "title": "Willkommen bei FitPersona",
     "description": "Ihre Reise zu einem gesünderen Lebensstil beginnt hier",
     "getStarted": "Loslegen",
+    "login": "Anmelden",
+    "register": "Registrieren",
     "features": {
       "track": {
         "title": "Verfolgen Sie Ihren Fortschritt",
@@ -17,6 +19,28 @@
         "description": "Vernetzen Sie sich mit Gleichgesinnten, teilen Sie Erfahrungen und bleiben Sie gemeinsam motiviert"
       }
     }
+  },
+  "auth": {
+    "loginTitle": "Melden Sie sich an",
+    "loginSubtitle": "Geben Sie Ihre Anmeldedaten ein, um auf Ihr Konto zuzugreifen",
+    "registerTitle": "Konto erstellen",
+    "registerSubtitle": "Werden Sie Teil von FitPersona und starten Sie Ihre Fitness-Reise",
+    "email": "E-Mail-Adresse",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "password": "Passwort",
+    "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Bestätigen Sie Ihr Passwort",
+    "login": "Anmelden",
+    "register": "Konto erstellen",
+    "loggingIn": "Anmeldung läuft...",
+    "registering": "Konto wird erstellt...",
+    "passwordsDontMatch": "Passwörter stimmen nicht überein",
+    "forgotPassword": "Passwort vergessen?",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "signIn": "Anmelden",
+    "dontHaveAccount": "Noch kein Konto?",
+    "signUp": "Registrieren"
   },
   "onboarding": {
     "title": "Erstellen Sie Ihr persönliches Fitnessprofil",
