@@ -12,12 +12,21 @@ Monorepo architecture is used for better modularization, scalability, and team c
 
 ---
 
+## 📝 Recent Notable Changes (April 2025)
+
+- Replaced magic link authentication with custom email/password registration and login using bcryptjs for hashing (no native bindings, SSR compatible).
+- Fixed Next.js dashboard routing: dashboard page is now locale-aware (`/[locale]/dashboard`) and inherits the correct layout and styling.
+- Removed login and register buttons from the home page ("Get Started" remains).
+- Improved error handling and user feedback for registration and login flows.
+- Ensured all authentication and dashboard redirects are locale-aware.
+
 ## 🚀 Tech Stack
 
 - **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, TypeScript, TanStack Query
 - **Backend**: Express + TypeScript (ts-node + esbuild), Zod for validation
 - **Database**: PostgreSQL (via Docker), Prisma ORM
-- **Authentication**: NextAuth.js (magic link via email)
+- **Authentication**: Custom email/password (bcryptjs, SSR-safe, no native bindings)
+
 - **Deployment**: Vercel (frontend + API routes), Supabase or Railway (PostgreSQL hosting)
 - **Package Manager**: pnpm
 - **Internationalization**: next-intl (multi-language support)

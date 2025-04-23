@@ -35,18 +35,6 @@ export default function HomePage() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button 
-            onClick={handleLogin}
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-          >
-            {t('login')}
-          </button>
-          <button 
-            onClick={handleRegister}
-            className="px-8 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105"
-          >
-            {t('register')}
-          </button>
-          <button 
             onClick={handleGetStarted}
             className="px-8 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105"
           >
