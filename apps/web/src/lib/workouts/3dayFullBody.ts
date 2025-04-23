@@ -117,9 +117,9 @@ export const threeDayFullBodyWorkout = {
         },
         {
           name: {
-            en: 'Pull-up or Lat Pulldown',
-            tr: 'Pull-up veya Lat Pulldown',
-            de: 'Klimmzüge oder Latziehen'
+            en: 'Pull-up',
+            tr: 'Pull-up',
+            de: 'Klimmzüge'
           },
           sets: 3,
           reps: '8-10',
@@ -127,6 +127,20 @@ export const threeDayFullBodyWorkout = {
             en: 'Compound exercise targeting back and biceps',
             tr: 'Sırt ve biceps hedefleyen temel egzersiz',
             de: 'Grundübung für Rücken und Bizeps'
+          }
+        },
+        {
+          name: {
+            en: 'Lat Pulldown',
+            tr: 'Lat Pulldown',
+            de: 'Latziehen'
+          },
+          sets: 3,
+          reps: '8-10',
+          description: {
+            en: 'Compound exercise targeting back and biceps, machine-assisted',
+            tr: 'Makine destekli sırt ve biceps egzersizi',
+            de: 'Grundübung für Rücken und Bizeps am Gerät'
           }
         },
         {
@@ -187,9 +201,9 @@ export const threeDayFullBodyWorkout = {
         },
         {
           name: {
-            en: 'Push-up or Incline Push-up',
-            tr: 'Push-up veya Incline Push-up',
-            de: 'Liegestütze oder Schrägliegestütze'
+            en: 'Push-up',
+            tr: 'Push-up',
+            de: 'Liegestütze'
           },
           sets: 3,
           reps: 'Maximum reps',
@@ -197,6 +211,20 @@ export const threeDayFullBodyWorkout = {
             en: 'Bodyweight exercise targeting chest and triceps',
             tr: 'Göğüs ve triceps hedefleyen vücut ağırlığı egzersizi',
             de: 'Körpergewichtsübung für Brust und Trizeps'
+          }
+        },
+        {
+          name: {
+            en: 'Incline Push-up',
+            tr: 'Incline Push-up',
+            de: 'Schrägliegestütze'
+          },
+          sets: 3,
+          reps: 'Maximum reps',
+          description: {
+            en: 'Push-up variation with hands elevated to reduce difficulty',
+            tr: 'Eller yükseltilmiş şekilde yapılan, daha kolay şınav varyasyonu',
+            de: 'Liegestütz-Variante mit erhöhten Händen, geringerer Schwierigkeit'
           }
         },
         {
@@ -215,9 +243,9 @@ export const threeDayFullBodyWorkout = {
         },
         {
           name: {
-            en: 'Hanging Leg Raise or Lying Leg Raise',
-            tr: 'Hanging Leg Raise veya Lying Leg Raise',
-            de: 'Hängendes oder liegendes Beinheben'
+            en: 'Hanging Leg Raise',
+            tr: 'Hanging Leg Raise',
+            de: 'Hängendes Beinheben'
           },
           sets: 3,
           reps: '15',
@@ -225,6 +253,20 @@ export const threeDayFullBodyWorkout = {
             en: 'Core exercise targeting lower abs',
             tr: 'Alt karın bölgesini hedefleyen core egzersizi',
             de: 'Core-Übung für die untere Bauchmuskulatur'
+          }
+        },
+        {
+          name: {
+            en: 'Lying Leg Raise',
+            tr: 'Lying Leg Raise',
+            de: 'Liegendes Beinheben'
+          },
+          sets: 3,
+          reps: '15',
+          description: {
+            en: 'Core exercise for lower abs performed lying on the floor',
+            tr: 'Yerde yatarak yapılan alt karın bölgesi egzersizi',
+            de: 'Core-Übung für die unteren Bauchmuskeln im Liegen'
           }
         },
         {

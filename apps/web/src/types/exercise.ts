@@ -3,8 +3,6 @@ export type Locale = 'en' | 'tr' | 'de';
 export interface Exercise {
   id?: string;
   name: string;
-  sets: number;
-  reps: string;
   description: Record<Locale, string>;
   videoUrl?: string;
   imageUrl?: string;
@@ -35,7 +33,9 @@ export type Equipment =
 
 export type MuscleGroup =
   | 'chest'
-  | 'back'
+  | 'back' // legacy, to be migrated
+  | 'upper_back'
+  | 'lower_back'
   | 'shoulders'
   | 'triceps'
   | 'biceps'

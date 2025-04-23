@@ -110,6 +110,7 @@
         "neck_pain": "Boyun Fıtığı",
         "knee_problem": "Diz Problemi",
         "shoulder_pain": "Omuz Problemi",
+        "wrist_pain": "Bilek Problemi",
         "diabetes": "Diyabet",
         "heart_condition": "Kalp Rahatsızlığı",
         "high_blood_pressure": "Yüksek Tansiyon",
@@ -133,20 +134,22 @@
     "riskConditions": "Riskli Durumlar"
   },
   "muscle": {
+    "upper_back": "Sırt",
+    "lower_back": "Bel",
     "back": "Sırt",
     "chest": "Göğüs",
     "shoulders": "Omuzlar",
     "legs": "Bacaklar",
     "core": "Core",
-    "abdominals": "Abdomen",
+    "abdominals": "Abdominal",
     "obliques": "Oblik",
     "glutes": "Kalça",
     "calves": "Baldır",
-    "biceps": "Biseps",
-    "triceps": "Triseps",
-    "quadriceps": "Kuadriseps",
+    "biceps": "Biceps",
+    "triceps": "Triceps",
+    "quadriceps": "Quadriceps",
     "hamstrings": "Hamstring",
-    "forearms": "Ön Kol"
+    "forearms": "Bilek"
   },
   "dashboard": {
     "title": "Fitness Kontrol Paneliniz",

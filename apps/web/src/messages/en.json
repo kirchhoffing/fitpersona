@@ -110,6 +110,7 @@
         "neck_pain": "Neck Pain",
         "knee_problem": "Knee Problem",
         "shoulder_pain": "Shoulder Pain",
+        "wrist_pain": "Wrist Pain",
         "diabetes": "Diabetes",
         "heart_condition": "Heart Condition",
         "high_blood_pressure": "High Blood Pressure",
@@ -133,6 +134,8 @@
     "riskConditions": "Risk Conditions"
   },
   "muscle": {
+    "upper_back": "Upper Back",
+    "lower_back": "Lower Back",
     "back": "Back",
     "chest": "Chest",
     "shoulders": "Shoulders",

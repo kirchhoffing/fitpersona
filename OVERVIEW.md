@@ -14,6 +14,7 @@ Monorepo architecture is used for better modularization, scalability, and team c
 
 ## 📝 Recent Notable Changes (April 2025)
 
+- Alternative exercises such as "Pull-up or Lat Pulldown", "Push-up or Incline Push-up", and "Hanging Leg Raise or Lying Leg Raise" have been separated into individual entries throughout the app and exercise data. All exercise listings and workout templates now display these as distinct exercises, improving clarity and localization.
 - Replaced magic link authentication with custom email/password registration and login using bcryptjs for hashing (no native bindings, SSR compatible).
 - Dashboard page is fully locale-aware (`/[locale]/dashboard`) with next-intl-based translations and inherits the correct layout and styling.
 - All user profile fields (including workout location and dietary preferences) are now stored as string values and displayed using localized translation keys.
@@ -96,6 +97,7 @@ model User {
 
 ### 🏋️ Workout Programs
 - Predefined 3-Day Full Body workout template
+- Alternative exercises are now listed as distinct entries (e.g., "Pull-up" and "Lat Pulldown" are separate, not combined).
 - Localized workout names & descriptions (next-intl)
 - **All exercise names, muscle groups, and health risk conditions are fully localized via JSON language files** (no hardcoded UI strings)
 - Progress tracking integration

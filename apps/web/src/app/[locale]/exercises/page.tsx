@@ -41,7 +41,7 @@ export default function ExercisesPage() {
           {filteredExercises.map((exercise) => (
             <div key={exercise.id} className="bg-gray-700 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
               {exercise.imageUrl && (
-                <div className="relative h-48 w-full">
+                <div className="relative h-72 w-full">
                   <Image
                     src={exercise.imageUrl}
                     alt={exercise.name}

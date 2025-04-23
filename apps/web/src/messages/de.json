@@ -109,7 +109,8 @@
         "back_pain": "Rückenschmerzen",
         "neck_pain": "Nackenschmerzen",
         "knee_problem": "Knieprobleme",
-        "shoulder_pain": "Schulterschmerzen",
+        "shoulder_pain": "Schulterproblem",
+        "wrist_pain": "Handgelenkschmerz",
         "diabetes": "Diabetes",
         "heart_condition": "Herzerkrankung",
         "high_blood_pressure": "Bluthochdruck",
@@ -133,6 +134,8 @@
     "riskConditions": "Risikozustände"
   },
   "muscle": {
+    "upper_back": "Oberer Rücken",
+    "lower_back": "Unterer Rücken",
     "back": "Rücken",
     "chest": "Brust",
     "shoulders": "Schultern",
