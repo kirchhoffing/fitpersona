@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations, useLocale } from 'next-intl';
 import { exerciseDatabase } from '@/lib/workouts/exercise-data';
+import { MuscleGroup } from '@fitpersona/exercises';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -17,7 +18,7 @@ export default function ExercisesPage() {
   // Filter exercises based on search input
   const filteredExercises = exercises.filter(exercise => 
     exercise.name.toLowerCase().includes(filter.toLowerCase()) ||
-    exercise.muscleGroups?.some(muscle => muscle.toLowerCase().includes(filter.toLowerCase()))
+    exercise.muscleGroups?.some((muscle: MuscleGroup) => muscle.toLowerCase().includes(filter.toLowerCase()))
   );
 
   return (
@@ -57,7 +58,7 @@ export default function ExercisesPage() {
                 <div>
                   <h4 className="text-sm text-gray-400 mb-1">{t('labels.targetArea')}</h4>
                   <div className="flex flex-wrap gap-2">
-                    {exercise.muscleGroups?.map((muscle) => {
+                    {exercise.muscleGroups?.map((muscle: MuscleGroup) => {
                       // List of generic muscle group keys for translation
                       const genericMuscles = [
                         'back', 'chest', 'shoulders', 'legs', 'core', 'abdominals', 'obliques', 'glutes', 'calves'
@@ -79,7 +80,7 @@ export default function ExercisesPage() {
                   <div>
                     <h4 className="text-sm text-gray-400 mb-1">{t('labels.riskConditions')}</h4>
                     <div className="flex flex-wrap gap-2">
-                      {exercise.healthRisks.map((risk) => (
+                      {exercise.healthRisks.map((risk: string) => (
                         <span
                           key={risk}
                           className="px-2 py-1 bg-red-900 text-red-100 text-xs rounded-full"
@@ -92,9 +93,7 @@ export default function ExercisesPage() {
                 )}
                 
                 <div className="flex justify-between items-center mt-4">
-                  <div className="text-gray-300">
-                    <span className="text-sm">{exercise.sets} sets × {exercise.reps}</span>
-                  </div>
+                  
                   
                   {exercise.videoUrl && (
                     <Link 

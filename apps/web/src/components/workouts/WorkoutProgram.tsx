@@ -2,7 +2,6 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { WorkoutProgram as WorkoutProgramType, Locale } from '@/types/exercise';
 
 interface WorkoutProgramProps {
@@ -34,8 +33,6 @@ export function WorkoutProgram({ program }: WorkoutProgramProps) {
                       <div className="flex items-center gap-2">
                         <h3 className="font-medium">{exercise.name}</h3>
                         <div className="flex gap-1">
-                          <Badge variant="secondary" className="text-xs px-1.5 py-0">{exercise.sets} {t('sets')}</Badge>
-                          <Badge variant="secondary" className="text-xs px-1.5 py-0">{exercise.reps} {t('reps')}</Badge>
                         </div>
                       </div>
                     </div>

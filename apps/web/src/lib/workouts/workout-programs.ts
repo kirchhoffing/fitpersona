@@ -1,5 +1,5 @@
 import { WorkoutProgram } from '@/types/exercise';
-import { exerciseDatabase } from './exercise-data';
+import { exerciseDatabase } from '@/exercise-data';
 
 export const threeDayFullBodyWorkout: WorkoutProgram = {
   id: '3day-full-body',

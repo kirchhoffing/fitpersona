@@ -36,6 +36,7 @@ export type MuscleGroup =
   | 'back' // legacy, to be migrated
   | 'upper_back'
   | 'lower_back'
+  | 'lats'
   | 'shoulders'
   | 'triceps'
   | 'biceps'
