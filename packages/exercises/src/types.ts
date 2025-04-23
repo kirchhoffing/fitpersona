@@ -35,6 +35,7 @@ export type Equipment =
 export type MuscleGroup =
   | 'chest'
   | 'back'
+  | 'lats'
   | 'shoulders'
   | 'triceps'
   | 'biceps'

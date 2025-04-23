@@ -35,7 +35,7 @@ export function SignUpForm() {
         throw new Error('Registration failed')
       }
 
-      router.push('/auth/signin')
+      router.push('/auth/login')
     } catch (error) {
       console.error('Registration error:', error)
     }

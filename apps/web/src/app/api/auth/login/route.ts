@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { compare } from 'bcrypt';
+import * as bcrypt from 'bcryptjs'; // Import bcryptjs instead of bcrypt
 import { sign } from 'jsonwebtoken';
 
 const loginSchema = z.object({
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     }
 
     // Verify password
-    const isPasswordValid = await compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
       return NextResponse.json(

@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export function LoginForm() {
   const t = useTranslations('auth');
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -31,8 +33,8 @@ export function LoginForm() {
         throw new Error(data.error || 'Login failed');
       }
 
-      // Redirect to dashboard or home page after successful login
-      router.push('/dashboard');
+      // Redirect to locale-aware dashboard after successful login
+      router.push(`/${locale}/dashboard`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
