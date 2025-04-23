@@ -125,6 +125,23 @@
       "complete": "Complete"
     }
   },
+  "dashboard": {
+    "title": "Your Fitness Dashboard",
+    "gender": "Gender",
+    "age": "Age",
+    "height": "Height (cm)",
+    "weight": "Weight (kg)",
+    "goal": "Goal",
+    "activityLevel": "Activity Level",
+    "workoutLocation": "Workout Location",
+    "availableEquipment": "Available Equipment",
+    "dietaryPreferences": "Dietary Preferences",
+    "none": "None",
+    "update": "Update",
+    "reset": "Reset",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
   "profile": {
     "create": {
       "title": "Create Profile",
@@ -188,6 +205,7 @@
     "locale": "en",
     "sets": "sets",
     "reps": "reps",
-    "cardio": "Cardio"
+    "cardio": "Cardio",
+    "watchVideo": "Watch Video"
   }
 }

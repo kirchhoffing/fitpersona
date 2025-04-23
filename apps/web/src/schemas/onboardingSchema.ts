@@ -71,6 +71,6 @@ export const stepSchemas = {
     workoutLocation: z.enum(['home', 'gym']),
   }),
   8: z.object({
-    dietaryPreferences: z.string().max(500).optional(),
+    dietaryPreferences: z.array(z.string()).optional(),
   }),
 } 

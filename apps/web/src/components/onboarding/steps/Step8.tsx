@@ -1,16 +1,20 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { stepSchemas } from '@/schemas/onboardingSchema'
-import { StepNavigator } from '../StepNavigator'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
+import { Button } from '@/components/ui/button'
 
 type FormData = { dietaryPreferences: string[] }
 
 export function Step8() {
-  const { dietaryPreferences, setDietaryPreferences } = useOnboardingStore()
+  const { dietaryPreferences, setDietaryPreferences, prevStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.health')
+  const nav = useTranslations('onboarding.navigation')
+  const locale = useLocale()
+  const router = useRouter()
 
   const healthConditions = [
     { id: 'back_pain',       label: t('back_pain') },
@@ -40,17 +44,17 @@ export function Step8() {
 
   const selected = watch('dietaryPreferences') || []
 
+  const handleFinish = handleSubmit((data) => {
+    setDietaryPreferences(data.dietaryPreferences.join(','))
+    router.push(`/${locale}/dashboard`)
+  })
+
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-white mb-6">
         {t('title')}
       </h2>
-      <form
-        onSubmit={handleSubmit((data) =>
-          setDietaryPreferences(data.dietaryPreferences.join(','))
-        )}
-        className="space-y-6"
-      >
+      <form onSubmit={handleFinish} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {healthConditions.map(({ id, label }) => (
             <label
@@ -94,7 +98,14 @@ export function Step8() {
           {t('description')}
         </p>
 
-        <StepNavigator />
+        <div className="flex justify-between items-center mt-4">
+          <Button type="button" variant="outline" onClick={prevStep}>
+            {nav('back')}
+          </Button>
+          <Button type="submit">
+            {nav('complete')}
+          </Button>
+        </div>
       </form>
     </div>
   )

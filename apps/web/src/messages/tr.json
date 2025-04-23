@@ -125,6 +125,23 @@
       "complete": "Tamamla"
     }
   },
+  "dashboard": {
+    "title": "Fitness Kontrol Paneliniz",
+    "gender": "Cinsiyet",
+    "age": "Yaş",
+    "height": "Boy (cm)",
+    "weight": "Kilo (kg)",
+    "goal": "Hedef",
+    "activityLevel": "Aktivite Seviyesi",
+    "workoutLocation": "Antrenman Yeri",
+    "availableEquipment": "Mevcut Ekipmanlar",
+    "dietaryPreferences": "Beslenme Tercihleri",
+    "none": "Hiçbiri",
+    "update": "Güncelle",
+    "reset": "Sıfırla",
+    "edit": "Düzenle",
+    "cancel": "İptal"
+  },
   "profile": {
     "create": {
       "title": "Profil Oluştur",
@@ -188,6 +205,7 @@
     "locale": "tr",
     "sets": "set",
     "reps": "tekrar",
-    "cardio": "Kardiyo"
+    "cardio": "Kardiyo",
+    "watchVideo": "Videoyu İzle"
   }
 }
