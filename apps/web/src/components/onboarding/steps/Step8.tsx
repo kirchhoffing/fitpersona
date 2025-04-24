@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
+import react from 'zustand'
 
 type FormData = { dietaryPreferences: string[] }
 
@@ -44,8 +45,29 @@ export function Step8() {
 
   const selected = watch('dietaryPreferences') || []
 
-  const handleFinish = handleSubmit((data) => {
+  const handleFinish = handleSubmit(async (data) => {
     setDietaryPreferences(data.dietaryPreferences.join(','))
+    // Gather all onboarding data
+    const store = useOnboardingStore.getState();
+    const profilePayload = {
+      gender: store.gender,
+      birthYear: store.age ? new Date().getFullYear() - store.age : null,
+      height: store.height,
+      weight: store.weight,
+      goal: store.goal,
+      activityLevel: store.activityLevel,
+      workoutLocation: store.workoutLocation,
+      dietaryPreferences: data.dietaryPreferences.join(',')
+    };
+    try {
+      await fetch('/api/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profilePayload),
+      });
+    } catch (error) {
+      console.error('Failed to save profile to backend:', error);
+    }
     router.push(`/${locale}/dashboard`)
   })
 
@@ -102,7 +124,7 @@ export function Step8() {
           <Button type="button" variant="outline" onClick={prevStep}>
             {nav('back')}
           </Button>
-          <Button type="submit">
+          <Button type="button" variant="default" onClick={handleFinish}>
             {nav('complete')}
           </Button>
         </div>

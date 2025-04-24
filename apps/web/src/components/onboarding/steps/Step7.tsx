@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
 type FormData = { equipment: 'body_weight' | 'home_equipment' | 'gym' }
 
 export function Step7() {
-  const { workoutLocation: initial, setWorkoutLocation } = useOnboardingStore()
+  const { workoutLocation: initial, setWorkoutLocation, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.equipment')
   
   const {
@@ -24,9 +24,14 @@ export function Step7() {
 
   // Seçim değiştiğinde store'u güncelle
   useEffect(() => {
-    const sub = watch(v => v.equipment && setWorkoutLocation(v.equipment))
+    const sub = watch(v => {
+      if (v.equipment) {
+        setWorkoutLocation(v.equipment)
+        nextStep()
+      }
+    })
     return () => sub.unsubscribe()
-  }, [watch, setWorkoutLocation])
+  }, [watch, setWorkoutLocation, nextStep])
 
   const selected = watch('equipment')
 
@@ -59,9 +64,7 @@ export function Step7() {
       </h2>
 
       <form
-        onSubmit={handleSubmit(({ equipment }) =>
-          setWorkoutLocation(equipment)
-        )}
+        onSubmit={handleSubmit(({ equipment }) => { setWorkoutLocation(equipment); nextStep(); })}
         className="space-y-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">

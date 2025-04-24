@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
 type FormData = { height: number }
 
 export function Step3() {
-  const { height: initialHeight, setHeight } = useOnboardingStore()
+  const { height: initialHeight, setHeight, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.height')
 
   const {
@@ -28,7 +28,7 @@ export function Step3() {
         {t('title')}
       </h2>
       <form
-        onSubmit={handleSubmit(({ height }) => setHeight(height))}
+        onSubmit={handleSubmit(({ height }) => { setHeight(height); nextStep(); })}
         className="space-y-6"
       >
         <input

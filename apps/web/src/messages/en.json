@@ -166,7 +166,12 @@
     "update": "Update",
     "reset": "Reset",
     "edit": "Edit",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "calorie": {
+      "title": "🎯 Daily Target Calories",
+      "subtitle": "(Estimation based on your profile)",
+      "loading": "Loading calories..."
+    }
   },
   "profile": {
     "create": {

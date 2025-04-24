@@ -15,6 +15,18 @@ type ProfileData = {
   dietaryPreferences: string[]
 }
 
+export async function GET(req: Request) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
+  if (!profile) {
+    return NextResponse.json(null, { status: 204 })
+  }
+  return NextResponse.json(profile)
+}
+
 export async function POST(req: Request) {
   try {
     // Get the current user's session
@@ -65,4 +77,4 @@ export async function POST(req: Request) {
       { status: 500 }
     )
   }
-} 
+}

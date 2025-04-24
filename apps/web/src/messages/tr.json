@@ -160,13 +160,18 @@
     "goal": "Hedef",
     "activityLevel": "Aktivite Seviyesi",
     "workoutLocation": "Antrenman Yeri",
-    "availableEquipment": "Mevcut Ekipmanlar",
+    "availableEquipment": "Mevcut Ekipman",
     "dietaryPreferences": "Beslenme Tercihleri",
-    "none": "Hiçbiri",
+    "none": "Yok",
     "update": "Güncelle",
     "reset": "Sıfırla",
     "edit": "Düzenle",
-    "cancel": "İptal"
+    "cancel": "İptal",
+    "calorie": {
+      "title": "🎯 Günlük Hedef Kalori",
+      "subtitle": "(Profilinize göre tahmini)",
+      "loading": "Kaloriler yükleniyor..."
+    }
   },
   "profile": {
     "create": {

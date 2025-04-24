@@ -1,0 +1,6 @@
+{
+  "name": "@fitpersona/nutrition",
+  "version": "1.0.0",
+  "main": "calorie-calculation.ts",
+  "types": "calorie-calculation.ts"
+}

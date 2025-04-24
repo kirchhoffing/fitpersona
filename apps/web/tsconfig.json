@@ -21,7 +21,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/lib/workouts/exercise-data": ["../../packages/exercises/src/exercise-data"],
-      "@/exercise-data": ["../../packages/exercises/src/exercise-data"]
+      "@/exercise-data": ["../../packages/exercises/src/exercise-data"],
+      "@/nutrition/*": ["../../packages/nutrition/*"],
+      "@fitpersona/nutrition": ["../../packages/nutrition/calorie-calculation"]
     }
   },
 

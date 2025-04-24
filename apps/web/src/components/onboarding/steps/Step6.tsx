@@ -11,7 +11,7 @@ type FormData = {
 }
 
 export function Step6() {
-  const { activityLevel: initialLevel, setActivityLevel } = useOnboardingStore()
+  const { activityLevel: initialLevel, setActivityLevel, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.activityLevel')
 
   const {
@@ -69,9 +69,7 @@ export function Step6() {
       </h2>
 
       <form
-        onSubmit={handleSubmit(({ activityLevel }) =>
-          setActivityLevel(activityLevel)
-        )}
+        onSubmit={handleSubmit(({ activityLevel }) => { setActivityLevel(activityLevel); nextStep(); })}
         className="space-y-6"
       >
         <div className="space-y-4">

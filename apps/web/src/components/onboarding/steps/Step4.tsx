@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
 type FormData = { weight: number }
 
 export function Step4() {
-  const { weight: initialWeight, setWeight } = useOnboardingStore()
+  const { weight: initialWeight, setWeight, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.weight')
 
   const {
@@ -28,7 +28,7 @@ export function Step4() {
         {t('title')}
       </h2>
       <form
-        onSubmit={handleSubmit(({ weight }) => setWeight(weight))}
+        onSubmit={handleSubmit(({ weight }) => { setWeight(weight); nextStep(); })}
         className="space-y-6"
       >
         <input

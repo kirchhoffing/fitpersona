@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
 type FormData = { age: number }
 
 export function Step2() {
-  const { age: initialAge, setAge } = useOnboardingStore()
+  const { age: initialAge, setAge, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.age')
 
   const {
@@ -24,7 +24,7 @@ export function Step2() {
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-white mb-6">{t('title')}</h2>
-      <form onSubmit={handleSubmit(({ age }) => setAge(age))} className="space-y-6">
+      <form onSubmit={handleSubmit(({ age }) => { setAge(age); nextStep(); })} className="space-y-6">
         <input
           type="number"
           {...register('age', { valueAsNumber: true })}
@@ -43,4 +43,3 @@ export function Step2() {
     </div>
   )
 }
-

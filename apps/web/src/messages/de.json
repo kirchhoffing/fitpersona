@@ -166,7 +166,12 @@
     "update": "Aktualisieren",
     "reset": "Zurücksetzen",
     "edit": "Bearbeiten",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "calorie": {
+      "title": "🎯 Täglicher Kalorienziel",
+      "subtitle": "(Schätzung basierend auf Ihrem Profil)",
+      "loading": "Kalorien werden geladen..."
+    }
   },
   "profile": {
     "create": {

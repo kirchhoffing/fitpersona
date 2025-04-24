@@ -11,7 +11,7 @@ type FormData = {
 }
 
 export function Step5() {
-  const { goal: initialGoal, setGoal } = useOnboardingStore()
+  const { goal: initialGoal, setGoal, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.goal')
 
   const {
@@ -60,7 +60,7 @@ export function Step5() {
       </h2>
 
       <form
-        onSubmit={handleSubmit(({ goal }) => setGoal(goal))}
+        onSubmit={handleSubmit(({ goal }) => { setGoal(goal); nextStep(); })}
         className="space-y-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">

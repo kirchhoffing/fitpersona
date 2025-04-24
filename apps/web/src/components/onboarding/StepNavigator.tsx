@@ -32,7 +32,7 @@ export function StepNavigator() {
         </span>
 
         <Button
-          onClick={nextStep}
+          type="submit"
           variant="default"
         >
           {currentStep === totalSteps ? t('complete') : t('next')}

@@ -10,7 +10,7 @@ import { Mars, Venus, NonBinary } from 'lucide-react'
 type FormData = { gender: 'male' | 'female' | 'other' }
 
 export function Step1() {
-  const { gender: initialGender, setGender } = useOnboardingStore()
+  const { gender: initialGender, setGender, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.gender')
 
   const {
@@ -48,8 +48,9 @@ export function Step1() {
   ]
 
   const onSubmit = (data: FormData) => {
-    // Store zaten useEffect ile güncelleniyor, ama burayı da boş bırakmamak için:
+    // Save to store and advance to next step
     setGender(data.gender)
+    nextStep()
   }
 
   return (

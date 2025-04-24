@@ -1,9 +1,11 @@
 "use client";
 import { useLocale, useTranslations } from 'next-intl'
 import { useOnboardingStore } from '@/store/onboardingStore'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Goal, ActivityLevel, Equipment, Gender } from '@/store/onboardingStore'
+
+import { CalorieDisplay } from './calorie-display'
 
 export default function DashboardPage() {
   const locale = useLocale()
@@ -43,9 +45,38 @@ export default function DashboardPage() {
     dietaryPreferences: dietaryPreferences || '',
   })
 
-  const onUpdate = () => {
+  const [profileData, setProfileData] = useState<{ gender: 'male' | 'female' | 'other'; birthYear: number; height: number; weight: number; goal: 'lose_weight' | 'gain_muscle' | 'maintain_fitness'; activityLevel: 'sedentary' | 'lightly_active' | 'active' | 'very_active'; } | null>(null);
+
+  // Debug values from useOnboardingStore
+  console.log('useOnboardingStore values:', { gender, age, height, weight, goal, activityLevel, workoutLocation });
+
+  useEffect(() => {
+    fetch('/api/profile')
+      .then(res => res.ok ? res.json() : Promise.reject('API request failed')) 
+      .then(data => {
+        console.log('Fetched profile data:', data);
+        setProfileData(data);
+        if (data) {
+          const store = useOnboardingStore.getState();
+          if (data.gender) store.setGender(data.gender);
+          if (data.birthYear) store.setAge(new Date().getFullYear() - data.birthYear);
+          if (data.height) store.setHeight(data.height);
+          if (data.weight) store.setWeight(data.weight);
+          if (data.goal) store.setGoal(data.goal);
+          if (data.activityLevel) store.setActivityLevel(data.activityLevel);
+          if (data.workoutLocation) store.setWorkoutLocation(data.workoutLocation);
+          if (data.dietaryPreferences) store.setDietaryPreferences(data.dietaryPreferences);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching profile data:', error); 
+        setProfileData(null); 
+      });
+  }, []);
+
+  const onUpdate = async () => {
     if (isEditing) {
-      // Save changes
+      // Save changes to local state
       setGender(editValues.gender as Gender)
       setAge(editValues.age ? Number(editValues.age) : null)
       setHeight(editValues.height ? Number(editValues.height) : null)
@@ -55,6 +86,22 @@ export default function DashboardPage() {
       setWorkoutLocation(editValues.workoutLocation as Equipment)
       setDietaryPreferences(editValues.dietaryPreferences)
       
+      // Persist to backend
+      await fetch('/api/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gender: editValues.gender,
+          birthYear: new Date().getFullYear() - Number(editValues.age),
+          height: Number(editValues.height),
+          weight: Number(editValues.weight),
+          fitnessGoals: [editValues.goal],
+          activityLevel: editValues.activityLevel,
+          availableEquipment: [], // You can update this to use real equipment if needed
+          dietaryPreferences: editValues.dietaryPreferences?.split(',').map(s => s.trim()).filter(Boolean) || []
+        })
+      })
+      // Optionally: refetch profileData here
       setIsEditing(false)
     } else {
       // Enter edit mode
@@ -104,7 +151,9 @@ export default function DashboardPage() {
                   </select>
                 ) : (
                   <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
-                    {tOnboarding(`gender.${gender}`)}
+                    {profileData
+  ? tOnboarding(`gender.${profileData.gender}`)
+  : (gender ? tOnboarding(`gender.${gender}`) : '')}
                   </span>
                 )}
               </div>
@@ -119,7 +168,9 @@ export default function DashboardPage() {
                     className="bg-gray-700 text-white p-2 rounded"
                   />
                 ) : (
-                  <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>{age}</span>
+                  <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
+                    {profileData ? (new Date().getFullYear() - profileData.birthYear) : age || ''}
+                  </span>
                 )}
               </div>
               
@@ -136,7 +187,9 @@ export default function DashboardPage() {
                     <span className="ml-2">cm</span>
                   </div>
                 ) : (
-                  <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>{height} cm</span>
+                  <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
+                    {profileData ? profileData.height : height || ''} cm
+                  </span>
                 )}
               </div>
               
@@ -153,7 +206,9 @@ export default function DashboardPage() {
                     <span className="ml-2">kg</span>
                   </div>
                 ) : (
-                  <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>{weight} kg</span>
+                  <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
+                    {profileData ? profileData.weight : weight || ''} kg
+                  </span>
                 )}
               </div>
             </div>
@@ -256,6 +311,27 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+      {/* Calorie Display Section */}
+      {(profileData || (gender && age && height && weight && activityLevel && goal)) ? (
+        <CalorieDisplay 
+          gender={
+            profileData
+              ? (profileData.gender === 'other' ? 'female' : profileData.gender)
+              : (gender === 'other' ? 'female' : gender!)
+          }
+          age={
+            profileData
+              ? new Date().getFullYear() - profileData.birthYear
+              : age!
+          }
+          height={profileData ? profileData.height : height!}
+          weight={profileData ? profileData.weight : weight!}
+          activityLevel={profileData ? profileData.activityLevel : activityLevel!}
+          goal={profileData ? profileData.goal : goal!}
+        />
+      ) : (
+        <div className="mt-4 text-gray-400">Loading calories...</div>
+      )}
     </div>
   )
 }
