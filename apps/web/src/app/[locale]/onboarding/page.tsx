@@ -1,3 +1,9 @@
+// [FitPersona Onboarding Page]
+// This file serves as the main route handler for the onboarding flow for each locale.
+// It orchestrates the step-by-step onboarding process, manages state, and imports step components from '@/components/onboarding/steps'.
+// The onboarding UI and logic are implemented in the components/onboarding directory.
+// Any changes to onboarding flow, routing, or step rendering should be made here.
+
 'use client'
 
 import { useOnboardingStore } from '@/store/onboardingStore'

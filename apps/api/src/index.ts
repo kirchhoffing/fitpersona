@@ -1,3 +1,9 @@
+/*
+  API Entry Point
+  Purpose: Sets up and starts the Express server for the FitPersona API, handling requests for workouts and health checks.
+  Context: This is the main server file for the backend API, registering routes and middleware and providing endpoints for workout data and server health.
+*/
+
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';

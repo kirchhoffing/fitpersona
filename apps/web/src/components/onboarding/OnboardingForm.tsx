@@ -1,3 +1,9 @@
+// [FitPersona OnboardingForm Component]
+// This file defines the main UI component for the onboarding form.
+// It handles form validation, user input, and submission logic for onboarding data.
+// Used by the onboarding route/page to render the onboarding steps and collect user information.
+// Step-specific UI is further split into components/onboarding/steps/StepX.tsx.
+
 'use client'
 
 import { useForm } from 'react-hook-form'

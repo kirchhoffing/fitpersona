@@ -1,3 +1,9 @@
+/*
+  Workout Programs Data & Logic
+  Purpose: Defines and exports workout program data structures and logic for use throughout the app.
+  Context: This file is imported by UI components and route pages (such as the workouts page) to display and manage workout program information in the FitPersona web app.
+*/
+
 import { WorkoutProgram } from '@/types/exercise';
 import { exerciseDatabase } from '@/exercise-data';
 

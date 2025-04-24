@@ -1,3 +1,9 @@
+/*
+  Exercises Page
+  Purpose: Displays a searchable and filterable grid of exercises for the user, localized by language/locale. Allows users to browse and search exercises and see details such as muscle groups and images.
+  Context: Part of the FitPersona web app, this page is used in the onboarding flow and general exercise exploration. Uses Next.js, next-intl for i18n, and pulls exercise data from the shared package.
+*/
+
 "use client";
 import { useTranslations, useLocale } from 'next-intl';
 import { exerciseDatabase } from '@/lib/workouts/exercise-data';
