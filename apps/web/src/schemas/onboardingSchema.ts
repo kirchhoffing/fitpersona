@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { Gender, Goal, ActivityLevel, Equipment } from '../store/onboardingStore'
 
 // Current year for age validation
 const currentYear = new Date().getFullYear()

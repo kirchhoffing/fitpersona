@@ -3,8 +3,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { WorkoutProgram } from '@/components/workouts/WorkoutProgram'
-import { workoutPrograms } from '@/lib/workouts/workout-programs'
 import { Goal, ActivityLevel, Equipment, Gender } from '@/store/onboardingStore'
 
 export default function DashboardPage() {
@@ -31,8 +29,6 @@ export default function DashboardPage() {
     setWorkoutLocation,
     setDietaryPreferences,
   } = useOnboardingStore()
-
-  const program = workoutPrograms['3day-full-body']
   
   // State for editing mode
   const [isEditing, setIsEditing] = useState(false)
@@ -259,8 +255,6 @@ export default function DashboardPage() {
             </Button>
           </div>
         </div>
-        
-        <WorkoutProgram program={program} />
       </div>
     </div>
   )

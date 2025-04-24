@@ -15,7 +15,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["packages/exercises/src/*"],
-      "@fitpersona/database": ["packages/database/src"]
+      "@fitpersona/database": ["packages/database/src"],
+      "@fitpersona/workouts/*": ["packages/workouts/*"],
+      "@fitpersona/exercises": ["packages/exercises/src/index.ts"]
     }
   },
   "exclude": ["node_modules"]
