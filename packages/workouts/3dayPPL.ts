@@ -1,6 +1,6 @@
 import { exerciseDatabase } from '@fitpersona/exercises';
 
-export const threeDayPushPullLegsWorkout = {
+export const threeDayPPLWorkout = {
   name: {
     en: '3-Day Push/Pull/Legs Workout Program',
     tr: '3 Günlük Push/Pull/Legs Antrenman Programı',

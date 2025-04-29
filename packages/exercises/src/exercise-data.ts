@@ -18,6 +18,262 @@ export const exerciseDatabase: Record<string, Exercise> = {
     difficulty: 'intermediate',
     healthRisks: ['back_pain', 'knee_problem']
   },
+  'bodyweight-squat': {
+    id: 'bodyweight-squat',
+    name: 'Bodyweight Squat',
+    description: {
+      en: 'A basic squat performed using only bodyweight, targeting the lower body.',
+      tr: 'Sadece vücut ağırlığı ile yapılan temel squat, alt vücudu hedefler.',
+      de: 'Eine grundlegende Kniebeuge nur mit dem eigenen Körpergewicht, zielt auf den Unterkörper.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=aclHkVaku9U',
+    imageUrl: '/exercises/BodyweightSquat.png',
+    category: 'bodyweight',
+    equipment: ['bodyweight'],
+    muscleGroups: ['quadriceps', 'glutes', 'hamstrings', 'core'],
+    difficulty: 'beginner',
+    healthRisks: ['knee_problem', 'back_pain']
+  },
+  'glute-bridge': {
+    id: 'glute-bridge',
+    name: 'Glute Bridge',
+    description: {
+      en: 'Bodyweight exercise focusing on glutes and hamstrings.',
+      tr: 'Kalça ve arka bacak kaslarını hedefleyen vücut ağırlığı egzersizi.',
+      de: 'Körpergewichtsübung für Gesäß und hintere Oberschenkel.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=m2Zx-57cSok',
+    imageUrl: '/exercises/GluteBridge.png',
+    category: 'bodyweight',
+    equipment: ['bodyweight'],
+    muscleGroups: ['glutes', 'hamstrings', 'core'],
+    difficulty: 'beginner',
+    healthRisks: ['back_pain']
+  },
+  'lunge': {
+    id: 'lunge',
+    name: 'Lunge',
+    description: {
+      en: 'A bodyweight exercise targeting quads, glutes, and hamstrings, performed by stepping forward and lowering the hips.',
+      tr: 'Öne adım atıp kalçayı indirerek yapılan ve uyluk, kalça ve arka bacak kaslarını hedefleyen vücut ağırlığı egzersizi.',
+      de: 'Eine Übung mit dem eigenen Körpergewicht, bei der man einen Schritt nach vorne macht und die Hüfte absenkt. Zielmuskeln: Oberschenkel, Gesäß, hintere Oberschenkel.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=QOVaHwm-Q6U',
+    imageUrl: '/exercises/Lunge.png',
+    category: 'bodyweight',
+    equipment: ['bodyweight'],
+    muscleGroups: ['quadriceps', 'glutes', 'hamstrings'],
+    difficulty: 'beginner',
+    healthRisks: ['knee_problem']
+  },
+  'wall-sit': {
+    id: 'wall-sit',
+    name: 'Wall Sit',
+    description: {
+      en: 'Isometric bodyweight exercise performed by sitting against a wall to strengthen the thighs and glutes.',
+      tr: 'Duvara yaslanarak yapılan ve uyluk ile kalça kaslarını güçlendiren izometrik vücut ağırlığı egzersizi.',
+      de: 'Isometrische Übung an der Wand, stärkt Oberschenkel und Gesäß.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=-cdph8hv0O0',
+    imageUrl: '/exercises/WallSit.png',
+    category: 'bodyweight',
+    equipment: ['bodyweight'],
+    muscleGroups: ['quadriceps', 'glutes'],
+    difficulty: 'beginner',
+    healthRisks: ['knee_problem']
+  },
+  'crunch': {
+    id: 'crunch',
+    name: 'Crunch',
+    description: {
+      en: 'A classic abdominal exercise performed by curling the shoulders towards the pelvis while lying on your back.',
+      tr: 'Sırt üstü yatarken omuzları pelvise doğru kaldırarak yapılan klasik karın egzersizi.',
+      de: 'Klassische Bauchübung, bei der die Schultern zum Becken gezogen werden.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=Xyd_fa5zoEU',
+    imageUrl: '/exercises/Crunch.png',
+    category: 'core',
+    equipment: ['bodyweight'],
+    muscleGroups: ['abdominals'],
+    difficulty: 'beginner',
+    healthRisks: ['neck_pain', 'back_pain']
+  },
+  'cobra-stretch': {
+    id: 'cobra-stretch',
+    name: 'Cobra Stretch',
+    description: {
+      en: 'A yoga stretch that opens the chest and strengthens the spine, performed by lying face down and pressing the chest upward.',
+      tr: 'Yüz üstü yatıp göğsü yukarı kaldırarak yapılan, omurgayı güçlendiren ve göğsü açan yoga esnetmesi.',
+      de: 'Eine Yoga-Dehnung zur Öffnung der Brust und Stärkung der Wirbelsäule, indem man sich aus der Bauchlage mit den Händen aufrichtet.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=JDcdhTuycOI',
+    imageUrl: '/exercises/CobraStretch.png',
+    category: 'core',
+    equipment: ['bodyweight'],
+    muscleGroups: ['chest', 'abdominals'],
+    difficulty: 'beginner',
+    healthRisks: ['back_pain']
+  },
+  'incline-bench-press': {
+    id: 'incline-bench-press',
+    name: 'Incline Bench Press',
+    description: {
+      en: 'Variation of bench press with barbell set at an incline, targeting the upper chest.',
+      tr: 'Barbell’in eğimli olarak kullanıldığı, üst göğüs kaslarını hedefleyen bench press varyasyonu.',
+      de: 'Variante der Bankdrückübung mit geneigter Stange, zielt auf den oberen Brustbereich ab.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=8iPEnn-ltC8',
+    imageUrl: '/exercises/InclineBenchPress.png',
+    category: 'compound',
+    equipment: ['barbell', 'bench'],
+    muscleGroups: ['chest', 'shoulders', 'triceps'],
+    difficulty: 'intermediate',
+    healthRisks: ['shoulder_pain']
+  },
+  'dumbbell-shoulder-press': {
+    id: 'dumbbell-shoulder-press',
+    name: 'Dumbbell Shoulder Press',
+    description: {
+      en: 'Compound exercise targeting shoulders using dumbbells.',
+      tr: 'Dumbbell kullanılarak yapılan, omuz kaslarını hedefleyen bileşik egzersiz.',
+      de: 'Grundübung für die Schultern mit Kurzhanteln.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=qEwKCR5JCog',
+    imageUrl: '/exercises/DumbbellShoulderPress.png',
+    category: 'compound',
+    equipment: ['dumbbell'],
+    muscleGroups: ['shoulders', 'triceps'],
+    difficulty: 'intermediate',
+    healthRisks: ['shoulder_pain', 'neck_pain']
+  },
+  'lateral-raise': {
+    id: 'lateral-raise',
+    name: 'Lateral Raise',
+    description: {
+      en: 'Isolation exercise targeting the side deltoids.',
+      tr: 'Yan deltoid kaslarını hedefleyen izole egzersiz.',
+      de: 'Isolationsübung für die seitliche Schulter.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=3VcKaXpzqRo',
+    imageUrl: '/exercises/LateralRaise.png',
+    category: 'isolation',
+    equipment: ['dumbbell'],
+    muscleGroups: ['shoulders'],
+    difficulty: 'beginner',
+    healthRisks: ['shoulder_pain']
+  },
+  'overhead-triceps-extension': {
+    id: 'overhead-triceps-extension',
+    name: 'Overhead Triceps Extension',
+    description: {
+      en: 'Isolation exercise targeting the triceps by extending arms overhead.',
+      tr: 'Kollar yukarıda uzatılarak yapılan, triceps kaslarını hedefleyen izolasyon egzersizi.',
+      de: 'Isolationsübung für den Trizeps, Arme über den Kopf gestreckt.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=nRiJVZDpdL0',
+    imageUrl: '/exercises/OverheadTricepsExtension.png',
+    category: 'isolation',
+    equipment: ['dumbbell'],
+    muscleGroups: ['triceps'],
+    difficulty: 'beginner',
+    healthRisks: ['shoulder_pain', 'elbow_pain']
+  },
+  'seated-cable-row': {
+    id: 'seated-cable-row',
+    name: 'Seated Cable Row',
+    description: {
+      en: 'Compound exercise targeting back and biceps using a cable machine.',
+      tr: 'Kablo makinesi kullanılarak yapılan, sırt ve biceps kaslarını hedefleyen bileşik egzersiz.',
+      de: 'Grundübung für Rücken und Bizeps an der Kabelzugmaschine.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=HJSVR_67OlM',
+    imageUrl: '/exercises/SeatedCableRow.png',
+    category: 'compound',
+    equipment: ['machine'],
+    muscleGroups: ['upper_back', 'biceps'],
+    difficulty: 'beginner',
+    healthRisks: ['back_pain']
+  },
+  'barbell-curl': {
+    id: 'barbell-curl',
+    name: 'Barbell Curl',
+    description: {
+      en: 'Isolation exercise targeting the biceps using a barbell.',
+      tr: 'Barbell kullanılarak yapılan, biceps kaslarını hedefleyen izolasyon egzersizi.',
+      de: 'Isolationsübung für den Bizeps mit der Langhantel.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=kwG2ipFRgfo',
+    imageUrl: '/exercises/BarbellCurl.png',
+    category: 'isolation',
+    equipment: ['barbell'],
+    muscleGroups: ['biceps', 'forearms'],
+    difficulty: 'beginner',
+    healthRisks: ['elbow_pain']
+  },
+  'hammer-curl': {
+    id: 'hammer-curl',
+    name: 'Hammer Curl',
+    description: {
+      en: 'Isolation exercise targeting biceps and forearms with a neutral grip.',
+      tr: 'Nötr kavrama ile yapılan, biceps ve ön kol kaslarını hedefleyen izolasyon egzersiz.',
+      de: 'Isolationsübung für Bizeps und Unterarme mit Neutralgriff.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=zC3nLlEvin4',
+    imageUrl: '/exercises/HammerCurl.png',
+    category: 'isolation',
+    equipment: ['dumbbell'],
+    muscleGroups: ['biceps', 'forearms'],
+    difficulty: 'beginner',
+    healthRisks: ['elbow_pain']
+  },
+  'leg-press': {
+    id: 'leg-press',
+    name: 'Leg Press',
+    description: {
+      en: 'Machine exercise targeting the lower body.',
+      tr: 'Makine kullanılarak yapılan alt vücut kaslarını hedefleyen egzersiz.',
+      de: 'Geräteübung für den Unterkörper.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=IZxyjW7MPJQ',
+    imageUrl: '/exercises/LegPress.png',
+    category: 'compound',
+    equipment: ['machine'],
+    muscleGroups: ['quadriceps', 'glutes', 'hamstrings'],
+    difficulty: 'intermediate',
+    healthRisks: ['back_pain', 'knee_problem']
+  },
+  'calf-raise': {
+    id: 'calf-raise',
+    name: 'Calf Raise',
+    description: {
+      en: 'Isolation exercise targeting the calves.',
+      tr: 'Baldır kaslarını hedefleyen izolasyon egzersizi.',
+      de: 'Isolationsübung für die Waden.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=-M4-G8p8fmc',
+    imageUrl: '/exercises/CalfRaise.png',
+    category: 'isolation',
+    equipment: ['bodyweight', 'machine'],
+    muscleGroups: ['calves'],
+    difficulty: 'beginner',
+    healthRisks: ['ankle_pain']
+  },
+  'cable-biceps-curl': {
+    id: 'cable-biceps-curl',
+    name: 'Cable Biceps Curl',
+    description: {
+      en: 'Isolation exercise targeting the biceps using a cable machine.',
+      tr: 'Kablo makinesi kullanılarak yapılan, biceps kaslarını hedefleyen izolasyon egzersizi.',
+      de: 'Isolationsübung für den Bizeps an der Kabelzugmaschine.'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=av7-8igSXTs',
+    imageUrl: '/exercises/CableBicepsCurl.png',
+    category: 'isolation',
+    equipment: ['cable'],
+    muscleGroups: ['biceps'],
+    difficulty: 'beginner',
+    healthRisks: []
+  },
   'bench-press': {
     id: 'bench-press',
     name: 'Bench Press',
@@ -207,6 +463,22 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'bodyweight',
     equipment: ['bodyweight'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
+    difficulty: 'beginner',
+    healthRisks: ['shoulder_pain', 'wrist_pain']
+  },
+  'dips-chair': {
+    id: 'dips-chair',
+    name: 'Chair Dips',
+    description: {
+      en: 'Bodyweight exercise targeting triceps using a chair',
+      tr: 'Bir sandalyeyi kullanarak triceps hedefleyen vücut ağırlığı egzersizi',
+      de: 'Körpergewichtsübung für Trizeps mit Stuhl'
+    },
+    videoUrl: 'https://www.youtube.com/watch?v=0326dy_-CzM',
+    imageUrl: '/exercises/ChairDips.png',
+    category: 'compound',
+    equipment: ['bodyweight', 'bench'],
+    muscleGroups: ['triceps', 'shoulders'],
     difficulty: 'beginner',
     healthRisks: ['shoulder_pain', 'wrist_pain']
   },

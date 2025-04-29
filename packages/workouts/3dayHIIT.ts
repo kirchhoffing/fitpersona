@@ -1,6 +1,6 @@
 import { exerciseDatabase } from '@fitpersona/exercises';
 
-export const threeDayBodyweightWorkout = {
+export const threeDayHIITWorkout = {
   name: {
     en: '3-Day Bodyweight Home Workout',
     tr: '3 Günlük Vücut Ağırlığıyla Evde Antrenman',

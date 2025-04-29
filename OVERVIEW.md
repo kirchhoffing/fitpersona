@@ -39,14 +39,13 @@ Monorepo architecture is used for better modularization, scalability, and team c
 ---
 
 ### 🚦 Onboarding & Step System
-- **Multi-step onboarding flow** guides users through profile creation, preferences, and fitness goals.
-- Each onboarding step is managed by a centralized step system (step IDs, progress, and state are tracked).
-- Steps are fully localized: all prompts, questions, and labels use translation keys from language JSON files.
-- Step logic is modular, so new steps or questions can be added easily.
-- Onboarding data is persisted between steps and can be resumed if interrupted.
-- Health conditions, risk factors, and all user-facing strings are sourced from translation files.
-
----
+- **Multi-step onboarding flow** guides users through profile creation, preferences, and fitness goals
+- Each onboarding step is managed by a centralized step system (step IDs, progress, and state are tracked)
+- Steps are fully localized using translation keys from language JSON files
+- Step logic is modular for easy addition of new steps or questions
+- Onboarding data is persisted and resumable
+- Health conditions, risk factors, and all user-facing strings are sourced from translation files
+- Dashboard layout recently reorganized: info/profile section now appears at the top, followed by a single calorie display, and the workout program at the bottom (no duplicate calorie estimation)
 
 ### 🧬 Database Schema
 **Profile Model**:
@@ -59,6 +58,21 @@ model Profile {
   birthYear     Int?
   height        Float?
   weight        Float?
+  goal          String?  // lose_weight, gain_muscle, maintain_fitness
+  activityLevel String?
+  equipment     String[]
+  dietary       String[]
+  preferences   Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+```
+
+**Exercise Database**:
+- Centralized in `packages/exercises/src/exercise-data.ts`
+- All referenced exercises in workout programs must be present here as distinct entries
+- To avoid type errors, ensure the MuscleGroup type in both `packages/exercises/src/types.ts` and `apps/web/src/types/exercise.ts` are kept in sync (recently fixed by adding 'lats' to the web app)
   goal          String?  // lose_weight, gain_muscle, maintain_fitness
   activityLevel String?
   equipment     String[]
@@ -86,15 +100,20 @@ model User {
 ```
 
 ### 🏋️ Workout Programs
-- Predefined 3-Day Full Body workout template
-- Alternative exercises are now listed as distinct entries (e.g., "Pull-up" and "Lat Pulldown" are separate, not combined).
+- Predefined 3-Day Full Body, Push/Pull/Legs, HIIT, and Bodyweight Home workout templates
+- All exercises are now listed as distinct entries in the database (e.g., "Pull-up" and "Lat Pulldown" are separate, not combined)
+- Recently added missing exercises referenced in workout programs, including: incline-bench-press, dumbbell-shoulder-press, lateral-raise, overhead-triceps-extension, seated-cable-row, barbell-curl, hammer-curl, leg-press, calf-raise, cable-biceps-curl
+- Fixed 'cobra-stretch' to be categorized as 'core' (was 'stretch')
 - Localized workout names & descriptions (next-intl)
 - **All exercise names, muscle groups, and health risk conditions are fully localized via JSON language files** (no hardcoded UI strings)
 - Progress tracking integration
-- Program assignment based on onboarding data
+- Program assignment based on onboarding data and central mapping logic (see below)
 - Exercise library with detailed instructions
 - Workout history and progress tracking
 - "watchVideo" translation key added for exercise video links
+- To add a new workout program, import it in `packages/workouts/workoutProgramMap.ts` and add a new mapping object to the `programMap` array with your match logic
+- The first matching rule in `programMap` is used; fallback provided
+- See the `WorkoutCriteria` type for available matching fields
 
 ---
 
@@ -123,8 +142,9 @@ model User {
 - WorkoutProgram: `WorkoutProgram.watchVideo` for "Watch Video" links.
 
 ### Notes
-- All user-facing strings in the dashboard and onboarding are now locale-aware and never display raw translation keys.
-- If a translation is missing, the key will be added to the corresponding JSON file for consistency.
+- All user-facing strings in the dashboard and onboarding are now locale-aware and never display raw translation keys
+- If a translation is missing, the key will be added to the corresponding JSON file for consistency
+- Dashboard and workout program UI are fully localized and updated to reflect the new section order
 
 - **Languages Supported**:
   - English (default)

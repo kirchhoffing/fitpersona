@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Goal, ActivityLevel, Equipment, Gender } from '@/store/onboardingStore'
 
 import { CalorieDisplay } from './calorie-display'
+import { WorkoutCriteria, selectWorkoutProgram } from '../../../../../../packages/workouts/workoutProgramMap';
+import { WorkoutProgramDisplay } from '@/components/WorkoutProgramDisplay';
 
 export default function DashboardPage() {
   const locale = useLocale()
@@ -129,11 +131,30 @@ export default function DashboardPage() {
     }
   }
 
+  // Calorie display defaults
+  const cdGender: 'male' | 'female' = (gender === 'male' || gender === 'female' ? gender : 'male');
+  const cdAge = age ?? 0;
+  const cdHeight = height ?? 0;
+  const cdWeight = weight ?? 0;
+  const cdActivityLevel = activityLevel ?? 'sedentary';
+  const cdGoal = goal ?? 'lose_weight';
+
+  // Workout location mapping with explicit type
+  const wLocation: WorkoutCriteria['workoutLocation'] = workoutLocation === 'body_weight' ? 'home' : 'gym';
+
+  // Prepare criteria for workout selection
+  const workoutCriteria: WorkoutCriteria = {
+    goal: cdGoal,
+    workoutLocation: wLocation,
+    activityLevel: cdActivityLevel,
+  };
+  const selectedProgram = selectWorkoutProgram(workoutCriteria);
+
   return (
     <div className="min-h-screen bg-gray-900 p-8">
       <div className="max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow p-6 space-y-6">
         <h1 className="text-4xl text-white font-bold">{t('title')}</h1>
-        
+        {/* Info/Profile Section - moved to top */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow">
             <div className="space-y-3 text-gray-300">
@@ -152,12 +173,11 @@ export default function DashboardPage() {
                 ) : (
                   <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
                     {profileData
-  ? tOnboarding(`gender.${profileData.gender}`)
-  : (gender ? tOnboarding(`gender.${gender}`) : '')}
+                      ? tOnboarding(`gender.${profileData.gender}`)
+                      : (gender ? tOnboarding(`gender.${gender}`) : '')}
                   </span>
                 )}
               </div>
-              
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">{t('age')}</span>
                 {isEditing ? (
@@ -173,7 +193,6 @@ export default function DashboardPage() {
                   </span>
                 )}
               </div>
-              
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">{t('height')}</span>
                 {isEditing ? (
@@ -192,7 +211,6 @@ export default function DashboardPage() {
                   </span>
                 )}
               </div>
-              
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">{t('weight')}</span>
                 {isEditing ? (
@@ -212,7 +230,6 @@ export default function DashboardPage() {
                 )}
               </div>
             </div>
-            
             <div className="space-y-3 text-gray-300">
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">{t('goal')}</span>
@@ -232,7 +249,6 @@ export default function DashboardPage() {
                   </span>
                 )}
               </div>
-              
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">{t('activityLevel')}</span>
                 {isEditing ? (
@@ -252,7 +268,6 @@ export default function DashboardPage() {
                   </span>
                 )}
               </div>
-              
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">{t('workoutLocation')}</span>
                 {isEditing ? (
@@ -271,7 +286,6 @@ export default function DashboardPage() {
                   </span>
                 )}
               </div>
-              
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">{t('dietaryPreferences')}</span>
                 {isEditing ? (
@@ -292,7 +306,6 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
-          
           <div className="flex flex-col space-y-2 mt-4 md:mt-0">
             <Button 
               variant={isEditing ? "default" : "outline"} 
@@ -310,28 +323,18 @@ export default function DashboardPage() {
             </Button>
           </div>
         </div>
-      </div>
-      {/* Calorie Display Section */}
-      {(profileData || (gender && age && height && weight && activityLevel && goal)) ? (
-        <CalorieDisplay 
-          gender={
-            profileData
-              ? (profileData.gender === 'other' ? 'female' : profileData.gender)
-              : (gender === 'other' ? 'female' : gender!)
-          }
-          age={
-            profileData
-              ? new Date().getFullYear() - profileData.birthYear
-              : age!
-          }
-          height={profileData ? profileData.height : height!}
-          weight={profileData ? profileData.weight : weight!}
-          activityLevel={profileData ? profileData.activityLevel : activityLevel!}
-          goal={profileData ? profileData.goal : goal!}
+        {/* Calorie Section - now under info */}
+        <CalorieDisplay
+          gender={cdGender}
+          age={cdAge}
+          height={cdHeight}
+          weight={cdWeight}
+          activityLevel={cdActivityLevel}
+          goal={cdGoal}
         />
-      ) : (
-        <div className="mt-4 text-gray-400">Loading calories...</div>
-      )}
+        {/* Dynamic Workout Program Section - now at bottom */}
+        <WorkoutProgramDisplay program={selectedProgram} locale={locale} />
+      </div>
     </div>
   )
 }
