@@ -25,6 +25,8 @@ interface OnboardingFormState {
   // Step 8
   availableEquipment: string[] | null
   dietaryPreferences: string | null
+  // Step 9
+  daysPerWeek: number | null
   // Navigation
   currentStep: number
   totalSteps: number
@@ -38,6 +40,7 @@ interface OnboardingFormState {
   setWorkoutLocation: (location: Equipment | null) => void
   setAvailableEquipment: (equipment: string[] | null) => void
   setDietaryPreferences: (preferences: string) => void
+  setDaysPerWeek: (days: number) => void
   nextStep: () => void
   prevStep: () => void
   resetForm: () => void
@@ -53,8 +56,9 @@ const initialState = {
   workoutLocation: null,
   availableEquipment: null,
   dietaryPreferences: null,
+  daysPerWeek: null,
   currentStep: 1,
-  totalSteps: 8,
+  totalSteps: 9,
 }
 
 type OnboardingStore = StateCreator<OnboardingFormState>
@@ -62,19 +66,20 @@ type OnboardingStore = StateCreator<OnboardingFormState>
 export const useOnboardingStore = create(
   persist<OnboardingFormState>(
     (set) => ({
-  ...initialState,
-  setGender: (gender: Gender) => set((state) => ({ ...state, gender })),
-  setAge: (age: number | null) => set((state) => ({ ...state, age })),
-  setHeight: (height: number | null) => set((state) => ({ ...state, height })),
-  setWeight: (weight: number | null) => set((state) => ({ ...state, weight })),
-  setGoal: (goal: Goal) => set((state) => ({ ...state, goal })),
-  setActivityLevel: (level: ActivityLevel) => set((state) => ({ ...state, activityLevel: level })),
-  setWorkoutLocation: (location: Equipment | null) => set((state) => ({ ...state, workoutLocation: location })),
-  setAvailableEquipment: (equipment: string[] | null) => set((state) => ({ ...state, availableEquipment: equipment })),
-  setDietaryPreferences: (preferences: string) => set((state) => ({ ...state, dietaryPreferences: preferences })),
-  nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, state.totalSteps) })),
-  prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
-  resetForm: () => set(initialState),
+      ...initialState,
+      setGender: (gender: Gender) => set((state) => ({ ...state, gender })),
+      setAge: (age: number | null) => set((state) => ({ ...state, age })),
+      setHeight: (height: number | null) => set((state) => ({ ...state, height })),
+      setWeight: (weight: number | null) => set((state) => ({ ...state, weight })),
+      setGoal: (goal: Goal) => set((state) => ({ ...state, goal })),
+      setActivityLevel: (level: ActivityLevel) => set((state) => ({ ...state, activityLevel: level })),
+      setWorkoutLocation: (location: Equipment | null) => set((state) => ({ ...state, workoutLocation: location })),
+      setAvailableEquipment: (equipment: string[] | null) => set((state) => ({ ...state, availableEquipment: equipment })),
+      setDietaryPreferences: (preferences: string) => set((state) => ({ ...state, dietaryPreferences: preferences })),
+      setDaysPerWeek: (days: number) => set((state) => ({ ...state, daysPerWeek: days })),
+      nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, state.totalSteps) })),
+      prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
+      resetForm: () => set(initialState),
     }),
     {
       name: 'onboarding-storage', // key in localStorage
@@ -88,6 +93,7 @@ export const useOnboardingStore = create(
         workoutLocation: state.workoutLocation,
         availableEquipment: state.availableEquipment,
         dietaryPreferences: state.dietaryPreferences,
+        daysPerWeek: state.daysPerWeek,
         currentStep: state.currentStep,
         totalSteps: state.totalSteps,
       } as unknown as OnboardingFormState),

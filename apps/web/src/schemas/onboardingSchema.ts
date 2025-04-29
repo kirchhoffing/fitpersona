@@ -41,6 +41,11 @@ export const onboardingSchema = z.object({
 
   // Step 8: Dietary Preferences (optional)
   dietaryPreferences: z.string().max(500, 'En fazla 500 karakter girebilirsiniz').optional(),
+
+  // Step 9: Days per week for workouts
+  daysPerWeek: z.number()
+    .min(1, 'Günde en az 1 gün egzersiz yapabilirsiniz')
+    .max(7, 'Haftada en fazla 7 gün egzersiz yapabilirsiniz'),
 })
 
 // Type for the form data
@@ -72,4 +77,7 @@ export const stepSchemas = {
   8: z.object({
     dietaryPreferences: z.array(z.string()).optional(),
   }),
-} 
+  9: z.object({
+    daysPerWeek: z.number().min(1).max(7),
+  }),
+}

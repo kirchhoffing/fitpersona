@@ -111,9 +111,10 @@ model User {
 - Exercise library with detailed instructions
 - Workout history and progress tracking
 - "watchVideo" translation key added for exercise video links
-- To add a new workout program, import it in `packages/workouts/workoutProgramMap.ts` and add a new mapping object to the `programMap` array with your match logic
-- The first matching rule in `programMap` is used; fallback provided
-- See the `WorkoutCriteria` type for available matching fields
+- To add a new workout program, import it in `packages/workouts/workoutProgramMap.ts` and add a new mapping object to the `programRules` array. You can use specific values or `'any'` as a wildcard for `goal`, `workoutLocation`, and `daysPerWeek`.
+- The selection logic automatically tries the most specific match first, then falls back to rules with `'any'` wildcards as needed (for example, `{ goal: 'any', workoutLocation: 'any', daysPerWeek: 5, program: fiveDayPPLWorkout }` covers all 5-day cases).
+- There is no longer any hardcoded or special-case logic for 5+ days. All fallback and matching is handled by the data-driven rules and a clear priority system.
+- See the `WorkoutCriteria` type for available matching fields.
 
 ---
 
