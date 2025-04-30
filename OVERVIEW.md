@@ -40,6 +40,9 @@ Monorepo architecture is used for better modularization, scalability, and team c
 
 ### 🚦 Onboarding & Step System
 - **Multi-step onboarding flow** guides users through profile creation, preferences, and fitness goals
+- **Step 7** now only offers "Home" and "Gym" as workout location options ("Bodyweight" removed)
+- **Step 8 and Step 9 order swapped:** users now select workout days before dietary/health preferences
+- **Days per week selection** is now a button-based UI (1-7), not a number input
 - Each onboarding step is managed by a centralized step system (step IDs, progress, and state are tracked)
 - Steps are fully localized using translation keys from language JSON files
 - Step logic is modular for easy addition of new steps or questions
@@ -135,9 +138,12 @@ model User {
 
 ## 🌍 Internationalization
 
-### Translation Key Structure
+### Translation Key Structure and Recent Fixes
 - All onboarding and dashboard fields use translation keys from `apps/web/src/messages/{locale}.json`.
-- Workout location keys: `onboarding.steps.equipment.body_weight`, `onboarding.steps.equipment.home_equipment`, `onboarding.steps.equipment.gym`.
+- **Workout location keys updated:** Now only `onboarding.steps.equipment.home` and `onboarding.steps.equipment.gym` are used ("body_weight" and "home_equipment" removed)
+- **Step order and translation alignment:** Step 8 and 9 swapped, translation files updated for all languages
+- **Days per week translation:** Button labels and instructions are now localized for the new button UI
+- **JSON issues:** Fixed trailing commas and invalid JSON in `de.json` and `tr.json`
 - Dietary preferences keys: `onboarding.steps.health.{preference}` (e.g., `back_pain`, `diabetes`, etc.).
 - Dashboard fallback: `dashboard.none` for empty dietary preferences.
 - WorkoutProgram: `WorkoutProgram.watchVideo` for "Watch Video" links.
