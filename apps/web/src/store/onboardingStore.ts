@@ -6,7 +6,7 @@ import { type StateCreator } from 'zustand'
 export type Gender = 'male' | 'female' | 'other'
 export type Goal = 'lose_weight' | 'gain_muscle' | 'maintain_fitness'
 export type ActivityLevel = 'sedentary' | 'lightly_active' | 'active' | 'very_active'
-export type Equipment = 'body_weight' | 'home_equipment' | 'gym'
+export type Equipment = 'home_equipment' | 'gym'
 
 interface OnboardingFormState {
   // Step 1
@@ -24,7 +24,7 @@ interface OnboardingFormState {
   workoutLocation: Equipment | null
   // Step 8
   availableEquipment: string[] | null
-  dietaryPreferences: string | null
+  dietaryPreferences: string[] | null
   // Step 9
   daysPerWeek: number | null
   // Navigation
@@ -39,7 +39,7 @@ interface OnboardingFormState {
   setActivityLevel: (level: ActivityLevel) => void
   setWorkoutLocation: (location: Equipment | null) => void
   setAvailableEquipment: (equipment: string[] | null) => void
-  setDietaryPreferences: (preferences: string) => void
+  setDietaryPreferences: (preferences: string[]) => void
   setDaysPerWeek: (days: number) => void
   nextStep: () => void
   prevStep: () => void
@@ -75,7 +75,7 @@ export const useOnboardingStore = create(
       setActivityLevel: (level: ActivityLevel) => set((state) => ({ ...state, activityLevel: level })),
       setWorkoutLocation: (location: Equipment | null) => set((state) => ({ ...state, workoutLocation: location })),
       setAvailableEquipment: (equipment: string[] | null) => set((state) => ({ ...state, availableEquipment: equipment })),
-      setDietaryPreferences: (preferences: string) => set((state) => ({ ...state, dietaryPreferences: preferences })),
+      setDietaryPreferences: (preferences: string[]) => set((state) => ({ ...state, dietaryPreferences: preferences })),
       setDaysPerWeek: (days: number) => set((state) => ({ ...state, daysPerWeek: days })),
       nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, state.totalSteps) })),
       prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),

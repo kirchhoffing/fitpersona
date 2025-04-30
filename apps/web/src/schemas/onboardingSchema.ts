@@ -72,7 +72,7 @@ export const stepSchemas = {
     activityLevel: z.enum(['sedentary', 'lightly_active', 'active', 'very_active']),
   }),
   7: z.object({
-    workoutLocation: z.enum(['home', 'gym']),
+    equipment: z.enum(['home_equipment', 'gym']),
   }),
   8: z.object({
     dietaryPreferences: z.array(z.string()).optional(),

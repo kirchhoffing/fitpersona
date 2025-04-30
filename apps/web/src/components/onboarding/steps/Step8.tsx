@@ -3,19 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { stepSchemas } from '@/schemas/onboardingSchema'
 import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
-import { useLocale } from 'next-intl'
-import { Button } from '@/components/ui/button'
-import react from 'zustand'
+import { StepNavigator } from '../StepNavigator'
 
 type FormData = { dietaryPreferences: string[] }
 
 export function Step8() {
-  const { dietaryPreferences, setDietaryPreferences, prevStep } = useOnboardingStore()
+  const { dietaryPreferences, setDietaryPreferences, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.health')
-  const nav = useTranslations('onboarding.navigation')
-  const locale = useLocale()
-  const router = useRouter()
 
   const healthConditions = [
     { id: 'back_pain',       label: t('back_pain') },
@@ -32,7 +26,8 @@ export function Step8() {
     { id: 'pregnancy',       label: t('pregnancy') },
   ]
 
-  const defaults = dietaryPreferences?.split(',').filter(Boolean) || []
+  // Use the array directly or default to empty array
+  const defaults = dietaryPreferences || []
   const {
     register,
     handleSubmit,
@@ -45,30 +40,10 @@ export function Step8() {
 
   const selected = watch('dietaryPreferences') || []
 
-  const handleFinish = handleSubmit(async (data) => {
-    setDietaryPreferences(data.dietaryPreferences.join(','))
-    // Gather all onboarding data
-    const store = useOnboardingStore.getState();
-    const profilePayload = {
-      gender: store.gender,
-      birthYear: store.age ? new Date().getFullYear() - store.age : null,
-      height: store.height,
-      weight: store.weight,
-      goal: store.goal,
-      activityLevel: store.activityLevel,
-      workoutLocation: store.workoutLocation,
-      dietaryPreferences: data.dietaryPreferences.join(',')
-    };
-    try {
-      await fetch('/api/profile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(profilePayload),
-      });
-    } catch (error) {
-      console.error('Failed to save profile to backend:', error);
-    }
-    router.push(`/${locale}/dashboard`)
+  const onSubmit = handleSubmit((data) => {
+    // Pass the array directly to the store
+    setDietaryPreferences(data.dietaryPreferences)
+    nextStep()
   })
 
   return (
@@ -76,7 +51,7 @@ export function Step8() {
       <h2 className="text-2xl font-bold text-white mb-6">
         {t('title')}
       </h2>
-      <form onSubmit={handleFinish} className="space-y-6">
+      <form onSubmit={onSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {healthConditions.map(({ id, label }) => (
             <label
@@ -120,14 +95,7 @@ export function Step8() {
           {t('description')}
         </p>
 
-        <div className="flex justify-between items-center mt-4">
-          <Button type="button" variant="outline" onClick={prevStep}>
-            {nav('back')}
-          </Button>
-          <Button type="button" variant="default" onClick={handleFinish}>
-            {nav('complete')}
-          </Button>
-        </div>
+        <StepNavigator />
       </form>
     </div>
   )

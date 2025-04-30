@@ -46,6 +46,8 @@
   "onboarding": {
     "title": "Kişisel Fitness Profilinizi Oluşturun",
     "description": "Birkaç soruyu yanıtlayarak size özel fitness ve beslenme planı oluşturmamıza yardımcı olun.",
+    "reset": "Sıfırla",
+    "resetConfirmation": "İlerlemenizi sıfırlamak istediğinizden emin misiniz? Tüm verileriniz kaybolacak.",
     "steps": {
       "gender": {
         "title": "Cinsiyetiniz nedir?",
@@ -96,10 +98,8 @@
       },
       "equipment": {
         "title": "Antrenman yerinizi seçin",
-        "body_weight": "Vücut Ağırlığı",
-        "body_weight_description": "Sadece vücut ağırlığımla egzersiz yapmak istiyorum",
-        "home_equipment": "Ev Ekipmanları",
-        "home_equipment_description": "Evde bazı fitness ekipmanlarım var",
+        "home": "Ev",
+        "home_description": "Evde antrenman yapacağım",
         "gym": "Spor Salonu",
         "gym_description": "Spor salonunda antrenman yapacağım"
       },
@@ -119,6 +119,10 @@
         "lactose_intolerance": "Laktoz İntoleransı",
         "nut_allergy": "Fıstık/Kuruyemiş Alerjisi",
         "pregnancy": "Hamilelik"
+      },
+      "daysPerWeek": {
+        "title": "Haftada kaç gün antrenman yapabilirsiniz?",
+        "label": "Haftada gün sayısı (1-7)"
       }
     },
     "navigation": {

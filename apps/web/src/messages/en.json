@@ -46,6 +46,8 @@
   "onboarding": {
     "title": "Create Your Personal Fitness Profile",
     "description": "Help us create a personalized fitness and nutrition plan by answering a few questions.",
+    "reset": "Reset",
+    "resetConfirmation": "Are you sure you want to reset your progress? All your data will be lost.",
     "steps": {
       "gender": {
         "title": "What is your gender?",
@@ -96,10 +98,8 @@
       },
       "equipment": {
         "title": "Choose your workout location",
-        "body_weight": "Bodyweight Only",
-        "body_weight_description": "I want to exercise using just my body weight",
-        "home_equipment": "Home Equipment",
-        "home_equipment_description": "I have some fitness equipment at home",
+        "home": "Home",
+        "home_description": "I will work out at home",
         "gym": "Gym",
         "gym_description": "I will work out at a gym"
       },
@@ -119,6 +119,10 @@
         "lactose_intolerance": "Lactose Intolerance",
         "nut_allergy": "Nut Allergy",
         "pregnancy": "Pregnancy"
+      },
+      "daysPerWeek": {
+        "title": "How many days can you work out?",
+        "label": "Days per week (1-7)"
       }
     },
     "navigation": {

@@ -44,8 +44,10 @@
     "signUp": "Registrieren"
   },
   "onboarding": {
-    "title": "Erstellen Sie Ihr persönliches Fitnessprofil",
+    "title": "Erstellen Sie Ihr persönliches Fitness-Profil",
     "description": "Helfen Sie uns, einen personalisierten Fitness- und Ernährungsplan zu erstellen, indem Sie einige Fragen beantworten.",
+    "reset": "Zurücksetzen",
+    "resetConfirmation": "Sind Sie sicher, dass Sie Ihren Fortschritt zurücksetzen möchten? Alle Ihre Daten gehen verloren.",
     "steps": {
       "gender": {
         "title": "Was ist Ihr Geschlecht?",
@@ -96,10 +98,8 @@
       },
       "equipment": {
         "title": "Wählen Sie Ihren Trainingsort",
-        "body_weight": "Nur Körpergewicht",
-        "body_weight_description": "Ich möchte nur mit meinem Körpergewicht trainieren",
-        "home_equipment": "Heim-Equipment",
-        "home_equipment_description": "Ich habe Fitnessgeräte zu Hause",
+        "home": "Zuhause",
+        "home_description": "Ich werde zu Hause trainieren",
         "gym": "Fitnessstudio",
         "gym_description": "Ich werde im Fitnessstudio trainieren"
       },
@@ -119,6 +119,10 @@
         "lactose_intolerance": "Laktoseintoleranz",
         "nut_allergy": "Nussallergie",
         "pregnancy": "Schwangerschaft"
+      },
+      "daysPerWeek": {
+        "title": "An wie vielen Tagen können Sie trainieren?",
+        "label": "Tage pro Woche (1-7)"
       }
     },
     "navigation": {

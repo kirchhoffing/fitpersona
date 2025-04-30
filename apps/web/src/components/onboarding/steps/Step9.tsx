@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useOnboardingStore } from '@/store/onboardingStore'
@@ -13,13 +13,15 @@ export function Step9() {
   const t = useTranslations('onboarding.steps.daysPerWeek')
 
   const {
-    register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(stepSchemas[9]),
     defaultValues: initial != null ? { daysPerWeek: initial } : {},
   })
+  
+  const [selectedDays, setSelectedDays] = useState<number | null>(initial || null)
 
   const onSubmit = (data: FormData) => {
     setDaysPerWeek(data.daysPerWeek)
@@ -31,20 +33,28 @@ export function Step9() {
       <h2 className="text-2xl font-bold text-white mb-6">{t('title')}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label htmlFor="daysPerWeek" className="block text-sm font-medium text-gray-300 mb-1">
+          <label className="block text-sm font-medium text-gray-300 mb-3">
             {t('label')}
           </label>
-          <input
-            type="number"
-            id="daysPerWeek"
-            {...register('daysPerWeek', { valueAsNumber: true })}
-            min={1}
-            max={7}
-            className="w-full rounded-lg bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="e.g., 3"
-          />
+          <div className="grid grid-cols-7 gap-3">
+            {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+              <button
+                key={day}
+                type="button"
+                onClick={() => {
+                  setSelectedDays(day);
+                  setValue('daysPerWeek', day);
+                }}
+                className={`py-3 px-4 rounded-lg text-center transition-colors ${selectedDays === day 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-700 text-white hover:bg-gray-600'}`}
+              >
+                {day}
+              </button>
+            ))}
+          </div>
           {errors.daysPerWeek && (
-            <p className="mt-1 text-sm text-red-400">{errors.daysPerWeek.message}</p>
+            <p className="mt-2 text-sm text-red-400">{errors.daysPerWeek.message}</p>
           )}
         </div>
 

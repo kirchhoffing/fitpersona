@@ -6,7 +6,7 @@ import { stepSchemas } from '@/schemas/onboardingSchema'
 import { StepNavigator } from '../StepNavigator'
 import { useTranslations } from 'next-intl'
 
-type FormData = { equipment: 'body_weight' | 'home_equipment' | 'gym' }
+type FormData = { equipment: 'home_equipment' | 'gym' }
 
 export function Step7() {
   const { workoutLocation: initial, setWorkoutLocation, nextStep } = useOnboardingStore()
@@ -22,31 +22,15 @@ export function Step7() {
     defaultValues: { equipment: initial ?? undefined },
   })
 
-  // Seçim değiştiğinde store'u güncelle
-  useEffect(() => {
-    const sub = watch(v => {
-      if (v.equipment) {
-        setWorkoutLocation(v.equipment)
-        nextStep()
-      }
-    })
-    return () => sub.unsubscribe()
-  }, [watch, setWorkoutLocation, nextStep])
 
   const selected = watch('equipment')
 
   const options = [
     {
-      value: 'body_weight' as const,
-      emoji: '🧘‍♂️',
-      title: t('body_weight'),
-      description: t('body_weight_description'),
-    },
-    {
       value: 'home_equipment' as const,
       emoji: '🏠',
-      title: t('home_equipment'),
-      description: t('home_equipment_description'),
+      title: t('home'),
+      description: t('home_description'),
     },
     {
       value: 'gym' as const,
@@ -67,7 +51,7 @@ export function Step7() {
         onSubmit={handleSubmit(({ equipment }) => { setWorkoutLocation(equipment); nextStep(); })}
         className="space-y-6"
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
+        <div className="flex flex-row justify-center gap-8 mt-6 mb-8">
           {options.map(({ value, emoji, title, description }) => (
             <label
               key={value}
@@ -84,9 +68,9 @@ export function Step7() {
                 className="sr-only"
               />
 
-              <div className="text-4xl mb-3">{emoji}</div>
-              <span className="font-medium block mb-2">{title}</span>
-              <p className="text-sm text-white">{description}</p>
+              <div className="text-6xl mb-4">{emoji}</div>
+              <span className="font-semibold text-lg block mb-2">{title}</span>
+              <p className="text-base text-white text-center">{description}</p>
             </label>
           ))}
         </div>
