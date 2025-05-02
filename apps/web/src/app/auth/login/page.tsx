@@ -1,13 +1,24 @@
-import React from 'react';
+import { LoginForm } from '@/components/auth/LoginForm';
 import Link from 'next/link';
 
 export default function LoginPage() {
+
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: '2rem' }}>
-      <h1>Login</h1>
-      {/* TODO: Add your login form here */}
-      <p>This is a placeholder login page. Replace this with your login form.</p>
-      <Link href="/auth/register">Don't have an account? Register</Link>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+            Sign in to your account
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            Don't have an account?{' '}
+            <Link href="/auth/signup" className="font-medium text-blue-500 hover:text-blue-400">
+              Register now
+            </Link>
+          </p>
+        </div>
+        <LoginForm />
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { RegisterForm } from '@/components/auth/RegisterForm';
+import Link from 'next/link';
 
 export default function RegisterPage() {
   const t = useTranslations('auth');
@@ -15,6 +16,12 @@ export default function RegisterPage() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-300">
             {t('registerSubtitle')}
+          </p>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            Already have an account?{' '}
+            <Link href="login" className="font-medium text-blue-500 hover:text-blue-400">
+              Login now
+            </Link>
           </p>
         </div>
         <RegisterForm />

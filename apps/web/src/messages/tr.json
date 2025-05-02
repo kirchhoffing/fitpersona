@@ -26,6 +26,7 @@
     "loginSubtitle": "Hesabınıza erişmek için bilgilerinizi girin",
     "registerTitle": "Hesap oluşturun",
     "registerSubtitle": "FitPersona'ya katılın ve fitness yolculuğunuza başlayın",
+    "name": "İsim",
     "email": "E-posta adresi",
     "emailPlaceholder": "E-posta adresinizi girin",
     "password": "Şifre",
@@ -242,5 +243,12 @@
     "reps": "tekrar",
     "cardio": "Kardiyo",
     "watchVideo": "Videoyu İzle"
+  },
+  "header": {
+    "login": "Giriş",
+    "register": "Kayıt Ol",
+    "logout": "Çıkış",
+    "dashboard": "Kontrol Paneli",
+    "getStarted": "Başla"
   }
 }

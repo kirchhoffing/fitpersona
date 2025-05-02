@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { LoginForm } from '@/components/auth/LoginForm';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const t = useTranslations('auth');
@@ -15,6 +16,12 @@ export default function LoginPage() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-300">
             {t('loginSubtitle')}
+          </p>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            Don't have an account?{' '}
+            <Link href="register" className="font-medium text-blue-500 hover:text-blue-400">
+              Register now
+            </Link>
           </p>
         </div>
         <LoginForm />

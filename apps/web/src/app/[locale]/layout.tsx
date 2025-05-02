@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
+import { useMessages } from 'next-intl';
 import { Metadata } from 'next';
+import { AuthProvider } from '@/components/auth/AuthProvider';
+import { IntlProvider } from '@/components/i18n/IntlProvider';
 import Header from '@/components/layout/Header';
 import '../globals.css';
 
@@ -34,11 +36,13 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className="dark">
       <body className="bg-gray-900 text-white">
-        <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
-          <Header />
-          <main>{children}</main>
-        </NextIntlClientProvider>
+        <AuthProvider>
+          <IntlProvider locale={locale} messages={messages}>
+            <Header />
+            <main>{children}</main>
+          </IntlProvider>
+        </AuthProvider>
       </body>
     </html>
   );
-} 
+}

@@ -22,12 +22,13 @@
     }
   },
   "auth": {
-    "loginTitle": "Melden Sie sich an",
+    "loginTitle": "Melden Sie sich bei Ihrem Konto an",
     "loginSubtitle": "Geben Sie Ihre Anmeldedaten ein, um auf Ihr Konto zuzugreifen",
-    "registerTitle": "Konto erstellen",
-    "registerSubtitle": "Werden Sie Teil von FitPersona und starten Sie Ihre Fitness-Reise",
+    "registerTitle": "Erstellen Sie Ihr Konto",
+    "registerSubtitle": "Treten Sie FitPersona bei und beginnen Sie Ihre Fitnessreise",
+    "name": "Name",
     "email": "E-Mail-Adresse",
-    "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
     "password": "Passwort",
     "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
     "confirmPassword": "Passwort bestätigen",
@@ -242,5 +243,12 @@
     "reps": "Wiederholungen",
     "cardio": "Cardio",
     "watchVideo": "Video ansehen"
+  },
+  "header": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "dashboard": "Dashboard",
+    "getStarted": "Loslegen"
   }
 }

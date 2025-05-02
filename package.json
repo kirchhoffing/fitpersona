@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter web dev",
-    "build": "pnpm --filter web build",
-    "start": "pnpm --filter web start"
+    "dev-web": "pnpm --filter web dev",
+    "dev-api": "pnpm --filter api dev",
+    "build-web": "pnpm --filter web build",
+    "build-api": "pnpm --filter api build",
+    "start-web": "pnpm --filter web start",
+    "start-api": "pnpm --filter api start"
   },
   "workspaces": [
     "apps/*",

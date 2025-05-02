@@ -2,25 +2,28 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useSession } from 'next-auth/react';
 
 export default function HomePage() {
   const t = useTranslations('Index');
   const router = useRouter();
   const pathname = usePathname();
+  const { data: session } = useSession();
   
   // Extract current locale from pathname
   const currentLocale = pathname.split('/')[1];
 
+  const handleExercises = () => {
+    router.push(`/${currentLocale}/exercises`);
+  };
+
   const handleGetStarted = () => {
-    router.push(`/${currentLocale}/onboarding`);
-  };
-
-  const handleLogin = () => {
-    router.push(`/${currentLocale}/auth/login`);
-  };
-
-  const handleRegister = () => {
-    router.push(`/${currentLocale}/auth/register`);
+    // Redirect unauthenticated users to login page
+    if (!session) {
+      router.push(`/${currentLocale}/auth/login`);
+    } else {
+      router.push(`/${currentLocale}/onboarding`);
+    }
   };
   
   return (
@@ -36,12 +39,12 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button 
             onClick={handleGetStarted}
-            className="px-8 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105"
+            className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
           >
             {t('getStarted')}
           </button>
           <button 
-            onClick={() => router.push(`/${currentLocale}/exercises`)}
+            onClick={handleExercises}
             className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
           >
             {t('exercises')}

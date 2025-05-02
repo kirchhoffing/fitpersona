@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export function LoginForm() {
   const t = useTranslations('auth');
@@ -20,21 +21,29 @@ export function LoginForm() {
     setError('');
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Login failed');
+      if (result?.error) {
+        throw new Error(result.error);
       }
 
-      // Redirect to locale-aware dashboard after successful login
-      router.push(`/${locale}/dashboard`);
+      if (result?.ok) {
+        // Check if user has completed onboarding
+        const response = await fetch('/api/user/onboarding-status');
+        const data = await response.json();
+        
+        // Redirect based on onboarding status
+        if (data.completed) {
+          router.push(`/${locale}/dashboard`);
+        } else {
+          // Return to homepage where the appropriate button will be shown
+          router.push(`/${locale}`);
+        }
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

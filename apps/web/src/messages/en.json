@@ -26,6 +26,7 @@
     "loginSubtitle": "Enter your credentials to access your account",
     "registerTitle": "Create your account",
     "registerSubtitle": "Join FitPersona and start your fitness journey",
+    "name": "Name",
     "email": "Email address",
     "emailPlaceholder": "Enter your email",
     "password": "Password",
@@ -242,5 +243,12 @@
     "reps": "reps",
     "cardio": "Cardio",
     "watchVideo": "Watch Video"
+  },
+  "header": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "getStarted": "Get Started"
   }
 }
