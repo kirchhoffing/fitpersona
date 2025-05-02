@@ -31,6 +31,8 @@ Monorepo architecture is used for better modularization, scalability, and team c
 
 ### 🧑‍💼 User Profile & Authentication
 - Email/password registration and login (bcryptjs, SSR compatible)
+- Registration form now collects **name** field
+- User's name is displayed in the global layout/header after login
 - Multi-step onboarding form with state persistence
 - Type-safe Zod validation for all user inputs
 - Secure session-based authentication
@@ -84,25 +86,21 @@ model Profile {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-```
-
 **User Model**:
 ```prisma
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
-  password      String?
-  name          String?
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  profile       Profile?
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  workouts  Workout[]
+  profile   Profile?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 ```
 
-### 🏋️ Workout Programs
+### Workout Programs
 - Predefined 3-Day Full Body, Push/Pull/Legs, HIIT, and Bodyweight Home workout templates
 - All exercises are now listed as distinct entries in the database (e.g., "Pull-up" and "Lat Pulldown" are separate, not combined)
 - Recently added missing exercises referenced in workout programs, including: incline-bench-press, dumbbell-shoulder-press, lateral-raise, overhead-triceps-extension, seated-cable-row, barbell-curl, hammer-curl, leg-press, calf-raise, cable-biceps-curl

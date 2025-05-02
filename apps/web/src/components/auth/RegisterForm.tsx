@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 export function RegisterForm() {
   const t = useTranslations('auth');
   const router = useRouter();
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,7 +32,7 @@ export function RegisterForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, surname, email, password }),
       });
 
       if (!response.ok) {
@@ -55,6 +57,40 @@ export function RegisterForm() {
         </div>
       )}
       
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+          {t('name')}
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autoComplete="given-name"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder={t('namePlaceholder') || 'First name'}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="surname" className="block text-sm font-medium text-gray-300">
+          {t('surname')}
+        </label>
+        <input
+          id="surname"
+          name="surname"
+          type="text"
+          autoComplete="family-name"
+          required
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder={t('surnamePlaceholder') || 'Surname'}
+        />
+      </div>
+
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-300">
           {t('email')}

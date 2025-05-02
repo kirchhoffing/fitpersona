@@ -62,7 +62,11 @@ export default function Header() {
                     {session.user.name ? session.user.name[0].toUpperCase() : session.user.email?.[0].toUpperCase()}
                   </div>
                   <span className="text-white font-medium">
-                    {session.user.name || session.user.email}
+                    {(() => {
+                      const name = session.user.name;
+                      if (name) return name;
+                      return session.user.email;
+                    })()}
                   </span>
                 </div>
                 <button

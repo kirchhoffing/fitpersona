@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator tsClient {
+  provider = "prisma-client-js"
+  output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  surname   String?
+  password  String
+  workouts  Workout[]
+  profile   Profile?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Workout {
+  id          String     @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
+  exercises   Exercise[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Exercise {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  sets        Int
+  reps        Int
+  weight      Float?
+  workoutId   String
+  workout     Workout  @relation(fields: [workoutId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Profile {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id])
+  gender             String
+  birthYear          Int
+  height             Int
+  weight             Float
+  goal               String
+  activityLevel      String
+  equipment          String
+  dietaryPreferences String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

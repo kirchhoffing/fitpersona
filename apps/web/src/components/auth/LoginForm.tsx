@@ -21,6 +21,7 @@ export function LoginForm() {
     setError('');
 
     try {
+      // Using NextAuth credentials provider which validates against database
       const result = await signIn('credentials', {
         email,
         password,
@@ -28,6 +29,7 @@ export function LoginForm() {
       });
 
       if (result?.error) {
+        console.error('Authentication error:', result.error);
         throw new Error(result.error);
       }
 
@@ -35,6 +37,11 @@ export function LoginForm() {
         // Check if user has completed onboarding
         const response = await fetch('/api/user/onboarding-status');
         const data = await response.json();
+        
+        // Wait for session to properly initialize
+        // This addresses the issue where users are immediately logged out after login
+        // because the dashboard checks authentication status too aggressively
+        await new Promise(resolve => setTimeout(resolve, 500));
         
         // Redirect based on onboarding status
         if (data.completed) {
@@ -45,6 +52,7 @@ export function LoginForm() {
         }
       }
     } catch (err) {
+      console.error('Login error:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsLoading(false);

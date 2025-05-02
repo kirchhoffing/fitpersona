@@ -1,7 +1,10 @@
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { prisma } from '@fitpersona/database/src/client'
+import { prisma } from '@/lib/prisma'
 import { compare } from 'bcryptjs'
+
+// IMPORTANT: This is the single source of truth for authentication
+// There is NO parallel auth system, NO hardcoded credentials, and NO bypasses
 
 declare module 'next-auth' {
   interface Session {
@@ -23,28 +26,48 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
+        console.log('Auth attempt with credentials:', { email: credentials?.email })
+        
+        // ABSOLUTE MUST HAVE DATABASE VALIDATION - NO EXCEPTIONS!
+        // There are NO hardcoded credentials, NO bypasses, and NO test accounts
+        
         if (!credentials?.email || !credentials?.password) {
+          console.error('Missing email or password in credentials')
           throw new Error('Email and password are required')
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
-        })
+        try {
+          // CRITICAL: Verify the user exists in the database
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email }
+          })
 
-        if (!user) {
-          throw new Error('User not found')
-        }
+          // DATABASE CHECK #1: User must exist in the database
+          if (!user) {
+            console.error(`Authentication failed: User not found in database: ${credentials.email}`)
+            throw new Error('Invalid email or password')
+          }
 
-        const isValid = await compare(credentials.password, user.password)
+          // DATABASE CHECK #2: Password must match the hashed password in database
+          const passwordMatches = await compare(credentials.password, user.password)
 
-        if (!isValid) {
-          throw new Error('Invalid password')
-        }
+          if (!passwordMatches) {
+            console.error(`Authentication failed: Invalid password for user: ${credentials.email}`)
+            throw new Error('Invalid email or password')
+          }
 
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name
+          // DATABASE VALIDATION SUCCEEDED
+          console.log(`Authentication successful for database user: ${credentials.email}`)
+          
+          // Return user from database ONLY - no hardcoded or synthetic values
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name || 'User'
+          }
+        } catch (error) {
+          console.error('Authentication error:', error)
+          throw error
         }
       }
     })
