@@ -27,6 +27,7 @@ export function RegisterForm() {
     }
 
     try {
+      // Use the absolute URL to avoid proxy issues
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
@@ -37,7 +38,18 @@ export function RegisterForm() {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || 'Registration failed');
+        console.error('Registration API error:', data);
+        
+        // Check if we have detailed validation errors
+        if (data.details && Array.isArray(data.details)) {
+          // Format detailed validation errors
+          const errorMessages = data.details.map((err: any) => 
+            `${err.field}: ${err.message}`
+          ).join('\n');
+          throw new Error(errorMessages || data.error || 'Registration failed');
+        } else {
+          throw new Error(data.error || 'Registration failed');
+        }
       }
 
       // Redirect to login page after successful registration

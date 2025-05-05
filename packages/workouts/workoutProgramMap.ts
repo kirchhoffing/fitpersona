@@ -17,6 +17,12 @@ import { sixDayGymWorkout } from './6dayGym';
 import { sevenDayHomeWorkout } from './7dayHome';
 import { sevenDayGymWorkout } from './7dayGym';
 
+// Import types from exercises package
+import { Day, WorkoutProgram, Exercise } from '@fitpersona/exercises';
+
+// Re-export these types for use in other modules
+export type { Day, WorkoutProgram, Exercise };
+
 // Define types for user criteria
 export type WorkoutCriteria = {
   goal: 'lose_weight' | 'gain_muscle' | 'maintain_fitness';
@@ -68,8 +74,11 @@ const programMap: Array<{ match: (criteria: WorkoutCriteria) => boolean; program
   })),
 ];
 
+// Import the health modifier function
+import { modifyWorkoutForHealth } from './modifiers/healthModifier';
+
 // Main function to select a program
-export function selectWorkoutProgram(criteria: WorkoutCriteria) {
+export function selectWorkoutProgram(criteria: WorkoutCriteria, profile?: any) {
   // Fallback priorities: [goal, workoutLocation]
   const priorities: Array<[string, string]> = [
     [criteria.goal, criteria.workoutLocation],            // exact match
@@ -78,16 +87,30 @@ export function selectWorkoutProgram(criteria: WorkoutCriteria) {
     ['any', 'any'],                                       // any goal & location
   ];
 
+  let program = undefined;
+
   for (const [goal, workoutLocation] of priorities) {
     const found = programRules.find(rule =>
       rule.goal === goal &&
       rule.workoutLocation === workoutLocation &&
       rule.daysPerWeek === criteria.daysPerWeek
     );
-    if (found) return found.program;
+    if (found) {
+      program = found.program;
+      break;
+    }
   }
 
-  return undefined; // No match found in rules or fallbacks
+  // If no program found, return undefined
+  if (!program) return undefined;
+  
+  // Apply health modification if user profile with health preferences is provided
+  if (profile && profile.healthPreferences && profile.healthPreferences.length > 0) {
+    const finalProgram = modifyWorkoutForHealth(program, profile.healthPreferences);
+    return finalProgram;
+  }
+  
+  return program;
 }
 
 // Export for dynamic import (if needed)

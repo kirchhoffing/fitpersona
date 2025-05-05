@@ -16,7 +16,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['barbell'],
     muscleGroups: ['quadriceps', 'glutes', 'hamstrings', 'core'],
     difficulty: 'intermediate',
-    healthRisks: ['back_pain', 'knee_problem']
+    healthRisks: ['back_pain', 'knee_problem'],
+    alternatives: ['bodyweight-squat', 'leg-press']
   },
   'bodyweight-squat': {
     id: 'bodyweight-squat',
@@ -96,7 +97,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['abdominals'],
     difficulty: 'intermediate',
-    healthRisks: ['neck_pain', 'back_pain']
+    healthRisks: ['neck_pain', 'back_pain'],
+    alternatives: ['cobra-stretch', 'plank']
   },
   'cobra-stretch': {
     id: 'cobra-stretch',
@@ -128,7 +130,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['barbell', 'bench'],
     muscleGroups: ['chest', 'shoulders', 'triceps'],
     difficulty: 'intermediate',
-    healthRisks: ['shoulder_pain']
+    healthRisks: ['shoulder_pain'],
+    alternatives: ['pushup', 'cobra-stretch']
   },
   'dumbbell-shoulder-press': {
     id: 'dumbbell-shoulder-press',
@@ -144,7 +147,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['dumbbell'],
     muscleGroups: ['shoulders', 'triceps'],
     difficulty: 'intermediate',
-    healthRisks: ['shoulder_pain', 'neck_pain']
+    healthRisks: ['shoulder_pain', 'neck_pain'],
+    alternatives: ['lateral-raise', 'overhead-triceps-extension']
   },
   'lateral-raise': {
     id: 'lateral-raise',
@@ -192,7 +196,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['machine'],
     muscleGroups: ['upper_back', 'biceps'],
     difficulty: 'intermediate',
-    healthRisks: ['back_pain']
+    healthRisks: ['back_pain'],
+    alternatives: ['cable-biceps-curl']
   },
   'barbell-curl': {
     id: 'barbell-curl',
@@ -240,7 +245,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['machine'],
     muscleGroups: ['quadriceps', 'glutes', 'hamstrings'],
     difficulty: 'intermediate',
-    healthRisks: ['back_pain', 'knee_problem']
+    healthRisks: ['back_pain', 'knee_problem'],
+    alternatives: ['bodyweight-squat', 'lunge', 'wall-sit']
   },
   'calf-raise': {
     id: 'calf-raise',
@@ -288,7 +294,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['barbell', 'bench'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
     difficulty: 'intermediate',
-    healthRisks: ['shoulder_pain']
+    healthRisks: ['shoulder_pain'],
+    alternatives: ['pushup', 'cobra-stretch']
   },
   'bent-over-row': {
     id: 'bent-over-row',
@@ -304,7 +311,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['barbell'],
     muscleGroups: ['upper_back', 'biceps', 'forearms'],
     difficulty: 'intermediate',
-    healthRisks: ['back_pain', 'neck_pain']
+    healthRisks: ['back_pain', 'neck_pain'],
+    alternatives: ['cable-biceps-curl', 'hammer-curl']
   },
   'plank': {
     id: 'plank',
@@ -334,9 +342,10 @@ export const exerciseDatabase: Record<string, Exercise> = {
     imageUrl: '/exercises/RomanianDeadlift.png',
     category: 'compound',
     equipment: ['barbell'],
-    muscleGroups: ['hamstrings', 'glutes', 'lower_back'],
+    muscleGroups: ['hamstrings', 'lower_back', 'glutes'],
     difficulty: 'intermediate',
-    healthRisks: ['back_pain']
+    healthRisks: ['back_pain'],
+    alternatives: ['glute-bridge', 'lunge']
   },
   'shoulder-press': {
     id: 'shoulder-press',

@@ -112,6 +112,11 @@ model User {
 - Exercise library with detailed instructions
 - Workout history and progress tracking
 - "watchVideo" translation key added for exercise video links
+- **New health-aware workout modifier:** Workouts are now automatically customized based on user health risks
+  - Each intermediate-level exercise now includes an `alternatives: string[]` array of zero-risk beginner backup exercises
+  - The system automatically replaces exercises that could pose health risks with safer alternatives
+  - A smart selection algorithm finds the best alternative that targets similar muscle groups
+  - See `packages/workouts/modifiers/README.md` for documentation on how it works and how to add new alternatives
 - To add a new workout program, import it in `packages/workouts/workoutProgramMap.ts` and add a new mapping object to the `programRules` array. You can use specific values or `'any'` as a wildcard for `goal`, `workoutLocation`, and `daysPerWeek`.
 - The selection logic automatically tries the most specific match first, then falls back to rules with `'any'` wildcards as needed (for example, `{ goal: 'any', workoutLocation: 'any', daysPerWeek: 5, program: fiveDayPPLWorkout }` covers all 5-day cases).
 - There is no longer any hardcoded or special-case logic for 5+ days. All fallback and matching is handled by the data-driven rules and a clear priority system.
