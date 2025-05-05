@@ -32,7 +32,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['quadriceps', 'glutes', 'hamstrings', 'core'],
     difficulty: 'beginner',
-    healthRisks: ['knee_problem', 'back_pain']
+    healthRisks: []
   },
   'glute-bridge': {
     id: 'glute-bridge',
@@ -48,7 +48,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['glutes', 'hamstrings', 'core'],
     difficulty: 'beginner',
-    healthRisks: ['back_pain']
+    healthRisks: []
   },
   'lunge': {
     id: 'lunge',
@@ -64,7 +64,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['quadriceps', 'glutes', 'hamstrings'],
     difficulty: 'beginner',
-    healthRisks: ['knee_problem']
+    healthRisks: []
   },
   'wall-sit': {
     id: 'wall-sit',
@@ -80,7 +80,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['quadriceps', 'glutes'],
     difficulty: 'beginner',
-    healthRisks: ['knee_problem']
+    healthRisks: []
   },
   'crunch': {
     id: 'crunch',
@@ -95,7 +95,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'core',
     equipment: ['bodyweight'],
     muscleGroups: ['abdominals'],
-    difficulty: 'beginner',
+    difficulty: 'intermediate',
     healthRisks: ['neck_pain', 'back_pain']
   },
   'cobra-stretch': {
@@ -112,7 +112,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['chest', 'abdominals'],
     difficulty: 'beginner',
-    healthRisks: ['back_pain']
+    healthRisks: []
   },
   'incline-bench-press': {
     id: 'incline-bench-press',
@@ -160,7 +160,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['dumbbell'],
     muscleGroups: ['shoulders'],
     difficulty: 'beginner',
-    healthRisks: ['shoulder_pain']
+    healthRisks: []
   },
   'overhead-triceps-extension': {
     id: 'overhead-triceps-extension',
@@ -176,7 +176,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['dumbbell'],
     muscleGroups: ['triceps'],
     difficulty: 'beginner',
-    healthRisks: ['shoulder_pain', 'elbow_pain']
+    healthRisks: []
   },
   'seated-cable-row': {
     id: 'seated-cable-row',
@@ -191,7 +191,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['machine'],
     muscleGroups: ['upper_back', 'biceps'],
-    difficulty: 'beginner',
+    difficulty: 'intermediate',
     healthRisks: ['back_pain']
   },
   'barbell-curl': {
@@ -208,7 +208,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['barbell'],
     muscleGroups: ['biceps', 'forearms'],
     difficulty: 'beginner',
-    healthRisks: ['elbow_pain']
+    healthRisks: []
   },
   'hammer-curl': {
     id: 'hammer-curl',
@@ -224,7 +224,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['dumbbell'],
     muscleGroups: ['biceps', 'forearms'],
     difficulty: 'beginner',
-    healthRisks: ['elbow_pain']
+    healthRisks: []
   },
   'leg-press': {
     id: 'leg-press',
@@ -256,7 +256,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight', 'machine'],
     muscleGroups: ['calves'],
     difficulty: 'beginner',
-    healthRisks: ['ankle_pain']
+    healthRisks: []
   },
   'cable-biceps-curl': {
     id: 'cable-biceps-curl',
@@ -288,7 +288,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['barbell', 'bench'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
     difficulty: 'intermediate',
-    healthRisks: ['shoulder_pain', 'heart_condition']
+    healthRisks: ['shoulder_pain']
   },
   'bent-over-row': {
     id: 'bent-over-row',
@@ -320,7 +320,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['core', 'abdominals'],
     difficulty: 'beginner',
-    healthRisks: ['back_pain', 'shoulder_pain', 'pregnancy']
+    healthRisks: []
   },
   'romanian-deadlift': {
     id: 'romanian-deadlift',
@@ -336,7 +336,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['barbell'],
     muscleGroups: ['hamstrings', 'glutes', 'lower_back'],
     difficulty: 'intermediate',
-    healthRisks: ['back_pain', 'knee_problem']
+    healthRisks: ['back_pain']
   },
   'shoulder-press': {
     id: 'shoulder-press',
@@ -368,7 +368,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['machine'],
     muscleGroups: ['upper_back', 'biceps'],
     difficulty: 'beginner',
-    healthRisks: ['shoulder_pain', 'back_pain']
+    healthRisks: []
   },
   'pullup': {
     id: 'pullup',
@@ -383,8 +383,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['pullup bar', 'bodyweight'],
     muscleGroups: ['upper_back', 'biceps', 'forearms'],
-    difficulty: 'intermediate',
-    healthRisks: ['shoulder_pain', 'back_pain']
+    difficulty: 'beginner',
+    healthRisks: []
   },
   'biceps-curl': {
     id: 'biceps-curl',
@@ -416,7 +416,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['cable'],
     muscleGroups: ['triceps'],
     difficulty: 'beginner',
-    healthRisks: ['shoulder_pain']
+    healthRisks: []
   },
   'kettlebell-goblet-squat': {
     id: 'kettlebell-goblet-squat',
@@ -432,7 +432,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['kettlebell'],
     muscleGroups: ['quadriceps', 'glutes', 'core'],
     difficulty: 'beginner',
-    healthRisks: ['knee_problem', 'back_pain']
+    healthRisks: []
   },
   'incline-pushup': {
     id: 'incline-pushup',
@@ -448,7 +448,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight', 'bench'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
     difficulty: 'beginner',
-    healthRisks: ['shoulder_pain', 'wrist_pain']
+    healthRisks: []
   },
   'pushup': {
     id: 'pushup',
@@ -464,7 +464,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
     difficulty: 'beginner',
-    healthRisks: ['shoulder_pain', 'wrist_pain']
+    healthRisks: []
   },
   'dips-chair': {
     id: 'dips-chair',
@@ -479,8 +479,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['bodyweight', 'bench'],
     muscleGroups: ['triceps', 'shoulders'],
-    difficulty: 'beginner',
-    healthRisks: ['shoulder_pain', 'wrist_pain']
+    difficulty: 'intermediate',
+    healthRisks: ['shoulder_pain', 'wrist_pain', 'elbow_pain']
   },
   'dumbbell-row': {
     id: 'dumbbell-row',
@@ -495,8 +495,8 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'compound',
     equipment: ['dumbbell'],
     muscleGroups: ['upper_back', 'biceps'],
-    difficulty: 'beginner',
-    healthRisks: ['back_pain', 'shoulder_pain']
+    difficulty: 'intermediate',
+    healthRisks: ['back_pain']
   },
   'leg-raise': {
     id: 'leg-raise',
@@ -527,7 +527,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'core',
     equipment: ['bodyweight'],
     muscleGroups: ['abdominals'],
-    difficulty: 'beginner',
+    difficulty: 'intermediate',
     healthRisks: ['neck_pain', 'back_pain']
   },
   'hyper-extension': {
@@ -544,7 +544,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     equipment: ['bodyweight', 'bench'],
     muscleGroups: ['lower_back'],
     difficulty: 'beginner',
-    healthRisks: ['back_pain']
+    healthRisks: []
   },
   'russian-twist': {
     id: 'russian-twist',
@@ -559,7 +559,7 @@ export const exerciseDatabase: Record<string, Exercise> = {
     category: 'core',
     equipment: ['bodyweight'],
     muscleGroups: ['obliques', 'core'],
-    difficulty: 'beginner',
+    difficulty: 'intermediate',
     healthRisks: ['back_pain', 'neck_pain', 'pregnancy']
   }
 }; 
