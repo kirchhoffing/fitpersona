@@ -3,6 +3,7 @@
     "title": "Welcome to FitPersona",
     "description": "Your journey to a healthier lifestyle starts here",
     "getStarted": "Get Started",
+    "dashboard": "Dashboard",
     "exercises": "Exercises",
     "login": "Login",
     "register": "Register",
@@ -107,6 +108,17 @@
         "gym": "Gym",
         "gym_description": "I will work out at a gym"
       },
+      "fitnessLevel": {
+        "title": "What is your level?",
+        "label": "Select your fitness experience level",
+        "beginner": "Beginner",
+        "beginner_description": "New to fitness or returning after a long break",
+        "intermediate": "Intermediate",
+        "intermediate_description": "Consistent training for several months",
+        "advanced": "Advanced",
+        "advanced_description": "Experienced with various workout routines and techniques",
+        "description": "Your fitness level helps us tailor exercises to your experience"
+      },
       "health": {
         "title": "Do you have any health conditions or allergies?",
         "description": "Select any health conditions or allergies you may have. Leave empty if none.",
@@ -126,7 +138,9 @@
       },
       "daysPerWeek": {
         "title": "How many days can you work out?",
-        "label": "Days per week (1-7)"
+        "label": "Days per week (1-7)",
+        "back": "Back",
+        "complete": "Complete"
       }
     },
     "navigation": {

@@ -3,15 +3,47 @@
 import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 export default function HomePage() {
   const t = useTranslations('Index');
   const router = useRouter();
   const pathname = usePathname();
   const { data: session } = useSession();
+  const [isOnboardingComplete, setIsOnboardingComplete] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   // Extract current locale from pathname
   const currentLocale = pathname.split('/')[1];
+
+  // Check if user has completed onboarding by checking if they have a profile
+  useEffect(() => {
+    if (session?.user) {
+      setIsLoading(true);
+      fetch('/api/profile')
+        .then(res => {
+          if (res.status === 204) {
+            // No profile found, onboarding not complete
+            setIsOnboardingComplete(false);
+          } else if (res.ok) {
+            // Profile exists, onboarding is complete
+            return res.json().then(data => {
+              setIsOnboardingComplete(!!data);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error checking profile:', error);
+          setIsOnboardingComplete(false);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsOnboardingComplete(false);
+      setIsLoading(false);
+    }
+  }, [session]);
 
   const handleExercises = () => {
     router.push(`/${currentLocale}/exercises`);
@@ -25,6 +57,10 @@ export default function HomePage() {
       router.push(`/${currentLocale}/onboarding`);
     }
   };
+
+  const handleDashboard = () => {
+    router.push(`/${currentLocale}/dashboard`);
+  };
   
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-start pt-20 px-4">
@@ -37,12 +73,30 @@ export default function HomePage() {
           {t('description')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
-            onClick={handleGetStarted}
-            className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
-          >
-            {t('getStarted')}
-          </button>
+          {session && !isLoading ? (
+            isOnboardingComplete ? (
+              <button 
+                onClick={handleDashboard}
+                className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
+              >
+                {t('dashboard') || 'Dashboard'}
+              </button>
+            ) : (
+              <button 
+                onClick={handleGetStarted}
+                className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
+              >
+                {t('getStarted')}
+              </button>
+            )
+          ) : (
+            <button 
+              onClick={handleGetStarted}
+              className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
+            >
+              {t('getStarted')}
+            </button>
+          )}
           <button 
             onClick={handleExercises}
             className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"

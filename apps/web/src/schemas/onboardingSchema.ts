@@ -35,14 +35,19 @@ export const onboardingSchema = z.object({
   }),
 
   // Step 7: Equipment
-  equipment: z.enum(['body_weight', 'home_equipment', 'gym'] as const, {
+  equipment: z.enum(['home_equipment', 'gym'] as const, {
     required_error: 'Lütfen ekipman durumunuzu seçin',
   }),
 
-  // Step 8: Dietary Preferences (optional)
-  dietaryPreferences: z.string().max(500, 'En fazla 500 karakter girebilirsiniz').optional(),
+  // Step 8: Fitness Level
+  fitnessLevel: z.enum(['beginner', 'intermediate', 'advanced'] as const, {
+    required_error: 'Lütfen fitness seviyenizi seçin',
+  }),
 
-  // Step 9: Days per week for workouts
+  // Step 9: Dietary Preferences (optional)
+  dietaryPreferences: z.array(z.string()).optional(),
+
+  // Step 10: Days per week for workouts
   daysPerWeek: z.number()
     .min(1, 'Günde en az 1 gün egzersiz yapabilirsiniz')
     .max(7, 'Haftada en fazla 7 gün egzersiz yapabilirsiniz'),
@@ -72,12 +77,15 @@ export const stepSchemas = {
     activityLevel: z.enum(['sedentary', 'lightly_active', 'active', 'very_active']),
   }),
   7: z.object({
-    equipment: z.enum(['home_equipment', 'gym']),
+    workoutLocation: z.enum(['home_equipment', 'gym']),
   }),
   8: z.object({
-    dietaryPreferences: z.array(z.string()).optional(),
+    fitnessLevel: z.enum(['beginner', 'intermediate', 'advanced']),
   }),
   9: z.object({
+    dietaryPreferences: z.array(z.string()).optional(),
+  }),
+  10: z.object({
     daysPerWeek: z.number().min(1).max(7),
   }),
 }

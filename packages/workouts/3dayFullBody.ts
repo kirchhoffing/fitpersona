@@ -27,18 +27,18 @@ export const threeDayFullBodyWorkout = {
           videoUrl: exerciseDatabase['barbell-squat'].videoUrl
         },
         {
-          name: exerciseDatabase['bench-press'].name,
+          name: exerciseDatabase['incline-bench-press'].name,
           sets: 4,
           reps: '6-8',
-          description: exerciseDatabase['bench-press'].description,
-          videoUrl: exerciseDatabase['bench-press'].videoUrl
+          description: exerciseDatabase['incline-bench-press'].description,
+          videoUrl: exerciseDatabase['incline-bench-press'].videoUrl
         },
         {
-          name: exerciseDatabase['bent-over-row'].name,
+          name: exerciseDatabase['dumbbell-row'].name,
           sets: 4,
           reps: '8-10',
-          description: exerciseDatabase['bent-over-row'].description,
-          videoUrl: exerciseDatabase['bent-over-row'].videoUrl
+          description: exerciseDatabase['dumbbell-row'].description,
+          videoUrl: exerciseDatabase['dumbbell-row'].videoUrl
         },
         {
           name: exerciseDatabase['plank'].name,
@@ -62,39 +62,39 @@ export const threeDayFullBodyWorkout = {
       },
       exercises: [
         {
-          name: exerciseDatabase['romanian-deadlift'].name,
+          name: exerciseDatabase['glute-bridge'].name,
           sets: 3,
           reps: '10-12',
-          description: exerciseDatabase['romanian-deadlift'].description,
-          videoUrl: exerciseDatabase['romanian-deadlift'].videoUrl
+          description: exerciseDatabase['glute-bridge'].description,
+          videoUrl: exerciseDatabase['glute-bridge'].videoUrl
         },
         {
-          name: exerciseDatabase['shoulder-press'].name,
+          name: exerciseDatabase['dumbbell-shoulder-press'].name,
           sets: 3,
           reps: '10-12',
-          description: exerciseDatabase['shoulder-press'].description,
-          videoUrl: exerciseDatabase['shoulder-press'].videoUrl
+          description: exerciseDatabase['dumbbell-shoulder-press'].description,
+          videoUrl: exerciseDatabase['dumbbell-shoulder-press'].videoUrl
         },
         {
-          name: exerciseDatabase['pullup'].name,
+          name: exerciseDatabase['lat-pulldown'].name,
           sets: 3,
           reps: '8-10',
-          description: exerciseDatabase['pullup'].description,
-          videoUrl: exerciseDatabase['pullup'].videoUrl
+          description: exerciseDatabase['lat-pulldown'].description,
+          videoUrl: exerciseDatabase['lat-pulldown'].videoUrl
         },
         {
-          name: exerciseDatabase['cable-biceps-curl'].name,
+          name: exerciseDatabase['barbell-curl'].name,
           sets: 3,
           reps: '12-15',
-          description: exerciseDatabase['cable-biceps-curl'].description,
-          videoUrl: exerciseDatabase['cable-biceps-curl'].videoUrl
+          description: exerciseDatabase['barbell-curl'].description,
+          videoUrl: exerciseDatabase['barbell-curl'].videoUrl
         },
         {
-          name: exerciseDatabase['cable-triceps-pushdown'].name,
+          name: exerciseDatabase['overhead-triceps-extension'].name,
           sets: 3,
           reps: '12-15',
-          description: exerciseDatabase['cable-triceps-pushdown'].description,
-          videoUrl: exerciseDatabase['cable-triceps-pushdown'].videoUrl
+          description: exerciseDatabase['overhead-triceps-extension'].description,
+          videoUrl: exerciseDatabase['overhead-triceps-extension'].videoUrl
         }
       ],
       cardio: {

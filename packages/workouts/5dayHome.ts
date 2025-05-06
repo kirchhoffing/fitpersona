@@ -32,7 +32,7 @@ export const fiveDayHomeWorkout = {
       exercises: [
         { name: exerciseDatabase['dumbbell-row'].name, sets: 4, reps: '10-12', description: exerciseDatabase['dumbbell-row'].description, videoUrl: exerciseDatabase['dumbbell-row'].videoUrl },
         { name: exerciseDatabase['hyper-extension'].name, sets: 3, reps: '12-15', description: exerciseDatabase['hyper-extension'].description, videoUrl: exerciseDatabase['hyper-extension'].videoUrl },
-        { name: exerciseDatabase['biceps-curl'].name, sets: 3, reps: '12-15', description: exerciseDatabase['biceps-curl'].description, videoUrl: exerciseDatabase['biceps-curl'].videoUrl },
+        { name: exerciseDatabase['barbell-curl'].name, sets: 3, reps: '12-15', description: exerciseDatabase['barbell-curl'].description, videoUrl: exerciseDatabase['barbell-curl'].videoUrl },
         { name: exerciseDatabase['hammer-curl'].name, sets: 3, reps: '12-15', description: exerciseDatabase['hammer-curl'].description, videoUrl: exerciseDatabase['hammer-curl'].videoUrl },
         { name: exerciseDatabase['plank'].name, sets: 3, reps: '30-45 seconds', description: exerciseDatabase['plank'].description, videoUrl: exerciseDatabase['plank'].videoUrl }
       ],

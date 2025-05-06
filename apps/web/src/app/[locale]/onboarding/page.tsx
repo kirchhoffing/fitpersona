@@ -16,6 +16,7 @@ import { Step6 } from '@/components/onboarding/steps/Step6'
 import { Step7 } from '@/components/onboarding/steps/Step7'
 import { Step8 } from '@/components/onboarding/steps/Step8'
 import { Step9 } from '@/components/onboarding/steps/Step9'
+import { Step10 } from '@/components/onboarding/steps/Step10'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
@@ -69,9 +70,11 @@ export default function OnboardingPage() {
       case 7:
         return <Step7 />
       case 8:
-        return <Step9 />
-      case 9:
         return <Step8 />
+      case 9:
+        return <Step9 />
+      case 10:
+        return <Step10 />
       default:
         return null
     }

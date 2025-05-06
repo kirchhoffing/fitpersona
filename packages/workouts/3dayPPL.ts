@@ -69,11 +69,11 @@ export const threeDayPPLWorkout = {
           videoUrl: exerciseDatabase['lat-pulldown'].videoUrl
         },
         {
-          name: exerciseDatabase['seated-cable-row'].name,
+          name: exerciseDatabase['dumbbell-row'].name,
           sets: 4,
           reps: '10-12',
-          description: exerciseDatabase['seated-cable-row'].description,
-          videoUrl: exerciseDatabase['seated-cable-row'].videoUrl
+          description: exerciseDatabase['dumbbell-row'].description,
+          videoUrl: exerciseDatabase['dumbbell-row'].videoUrl
         },
         {
           name: exerciseDatabase['barbell-curl'].name,
@@ -111,11 +111,11 @@ export const threeDayPPLWorkout = {
           videoUrl: exerciseDatabase['barbell-squat'].videoUrl
         },
         {
-          name: exerciseDatabase['romanian-deadlift'].name,
+          name: exerciseDatabase['glute-bridge'].name,
           sets: 3,
           reps: '10',
-          description: exerciseDatabase['romanian-deadlift'].description,
-          videoUrl: exerciseDatabase['romanian-deadlift'].videoUrl
+          description: exerciseDatabase['glute-bridge'].description,
+          videoUrl: exerciseDatabase['glute-bridge'].videoUrl
         },
         {
           name: exerciseDatabase['leg-press'].name,

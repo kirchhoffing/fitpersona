@@ -25,7 +25,7 @@ export const twoDayFullBodyWorkout = {
       exercises: [
         { name: exerciseDatabase['lunge'].name, sets: 3, reps: '10 per leg', description: exerciseDatabase['lunge'].description, videoUrl: exerciseDatabase['lunge'].videoUrl },
         { name: exerciseDatabase['dumbbell-row'].name, sets: 3, reps: '12', description: exerciseDatabase['dumbbell-row'].description, videoUrl: exerciseDatabase['dumbbell-row'].videoUrl },
-        { name: exerciseDatabase['shoulder-press'].name, sets: 3, reps: '10-12', description: exerciseDatabase['shoulder-press'].description, videoUrl: exerciseDatabase['shoulder-press'].videoUrl }
+        { name: exerciseDatabase['dumbbell-shoulder-press'].name, sets: 3, reps: '10-12', description: exerciseDatabase['dumbbell-shoulder-press'].description, videoUrl: exerciseDatabase['dumbbell-shoulder-press'].videoUrl }
       ]
     }
   ]

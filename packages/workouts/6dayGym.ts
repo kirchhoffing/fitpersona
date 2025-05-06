@@ -15,11 +15,11 @@ export const sixDayGymWorkout = {
     {
       name: { en: 'Day 1 - Push A', tr: 'Gün 1 - İtme A', de: 'Tag 1 - Drücken A' },
       exercises: [
-        { name: exerciseDatabase['bench-press'].name, sets: 4, reps: '8-10', description: exerciseDatabase['bench-press'].description, videoUrl: exerciseDatabase['bench-press'].videoUrl },
+        { name: exerciseDatabase['incline-bench-press'].name, sets: 4, reps: '8-10', description: exerciseDatabase['incline-bench-press'].description, videoUrl: exerciseDatabase['incline-bench-press'].videoUrl },
         { name: exerciseDatabase['incline-bench-press'].name, sets: 3, reps: '8-10', description: exerciseDatabase['incline-bench-press'].description, videoUrl: exerciseDatabase['incline-bench-press'].videoUrl },
         { name: exerciseDatabase['dumbbell-shoulder-press'].name, sets: 3, reps: '10-12', description: exerciseDatabase['dumbbell-shoulder-press'].description, videoUrl: exerciseDatabase['dumbbell-shoulder-press'].videoUrl },
         { name: exerciseDatabase['lateral-raise'].name, sets: 3, reps: '12-15', description: exerciseDatabase['lateral-raise'].description, videoUrl: exerciseDatabase['lateral-raise'].videoUrl },
-        { name: exerciseDatabase['cable-triceps-pushdown'].name, sets: 3, reps: '12-15', description: exerciseDatabase['cable-triceps-pushdown'].description, videoUrl: exerciseDatabase['cable-triceps-pushdown'].videoUrl },
+        { name: exerciseDatabase['overhead-triceps-extension'].name, sets: 3, reps: '12-15', description: exerciseDatabase['overhead-triceps-extension'].description, videoUrl: exerciseDatabase['overhead-triceps-extension'].videoUrl },
         { name: exerciseDatabase['overhead-triceps-extension'].name, sets: 3, reps: '12-15', description: exerciseDatabase['overhead-triceps-extension'].description, videoUrl: exerciseDatabase['overhead-triceps-extension'].videoUrl }
       ],
       cardio: {

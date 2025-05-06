@@ -3,6 +3,7 @@
     "title": "FitPersona'ya Hoş Geldiniz",
     "description": "Daha sağlıklı bir yaşam tarzına giden yolculuğunuz burada başlıyor",
     "getStarted": "Başla",
+    "dashboard": "Kontrol Paneli",
     "exercises": "Egzersizler",
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
@@ -107,6 +108,17 @@
         "gym": "Spor Salonu",
         "gym_description": "Spor salonunda antrenman yapacağım"
       },
+      "fitnessLevel": {
+        "title": "Fitness seviyeniz nedir?",
+        "label": "Fitness deneyim seviyenizi seçin",
+        "beginner": "Başlangıç",
+        "beginner_description": "Fitness'a yeni başlayan veya uzun bir aradan sonra dönen",
+        "intermediate": "Orta Seviye",
+        "intermediate_description": "Birkaç aydır düzenli antrenman yapan",
+        "advanced": "İleri Seviye",
+        "advanced_description": "Çeşitli antrenman rutinleri ve teknikleri konusunda deneyimli",
+        "description": "Fitness seviyeniz, egzersizleri deneyiminize göre uyarlamamıza yardımcı olur"
+      },
       "health": {
         "title": "Sağlık durumunuz veya alerjileriniz var mı?",
         "description": "Varsa sağlık durumunuzu veya alerjilerinizi seçin. Yoksa boş bırakabilirsiniz.",
@@ -126,7 +138,9 @@
       },
       "daysPerWeek": {
         "title": "Haftada kaç gün antrenman yapabilirsiniz?",
-        "label": "Haftada gün sayısı (1-7)"
+        "label": "Haftada gün sayısı (1-7)",
+        "back": "Geri",
+        "complete": "Tamamla"
       }
     },
     "navigation": {

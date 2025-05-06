@@ -7,6 +7,7 @@ export type Gender = 'male' | 'female' | 'other'
 export type Goal = 'lose_weight' | 'gain_muscle' | 'maintain_fitness'
 export type ActivityLevel = 'sedentary' | 'lightly_active' | 'active' | 'very_active'
 export type Equipment = 'home_equipment' | 'gym'
+export type FitnessLevel = 'beginner' | 'intermediate' | 'advanced'
 
 interface OnboardingFormState {
   // Step 1
@@ -23,10 +24,12 @@ interface OnboardingFormState {
   // Step 7
   workoutLocation: Equipment | null
   // Step 8
-  availableEquipment: string[] | null
-  dietaryPreferences: string[] | null
+  fitnessLevel: FitnessLevel | null
   // Step 9
+  dietaryPreferences: string[] | null
+  // Step 10
   daysPerWeek: number | null
+  availableEquipment: string[] | null
   // Navigation
   currentStep: number
   totalSteps: number
@@ -38,6 +41,7 @@ interface OnboardingFormState {
   setGoal: (goal: Goal) => void
   setActivityLevel: (level: ActivityLevel) => void
   setWorkoutLocation: (location: Equipment | null) => void
+  setFitnessLevel: (level: FitnessLevel) => void
   setAvailableEquipment: (equipment: string[] | null) => void
   setDietaryPreferences: (preferences: string[]) => void
   setDaysPerWeek: (days: number) => void
@@ -54,11 +58,12 @@ const initialState = {
   goal: null,
   activityLevel: null,
   workoutLocation: null,
+  fitnessLevel: null,
   availableEquipment: null,
   dietaryPreferences: null,
   daysPerWeek: null,
   currentStep: 1,
-  totalSteps: 9,
+  totalSteps: 10,
 }
 
 type OnboardingStore = StateCreator<OnboardingFormState>
@@ -74,6 +79,7 @@ export const useOnboardingStore = create(
       setGoal: (goal: Goal) => set((state) => ({ ...state, goal })),
       setActivityLevel: (level: ActivityLevel) => set((state) => ({ ...state, activityLevel: level })),
       setWorkoutLocation: (location: Equipment | null) => set((state) => ({ ...state, workoutLocation: location })),
+      setFitnessLevel: (level: FitnessLevel) => set((state) => ({ ...state, fitnessLevel: level })),
       setAvailableEquipment: (equipment: string[] | null) => set((state) => ({ ...state, availableEquipment: equipment })),
       setDietaryPreferences: (preferences: string[]) => set((state) => ({ ...state, dietaryPreferences: preferences })),
       setDaysPerWeek: (days: number) => set((state) => ({ ...state, daysPerWeek: days })),
@@ -91,6 +97,7 @@ export const useOnboardingStore = create(
         goal: state.goal,
         activityLevel: state.activityLevel,
         workoutLocation: state.workoutLocation,
+        fitnessLevel: state.fitnessLevel,
         availableEquipment: state.availableEquipment,
         dietaryPreferences: state.dietaryPreferences,
         daysPerWeek: state.daysPerWeek,

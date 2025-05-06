@@ -15,17 +15,17 @@ export const fourDayUpperLowerWorkout = {
     {
       name: { en: 'Day 1 - Upper Body A', tr: 'Gün 1 – Üst Vücut A', de: 'Tag 1 - Oberkörper A' },
       exercises: [
-        { name: exerciseDatabase['bench-press'].name, sets: 4, reps: '6-8', description: exerciseDatabase['bench-press'].description, videoUrl: exerciseDatabase['bench-press'].videoUrl },
-        { name: exerciseDatabase['bent-over-row'].name, sets: 4, reps: '6-8', description: exerciseDatabase['bent-over-row'].description, videoUrl: exerciseDatabase['bent-over-row'].videoUrl },
-        { name: exerciseDatabase['shoulder-press'].name, sets: 3, reps: '8-10', description: exerciseDatabase['shoulder-press'].description, videoUrl: exerciseDatabase['shoulder-press'].videoUrl },
-        { name: exerciseDatabase['pullup'].name, sets: 3, reps: '8-10', description: exerciseDatabase['pullup'].description, videoUrl: exerciseDatabase['pullup'].videoUrl }
+        { name: exerciseDatabase['incline-bench-press'].name, sets: 4, reps: '6-8', description: exerciseDatabase['incline-bench-press'].description, videoUrl: exerciseDatabase['incline-bench-press'].videoUrl },
+        { name: exerciseDatabase['dumbbell-row'].name, sets: 4, reps: '6-8', description: exerciseDatabase['dumbbell-row'].description, videoUrl: exerciseDatabase['dumbbell-row'].videoUrl },
+        { name: exerciseDatabase['dumbbell-shoulder-press'].name, sets: 3, reps: '8-10', description: exerciseDatabase['dumbbell-shoulder-press'].description, videoUrl: exerciseDatabase['dumbbell-shoulder-press'].videoUrl },
+        { name: exerciseDatabase['lat-pulldown'].name, sets: 3, reps: '8-10', description: exerciseDatabase['lat-pulldown'].description, videoUrl: exerciseDatabase['lat-pulldown'].videoUrl }
       ]
     },
     {
       name: { en: 'Day 2 - Lower Body A', tr: 'Gün 2 – Alt Vücut A', de: 'Tag 2 - Unterkörper A' },
       exercises: [
         { name: exerciseDatabase['barbell-squat'].name, sets: 4, reps: '6-8', description: exerciseDatabase['barbell-squat'].description, videoUrl: exerciseDatabase['barbell-squat'].videoUrl },
-        { name: exerciseDatabase['romanian-deadlift'].name, sets: 3, reps: '8-10', description: exerciseDatabase['romanian-deadlift'].description, videoUrl: exerciseDatabase['romanian-deadlift'].videoUrl },
+        { name: exerciseDatabase['glute-bridge'].name, sets: 3, reps: '8-10', description: exerciseDatabase['glute-bridge'].description, videoUrl: exerciseDatabase['glute-bridge'].videoUrl },
         { name: exerciseDatabase['leg-press'].name, sets: 3, reps: '10-12', description: exerciseDatabase['leg-press'].description, videoUrl: exerciseDatabase['leg-press'].videoUrl },
         { name: exerciseDatabase['calf-raise'].name, sets: 3, reps: '12-15', description: exerciseDatabase['calf-raise'].description, videoUrl: exerciseDatabase['calf-raise'].videoUrl }
       ]
@@ -34,17 +34,17 @@ export const fourDayUpperLowerWorkout = {
       name: { en: 'Day 3 - Upper Body B', tr: 'Gün 3 – Üst Vücut B', de: 'Tag 3 - Oberkörper B' },
       exercises: [
         { name: exerciseDatabase['incline-bench-press'].name, sets: 4, reps: '8-10', description: exerciseDatabase['incline-bench-press'].description, videoUrl: exerciseDatabase['incline-bench-press'].videoUrl },
-        { name: exerciseDatabase['seated-row'].name, sets: 4, reps: '8-10', description: exerciseDatabase['seated-row'].description, videoUrl: exerciseDatabase['seated-row'].videoUrl },
+        { name: exerciseDatabase['dumbbell-row'].name, sets: 4, reps: '8-10', description: exerciseDatabase['dumbbell-row'].description, videoUrl: exerciseDatabase['dumbbell-row'].videoUrl },
         { name: exerciseDatabase['lateral-raise'].name, sets: 3, reps: '12-15', description: exerciseDatabase['lateral-raise'].description, videoUrl: exerciseDatabase['lateral-raise'].videoUrl },
-        { name: exerciseDatabase['tricep-dip'].name, sets: 3, reps: '8-12', description: exerciseDatabase['tricep-dip'].description, videoUrl: exerciseDatabase['tricep-dip'].videoUrl }
+        { name: exerciseDatabase['overhead-triceps-extension'].name, sets: 3, reps: '8-12', description: exerciseDatabase['overhead-triceps-extension'].description, videoUrl: exerciseDatabase['overhead-triceps-extension'].videoUrl }
       ]
     },
     {
       name: { en: 'Day 4 - Lower Body B', tr: 'Gün 4 – Alt Vücut B', de: 'Tag 4 - Unterkörper B' },
       exercises: [
-        { name: exerciseDatabase['front-squat'].name, sets: 4, reps: '6-8', description: exerciseDatabase['front-squat'].description, videoUrl: exerciseDatabase['front-squat'].videoUrl },
-        { name: exerciseDatabase['deadlift'].name, sets: 3, reps: '5-7', description: exerciseDatabase['deadlift'].description, videoUrl: exerciseDatabase['deadlift'].videoUrl },
-        { name: exerciseDatabase['leg-curl'].name, sets: 3, reps: '10-12', description: exerciseDatabase['leg-curl'].description, videoUrl: exerciseDatabase['leg-curl'].videoUrl },
+        { name: exerciseDatabase['bodyweight-squat'].name, sets: 4, reps: '6-8', description: exerciseDatabase['bodyweight-squat'].description, videoUrl: exerciseDatabase['bodyweight-squat'].videoUrl },
+        { name: exerciseDatabase['glute-bridge'].name, sets: 3, reps: '5-7', description: exerciseDatabase['glute-bridge'].description, videoUrl: exerciseDatabase['glute-bridge'].videoUrl },
+        { name: exerciseDatabase['leg-press'].name, sets: 3, reps: '10-12', description: exerciseDatabase['leg-press'].description, videoUrl: exerciseDatabase['leg-press'].videoUrl },
         { name: exerciseDatabase['calf-raise'].name, sets: 3, reps: '12-15', description: exerciseDatabase['calf-raise'].description, videoUrl: exerciseDatabase['calf-raise'].videoUrl }
       ]
     }

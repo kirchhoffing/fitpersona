@@ -47,33 +47,110 @@ export default function DashboardPage() {
     dietaryPreferences: dietaryPreferences || '',
   })
 
-  const [profileData, setProfileData] = useState<{ gender: 'male' | 'female' | 'other'; birthYear: number; height: number; weight: number; goal: 'lose_weight' | 'gain_muscle' | 'maintain_fitness'; activityLevel: 'sedentary' | 'lightly_active' | 'active' | 'very_active'; } | null>(null);
+  // Define a more complete profile data type that matches our file-based storage format
+  type ProfileDataType = {
+    gender: 'male' | 'female' | 'other';
+    birthYear: number;
+    height: number;
+    weight: number;
+    goal: 'lose_weight' | 'gain_muscle' | 'maintain_fitness';
+    activityLevel: 'sedentary' | 'lightly_active' | 'active' | 'very_active';
+    equipment?: string;
+    dietaryPreferences?: string | string[];
+    userId?: string;
+    updatedAt?: string;
+    daysPerWeek?: number;
+  };
+
+  const [profileData, setProfileData] = useState<ProfileDataType | null>(null);
 
   // Debug values from useOnboardingStore
   console.log('useOnboardingStore values:', { gender, age, height, weight, goal, activityLevel, workoutLocation });
 
+  // Add loading state to prevent immediate logout during session initialization
+  const [isLoading, setIsLoading] = useState(true);
+  const [authError, setAuthError] = useState(false);
+
   useEffect(() => {
-    fetch('/api/profile')
-      .then(res => res.ok ? res.json() : Promise.reject('API request failed')) 
-      .then(data => {
-        console.log('Fetched profile data:', data);
-        setProfileData(data);
-        if (data) {
-          const store = useOnboardingStore.getState();
-          if (data.gender) store.setGender(data.gender);
-          if (data.birthYear) store.setAge(new Date().getFullYear() - data.birthYear);
-          if (data.height) store.setHeight(data.height);
-          if (data.weight) store.setWeight(data.weight);
-          if (data.goal) store.setGoal(data.goal);
-          if (data.activityLevel) store.setActivityLevel(data.activityLevel);
-          if (data.workoutLocation) store.setWorkoutLocation(data.workoutLocation);
-          if (data.dietaryPreferences) store.setDietaryPreferences(data.dietaryPreferences);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching profile data:', error); 
-        setProfileData(null); 
-      });
+    console.log('Dashboard page mounted, loading profile...');
+    
+    try {
+      // First try to get data from localStorage (our temporary workaround)
+      const storedProfile = localStorage.getItem('fitpersona_profile');
+      
+      if (storedProfile) {
+        // We have data in localStorage
+        const profileData = JSON.parse(storedProfile);
+        console.log('Loaded profile data from localStorage:', profileData);
+        
+        setProfileData(profileData);
+        
+        // Update the store with the profile data
+        const store = useOnboardingStore.getState();
+        if (profileData.gender) store.setGender(profileData.gender);
+        if (profileData.birthYear) store.setAge(new Date().getFullYear() - profileData.birthYear);
+        if (profileData.height) store.setHeight(profileData.height);
+        if (profileData.weight) store.setWeight(profileData.weight);
+        if (profileData.goal) store.setGoal(profileData.goal);
+        if (profileData.activityLevel) store.setActivityLevel(profileData.activityLevel);
+        if (profileData.equipment) store.setWorkoutLocation(profileData.equipment);
+        if (profileData.dietaryPreferences) store.setDietaryPreferences(profileData.dietaryPreferences);
+        
+        setIsLoading(false);
+      } else {
+        // Fallback to API if nothing in localStorage
+        console.log('No profile in localStorage, trying API...');
+        
+        // Add a small delay to allow session to initialize
+        const timeoutId = setTimeout(() => {
+          fetch('/api/profile')
+            .then(res => {
+              console.log('Profile API response status:', res.status);
+              if (res.status === 401) {
+                // Don't set auth error, just use default data
+                return Promise.reject('Unauthorized');
+              }
+              
+              // Handle 404 (profile not found) gracefully by using default data
+              if (res.status === 404) {
+                console.log('Profile not found (404), using default data');
+                return null; // Return null to indicate no profile exists yet
+              }
+              
+              return res.ok ? res.json() : Promise.reject(`API request failed with status ${res.status}`);
+            })
+            .then(data => {
+              console.log('Fetched profile data from API:', data);
+              
+              // If data is null (404 response), we're using defaults - no need to update state
+              if (data) {
+                setProfileData(data);
+                const store = useOnboardingStore.getState();
+                if (data.gender) store.setGender(data.gender);
+                if (data.birthYear) store.setAge(new Date().getFullYear() - data.birthYear);
+                if (data.height) store.setHeight(data.height);
+                if (data.weight) store.setWeight(data.weight);
+                if (data.goal) store.setGoal(data.goal);
+                if (data.activityLevel) store.setActivityLevel(data.activityLevel);
+                if (data.equipment) store.setWorkoutLocation(data.equipment);
+                if (data.dietaryPreferences) store.setDietaryPreferences(data.dietaryPreferences);
+              }
+              
+              setIsLoading(false);
+            })
+            .catch(error => {
+              console.log('Using default profile data due to API error');
+              // Use default data from the store
+              setIsLoading(false);
+            });
+        }, 500);
+        
+        return () => clearTimeout(timeoutId);
+      }
+    } catch (error) {
+      console.error('Error loading profile data:', error);
+      setIsLoading(false);
+    }
   }, []);
 
   const onUpdate = async () => {
@@ -86,7 +163,7 @@ export default function DashboardPage() {
       setGoal(editValues.goal as Goal)
       setActivityLevel(editValues.activityLevel as ActivityLevel)
       setWorkoutLocation(editValues.workoutLocation as Equipment)
-      setDietaryPreferences(editValues.dietaryPreferences)
+      setDietaryPreferences(typeof editValues.dietaryPreferences === 'string' ? editValues.dietaryPreferences.split(',').map(s => s.trim()).filter(Boolean) : (Array.isArray(editValues.dietaryPreferences) ? editValues.dietaryPreferences : []))
       
       // Persist to backend
       await fetch('/api/profile', {
@@ -100,7 +177,7 @@ export default function DashboardPage() {
           fitnessGoals: [editValues.goal],
           activityLevel: editValues.activityLevel,
           availableEquipment: [], // You can update this to use real equipment if needed
-          dietaryPreferences: editValues.dietaryPreferences?.split(',').map(s => s.trim()).filter(Boolean) || []
+          dietaryPreferences: Array.isArray(editValues.dietaryPreferences) ? editValues.dietaryPreferences : (editValues.dietaryPreferences?.split(',').map(s => s.trim()).filter(Boolean) || [])
         })
       })
       // Optionally: refetch profileData here
@@ -140,7 +217,11 @@ export default function DashboardPage() {
   const cdGoal = goal ?? 'lose_weight';
 
   // Workout location mapping with explicit type
-  const wLocation: WorkoutCriteria['workoutLocation'] = workoutLocation === 'body_weight' ? 'home' : 'gym';
+  // Safely convert workoutLocation to the expected type
+  const wLocation: WorkoutCriteria['workoutLocation'] = 
+    !workoutLocation ? 'home' : // Handle null case
+    (String(workoutLocation) === 'body_weight' || String(workoutLocation) === 'home_equipment') ? 'home' : 
+    String(workoutLocation) === 'gym' ? 'gym' : 'home';
 
   // Prepare criteria for workout selection
   const workoutCriteria: WorkoutCriteria = {
@@ -152,7 +233,27 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-900 p-8">
-      <div className="max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow p-6 space-y-6">
+      {isLoading ? (
+        <div className="max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow p-6 flex flex-col items-center justify-center" style={{ minHeight: '400px' }}>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+          <p className="text-white text-xl">Loading your profile...</p>
+        </div>
+      ) : authError ? (
+        <div className="max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow p-6 flex flex-col items-center justify-center" style={{ minHeight: '400px' }}>
+          <div className="text-red-500 text-6xl mb-4">⚠️</div>
+          <h2 className="text-white text-2xl mb-4">Authentication Error</h2>
+          <p className="text-gray-300 mb-6 text-center">There was a problem accessing your profile. This might be because your session has expired.</p>
+          <div className="flex space-x-4">
+            <a href="/auth/signin" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Sign In
+            </a>
+            <a href="/" className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Go to Home
+            </a>
+          </div>
+        </div>
+      ) : (
+        <div className="max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow p-6 space-y-6">
         <h1 className="text-4xl text-white font-bold">{t('title')}</h1>
         {/* Info/Profile Section - moved to top */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-4">
@@ -297,10 +398,35 @@ export default function DashboardPage() {
                   />
                 ) : (
                   <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
-                    {dietaryPreferences ? 
-                      dietaryPreferences.split(',').map(pref => 
-                        tOnboarding(`health.${pref}`)).join(', ') 
-                      : t('none')}
+                    {(() => {
+                      try {
+                        // Handle various formats of dietaryPreferences safely
+                        if (!dietaryPreferences && !profileData?.dietaryPreferences) return t('none');
+                        
+                        // Get from store or profile data
+                        const prefsData = dietaryPreferences || profileData?.dietaryPreferences;
+                        
+                        // Handle array format
+                        if (Array.isArray(prefsData)) {
+                          return prefsData.length > 0 ? 
+                            prefsData.map(pref => tOnboarding(`health.${pref.trim()}`)).join(', ') : 
+                            t('none');
+                        }
+                        
+                        // Handle string format
+                        if (typeof prefsData === 'string') {
+                          return prefsData.trim() ? 
+                            prefsData.split(',').map(pref => tOnboarding(`health.${pref.trim()}`)).join(', ') : 
+                            t('none');
+                        }
+                        
+                        // Fallback
+                        return t('none');
+                      } catch (error) {
+                        console.error('Error rendering dietary preferences:', error);
+                        return t('none');
+                      }
+                    })()} 
                   </span>
                 )}
               </div>
@@ -335,6 +461,7 @@ export default function DashboardPage() {
         {/* Dynamic Workout Program Section - now at bottom */}
         <WorkoutProgramDisplay program={selectedProgram} locale={locale} />
       </div>
+      )}
     </div>
   )
 }

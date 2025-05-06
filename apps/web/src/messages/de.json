@@ -3,6 +3,7 @@
     "title": "Willkommen bei FitPersona",
     "description": "Ihre Reise zu einem gesünderen Lebensstil beginnt hier",
     "getStarted": "Loslegen",
+    "dashboard": "Dashboard",
     "exercises": "Übungen",
     "login": "Anmelden",
     "register": "Registrieren",
@@ -107,6 +108,17 @@
         "gym": "Fitnessstudio",
         "gym_description": "Ich werde im Fitnessstudio trainieren"
       },
+      "fitnessLevel": {
+        "title": "Was ist Ihr Fitnesslevel?",
+        "label": "Wählen Sie Ihr Fitnesserfahrungsniveau",
+        "beginner": "Anfänger",
+        "beginner_description": "Neu im Fitnessbereich oder nach langer Pause zurückgekehrt",
+        "intermediate": "Fortgeschritten",
+        "intermediate_description": "Regelmäßiges Training seit mehreren Monaten",
+        "advanced": "Profi",
+        "advanced_description": "Erfahrung mit verschiedenen Trainingsroutinen und Techniken",
+        "description": "Ihr Fitnesslevel hilft uns, Übungen an Ihre Erfahrung anzupassen"
+      },
       "health": {
         "title": "Haben Sie gesundheitliche Einschränkungen oder Allergien?",
         "description": "Wählen Sie vorhandene gesundheitliche Einschränkungen oder Allergien aus. Lassen Sie es leer, wenn keine vorhanden sind.",
@@ -126,7 +138,9 @@
       },
       "daysPerWeek": {
         "title": "An wie vielen Tagen können Sie trainieren?",
-        "label": "Tage pro Woche (1-7)"
+        "label": "Tage pro Woche (1-7)",
+        "back": "Zurück",
+        "complete": "Abschließen"
       }
     },
     "navigation": {
