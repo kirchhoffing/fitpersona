@@ -11,36 +11,34 @@ export default function HomePage() {
   const pathname = usePathname();
   const { data: session } = useSession();
   const [isOnboardingComplete, setIsOnboardingComplete] = useState(false);
+  const [hasVisitedDashboard, setHasVisitedDashboard] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   
   // Extract current locale from pathname
   const currentLocale = pathname.split('/')[1];
 
-  // Check if user has completed onboarding by checking if they have a profile
+  // Check if user has completed onboarding and visited the dashboard
   useEffect(() => {
     if (session?.user) {
       setIsLoading(true);
-      fetch('/api/profile')
-        .then(res => {
-          if (res.status === 204) {
-            // No profile found, onboarding not complete
-            setIsOnboardingComplete(false);
-          } else if (res.ok) {
-            // Profile exists, onboarding is complete
-            return res.json().then(data => {
-              setIsOnboardingComplete(!!data);
-            });
-          }
-        })
-        .catch(error => {
-          console.error('Error checking profile:', error);
-          setIsOnboardingComplete(false);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+      
+      // SIMPLIFIED APPROACH: Just use localStorage for both states
+      // Check if user has visited dashboard
+      const hasVisitedDashboardFromStorage = localStorage.getItem('fitpersona_dashboard_visited') === 'true';
+      
+      // Check if user has a profile (which means onboarding is complete)
+      const hasProfile = localStorage.getItem('fitpersona_profile') !== null;
+      
+      console.log('Profile exists (localStorage):', hasProfile);
+      console.log('Dashboard visited (localStorage):', hasVisitedDashboardFromStorage);
+      
+      // Set states based on localStorage values
+      setIsOnboardingComplete(hasProfile);
+      setHasVisitedDashboard(hasVisitedDashboardFromStorage);
+      setIsLoading(false);
     } else {
       setIsOnboardingComplete(false);
+      setHasVisitedDashboard(false);
       setIsLoading(false);
     }
   }, [session]);
@@ -75,13 +73,26 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {session && !isLoading ? (
             isOnboardingComplete ? (
-              <button 
-                onClick={handleDashboard}
-                className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
-              >
-                {t('dashboard') || 'Dashboard'}
-              </button>
+              // User has completed onboarding
+              hasVisitedDashboard ? (
+                // User has visited dashboard - show Dashboard button
+                <button 
+                  onClick={handleDashboard}
+                  className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
+                >
+                  {t('dashboard') || 'Dashboard'}
+                </button>
+              ) : (
+                // User has completed onboarding but never visited dashboard - show Get Started
+                <button 
+                  onClick={handleGetStarted}
+                  className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
+                >
+                  {t('getStarted')}
+                </button>
+              )
             ) : (
+              // User has not completed onboarding - show Get Started
               <button 
                 onClick={handleGetStarted}
                 className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"
@@ -90,6 +101,7 @@ export default function HomePage() {
               </button>
             )
           ) : (
+            // User is not logged in - show Get Started
             <button 
               onClick={handleGetStarted}
               className="px-10 py-4 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 text-lg"

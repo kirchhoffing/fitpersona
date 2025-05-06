@@ -6,11 +6,11 @@ import { stepSchemas } from '@/schemas/onboardingSchema'
 import { StepNavigator } from '../StepNavigator'
 import { useTranslations } from 'next-intl'
 
-type FormData = { workoutLocation: 'home_equipment' | 'gym' }
+type FormData = { workoutLocation: 'home' | 'gym' }
 
 export function Step7() {
   const { workoutLocation: initial, setWorkoutLocation, nextStep } = useOnboardingStore()
-  const t = useTranslations('onboarding.steps.equipment')
+  const t = useTranslations('onboarding.steps.workoutLocation')
   
   const {
     register,
@@ -31,7 +31,7 @@ export function Step7() {
 
   const options = [
     {
-      value: 'home_equipment' as const,
+      value: 'home' as const,
       emoji: '🏠',
       title: t('home'),
       description: t('home_description'),

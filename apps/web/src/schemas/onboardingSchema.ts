@@ -34,8 +34,8 @@ export const onboardingSchema = z.object({
     required_error: 'Lütfen aktivite düzeyinizi seçin',
   }),
 
-  // Step 7: Equipment
-  equipment: z.enum(['home_equipment', 'gym'] as const, {
+  // Step 7: Workout Location
+  workoutLocation: z.enum(['home', 'gym'] as const, {
     required_error: 'Lütfen ekipman durumunuzu seçin',
   }),
 
@@ -77,7 +77,7 @@ export const stepSchemas = {
     activityLevel: z.enum(['sedentary', 'lightly_active', 'active', 'very_active']),
   }),
   7: z.object({
-    workoutLocation: z.enum(['home_equipment', 'gym']),
+    workoutLocation: z.enum(['home', 'gym']),
   }),
   8: z.object({
     fitnessLevel: z.enum(['beginner', 'intermediate', 'advanced']),

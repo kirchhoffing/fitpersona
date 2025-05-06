@@ -75,14 +75,7 @@ export default function Header() {
                 >
                   {t('logout')}
                 </button>
-                {hasCompletedOnboarding && (
-                  <button
-                    onClick={handleDashboardClick}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
-                  >
-                    {t('dashboard')}
-                  </button>
-                )}
+
               </>
             ) : (
               <>

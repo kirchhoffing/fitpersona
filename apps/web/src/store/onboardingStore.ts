@@ -6,7 +6,7 @@ import { type StateCreator } from 'zustand'
 export type Gender = 'male' | 'female' | 'other'
 export type Goal = 'lose_weight' | 'gain_muscle' | 'maintain_fitness'
 export type ActivityLevel = 'sedentary' | 'lightly_active' | 'active' | 'very_active'
-export type Equipment = 'home_equipment' | 'gym'
+export type WorkoutLocation = 'home' | 'gym'
 export type FitnessLevel = 'beginner' | 'intermediate' | 'advanced'
 
 interface OnboardingFormState {
@@ -22,7 +22,7 @@ interface OnboardingFormState {
   // Step 6
   activityLevel: ActivityLevel | null
   // Step 7
-  workoutLocation: Equipment | null
+  workoutLocation: WorkoutLocation | null
   // Step 8
   fitnessLevel: FitnessLevel | null
   // Step 9
@@ -40,7 +40,7 @@ interface OnboardingFormState {
   setWeight: (weight: number | null) => void
   setGoal: (goal: Goal) => void
   setActivityLevel: (level: ActivityLevel) => void
-  setWorkoutLocation: (location: Equipment | null) => void
+  setWorkoutLocation: (location: WorkoutLocation | null) => void
   setFitnessLevel: (level: FitnessLevel) => void
   setAvailableEquipment: (equipment: string[] | null) => void
   setDietaryPreferences: (preferences: string[]) => void
@@ -78,7 +78,7 @@ export const useOnboardingStore = create(
       setWeight: (weight: number | null) => set((state) => ({ ...state, weight })),
       setGoal: (goal: Goal) => set((state) => ({ ...state, goal })),
       setActivityLevel: (level: ActivityLevel) => set((state) => ({ ...state, activityLevel: level })),
-      setWorkoutLocation: (location: Equipment | null) => set((state) => ({ ...state, workoutLocation: location })),
+      setWorkoutLocation: (location: WorkoutLocation | null) => set((state) => ({ ...state, workoutLocation: location })),
       setFitnessLevel: (level: FitnessLevel) => set((state) => ({ ...state, fitnessLevel: level })),
       setAvailableEquipment: (equipment: string[] | null) => set((state) => ({ ...state, availableEquipment: equipment })),
       setDietaryPreferences: (preferences: string[]) => set((state) => ({ ...state, dietaryPreferences: preferences })),

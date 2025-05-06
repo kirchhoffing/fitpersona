@@ -2,8 +2,9 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Goal, ActivityLevel, Equipment, Gender } from '@/store/onboardingStore'
+import { Goal, ActivityLevel, WorkoutLocation, Gender } from '@/store/onboardingStore'
 
 import { CalorieDisplay } from './calorie-display'
 import { WorkoutCriteria, selectWorkoutProgram } from '../../../../../../packages/workouts/workoutProgramMap';
@@ -21,7 +22,6 @@ export default function DashboardPage() {
     goal,
     activityLevel,
     workoutLocation,
-    availableEquipment,
     dietaryPreferences,
     resetForm,
     setGender,
@@ -43,7 +43,7 @@ export default function DashboardPage() {
     weight: weight?.toString() || '',
     goal: goal as Goal || 'lose_weight',
     activityLevel: activityLevel as ActivityLevel || 'sedentary',
-    workoutLocation: workoutLocation as Equipment || 'body_weight',
+    workoutLocation: workoutLocation as WorkoutLocation || 'home',
     dietaryPreferences: dietaryPreferences || '',
   })
 
@@ -74,6 +74,25 @@ export default function DashboardPage() {
   useEffect(() => {
     console.log('Dashboard page mounted, loading profile...');
     
+    // Mark that the user has visited the dashboard
+    const markDashboardVisited = async () => {
+      try {
+        // Call the API (even though it's not updating the database right now)
+        await fetch('/api/user/onboarding-status', {
+          method: 'POST',
+        });
+        
+        // Store the dashboard visit information in localStorage as a workaround
+        localStorage.setItem('fitpersona_dashboard_visited', 'true');
+        
+        console.log('Marked dashboard as visited (localStorage workaround)');
+      } catch (error) {
+        console.error('Error marking dashboard as visited:', error);
+        // Still try to set localStorage even if the API call fails
+        localStorage.setItem('fitpersona_dashboard_visited', 'true');
+      }
+    };
+    
     try {
       // First try to get data from localStorage (our temporary workaround)
       const storedProfile = localStorage.getItem('fitpersona_profile');
@@ -95,6 +114,9 @@ export default function DashboardPage() {
         if (profileData.activityLevel) store.setActivityLevel(profileData.activityLevel);
         if (profileData.equipment) store.setWorkoutLocation(profileData.equipment);
         if (profileData.dietaryPreferences) store.setDietaryPreferences(profileData.dietaryPreferences);
+        
+        // Mark that the user has visited the dashboard
+        markDashboardVisited();
         
         setIsLoading(false);
       } else {
@@ -134,6 +156,9 @@ export default function DashboardPage() {
                 if (data.activityLevel) store.setActivityLevel(data.activityLevel);
                 if (data.equipment) store.setWorkoutLocation(data.equipment);
                 if (data.dietaryPreferences) store.setDietaryPreferences(data.dietaryPreferences);
+                
+                // Mark that the user has visited the dashboard
+                markDashboardVisited();
               }
               
               setIsLoading(false);
@@ -162,7 +187,7 @@ export default function DashboardPage() {
       setWeight(editValues.weight ? Number(editValues.weight) : null)
       setGoal(editValues.goal as Goal)
       setActivityLevel(editValues.activityLevel as ActivityLevel)
-      setWorkoutLocation(editValues.workoutLocation as Equipment)
+      setWorkoutLocation(editValues.workoutLocation as WorkoutLocation)
       setDietaryPreferences(typeof editValues.dietaryPreferences === 'string' ? editValues.dietaryPreferences.split(',').map(s => s.trim()).filter(Boolean) : (Array.isArray(editValues.dietaryPreferences) ? editValues.dietaryPreferences : []))
       
       // Persist to backend
@@ -176,7 +201,7 @@ export default function DashboardPage() {
           weight: Number(editValues.weight),
           fitnessGoals: [editValues.goal],
           activityLevel: editValues.activityLevel,
-          availableEquipment: [], // You can update this to use real equipment if needed
+          equipment: editValues.workoutLocation,
           dietaryPreferences: Array.isArray(editValues.dietaryPreferences) ? editValues.dietaryPreferences : (editValues.dietaryPreferences?.split(',').map(s => s.trim()).filter(Boolean) || [])
         })
       })
@@ -188,7 +213,11 @@ export default function DashboardPage() {
     }
   }
 
-  const onReset = () => {
+  const router = useRouter();
+  const [resetInProgress, setResetInProgress] = useState(false);
+
+  // Function to handle the reset of user profile
+  const onReset = async () => {
     if (isEditing) {
       // Cancel editing
       setEditValues({
@@ -198,13 +227,65 @@ export default function DashboardPage() {
         weight: weight?.toString() || '',
         goal: goal as Goal || 'lose_weight',
         activityLevel: activityLevel as ActivityLevel || 'sedentary',
-        workoutLocation: workoutLocation as Equipment || 'body_weight',
+        workoutLocation: workoutLocation as WorkoutLocation || 'home',
         dietaryPreferences: dietaryPreferences || '',
       })
       setIsEditing(false)
     } else {
-      // Reset all data
-      resetForm()
+      // Confirm before resetting
+      const userConfirmed = window.confirm('Are you sure you want to reset your profile? All your data will be cleared.');
+      
+      if (userConfirmed) {
+        try {
+          setResetInProgress(true);
+          
+          // 1. Call the API to reset backend data
+          const response = await fetch('/api/user/reset', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to reset profile');
+          }
+          
+          // 2. Clear local storage data
+          localStorage.removeItem('fitpersona_profile');
+          localStorage.removeItem('fitpersona_dashboard_visited');
+          localStorage.removeItem('fitpersona_onboarding_state');
+          
+          // 3. Reset the store state
+          resetForm();
+          
+          // 4. Show a temporary notification (since we don't have a toast library)
+          const notification = document.createElement('div');
+          notification.textContent = 'Your profile has been reset';
+          notification.style.position = 'fixed';
+          notification.style.bottom = '20px';
+          notification.style.right = '20px';
+          notification.style.backgroundColor = '#10B981';
+          notification.style.color = 'white';
+          notification.style.padding = '12px 20px';
+          notification.style.borderRadius = '4px';
+          notification.style.zIndex = '9999';
+          document.body.appendChild(notification);
+          
+          // Remove the notification after 3 seconds
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 3000);
+          
+          // 5. Redirect to the home page
+          router.push('/');
+        } catch (error) {
+          console.error('Error resetting profile:', error);
+          alert('Failed to reset your profile. Please try again.');
+        } finally {
+          setResetInProgress(false);
+        }
+      }
     }
   }
 
@@ -220,7 +301,7 @@ export default function DashboardPage() {
   // Safely convert workoutLocation to the expected type
   const wLocation: WorkoutCriteria['workoutLocation'] = 
     !workoutLocation ? 'home' : // Handle null case
-    (String(workoutLocation) === 'body_weight' || String(workoutLocation) === 'home_equipment') ? 'home' : 
+    (String(workoutLocation) === 'home') ? 'home' : 
     String(workoutLocation) === 'gym' ? 'gym' : 'home';
 
   // Prepare criteria for workout selection
@@ -374,16 +455,15 @@ export default function DashboardPage() {
                 {isEditing ? (
                   <select 
                     value={editValues.workoutLocation} 
-                    onChange={(e) => setEditValues({...editValues, workoutLocation: e.target.value as Equipment})}
+                    onChange={(e) => setEditValues({...editValues, workoutLocation: e.target.value as WorkoutLocation})}
                     className="bg-gray-700 text-white p-2 rounded"
                   >
-                    <option value="body_weight">Body Weight</option>
-                    <option value="home_equipment">Home Equipment</option>
+                    <option value="home">Home</option>
                     <option value="gym">Gym</option>
                   </select>
                 ) : (
                   <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
-                    {workoutLocation ? tOnboarding(`equipment.${workoutLocation}`) : 'N/A'}
+                    {workoutLocation ? tOnboarding(`equipment.${workoutLocation}`) : t('none')}
                   </span>
                 )}
               </div>

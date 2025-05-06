@@ -4182,6 +4182,7 @@ export namespace Prisma {
     activityLevel: string | null
     equipment: string | null
     dietaryPreferences: string | null
+    hasVisitedDashboard: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4197,6 +4198,7 @@ export namespace Prisma {
     activityLevel: string | null
     equipment: string | null
     dietaryPreferences: string | null
+    hasVisitedDashboard: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4212,6 +4214,7 @@ export namespace Prisma {
     activityLevel: number
     equipment: number
     dietaryPreferences: number
+    hasVisitedDashboard: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4241,6 +4244,7 @@ export namespace Prisma {
     activityLevel?: true
     equipment?: true
     dietaryPreferences?: true
+    hasVisitedDashboard?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4256,6 +4260,7 @@ export namespace Prisma {
     activityLevel?: true
     equipment?: true
     dietaryPreferences?: true
+    hasVisitedDashboard?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4271,6 +4276,7 @@ export namespace Prisma {
     activityLevel?: true
     equipment?: true
     dietaryPreferences?: true
+    hasVisitedDashboard?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4373,6 +4379,7 @@ export namespace Prisma {
     activityLevel: string
     equipment: string
     dietaryPreferences: string | null
+    hasVisitedDashboard: boolean
     createdAt: Date
     updatedAt: Date
     _count: ProfileCountAggregateOutputType | null
@@ -4407,6 +4414,7 @@ export namespace Prisma {
     activityLevel?: boolean
     equipment?: boolean
     dietaryPreferences?: boolean
+    hasVisitedDashboard?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4423,6 +4431,7 @@ export namespace Prisma {
     activityLevel?: boolean
     equipment?: boolean
     dietaryPreferences?: boolean
+    hasVisitedDashboard?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4439,6 +4448,7 @@ export namespace Prisma {
     activityLevel?: boolean
     equipment?: boolean
     dietaryPreferences?: boolean
+    hasVisitedDashboard?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -4466,6 +4476,7 @@ export namespace Prisma {
       activityLevel: string
       equipment: string
       dietaryPreferences: string | null
+      hasVisitedDashboard: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["profile"]>
@@ -4872,6 +4883,7 @@ export namespace Prisma {
     readonly activityLevel: FieldRef<"Profile", 'String'>
     readonly equipment: FieldRef<"Profile", 'String'>
     readonly dietaryPreferences: FieldRef<"Profile", 'String'>
+    readonly hasVisitedDashboard: FieldRef<"Profile", 'Boolean'>
     readonly createdAt: FieldRef<"Profile", 'DateTime'>
     readonly updatedAt: FieldRef<"Profile", 'DateTime'>
   }
@@ -5271,6 +5283,7 @@ export namespace Prisma {
     activityLevel: 'activityLevel',
     equipment: 'equipment',
     dietaryPreferences: 'dietaryPreferences',
+    hasVisitedDashboard: 'hasVisitedDashboard',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -5360,6 +5373,13 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -5588,6 +5608,7 @@ export namespace Prisma {
     activityLevel?: StringFilter<"Profile"> | string
     equipment?: StringFilter<"Profile"> | string
     dietaryPreferences?: StringNullableFilter<"Profile"> | string | null
+    hasVisitedDashboard?: BoolFilter<"Profile"> | boolean
     createdAt?: DateTimeFilter<"Profile"> | Date | string
     updatedAt?: DateTimeFilter<"Profile"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -5604,6 +5625,7 @@ export namespace Prisma {
     activityLevel?: SortOrder
     equipment?: SortOrder
     dietaryPreferences?: SortOrderInput | SortOrder
+    hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -5623,6 +5645,7 @@ export namespace Prisma {
     activityLevel?: StringFilter<"Profile"> | string
     equipment?: StringFilter<"Profile"> | string
     dietaryPreferences?: StringNullableFilter<"Profile"> | string | null
+    hasVisitedDashboard?: BoolFilter<"Profile"> | boolean
     createdAt?: DateTimeFilter<"Profile"> | Date | string
     updatedAt?: DateTimeFilter<"Profile"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -5639,6 +5662,7 @@ export namespace Prisma {
     activityLevel?: SortOrder
     equipment?: SortOrder
     dietaryPreferences?: SortOrderInput | SortOrder
+    hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProfileCountOrderByAggregateInput
@@ -5662,6 +5686,7 @@ export namespace Prisma {
     activityLevel?: StringWithAggregatesFilter<"Profile"> | string
     equipment?: StringWithAggregatesFilter<"Profile"> | string
     dietaryPreferences?: StringNullableWithAggregatesFilter<"Profile"> | string | null
+    hasVisitedDashboard?: BoolWithAggregatesFilter<"Profile"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Profile"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Profile"> | Date | string
   }
@@ -5903,6 +5928,7 @@ export namespace Prisma {
     activityLevel: string
     equipment: string
     dietaryPreferences?: string | null
+    hasVisitedDashboard?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutProfileInput
@@ -5919,6 +5945,7 @@ export namespace Prisma {
     activityLevel: string
     equipment: string
     dietaryPreferences?: string | null
+    hasVisitedDashboard?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5933,6 +5960,7 @@ export namespace Prisma {
     activityLevel?: StringFieldUpdateOperationsInput | string
     equipment?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
+    hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProfileNestedInput
@@ -5949,6 +5977,7 @@ export namespace Prisma {
     activityLevel?: StringFieldUpdateOperationsInput | string
     equipment?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
+    hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5964,6 +5993,7 @@ export namespace Prisma {
     activityLevel: string
     equipment: string
     dietaryPreferences?: string | null
+    hasVisitedDashboard?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5978,6 +6008,7 @@ export namespace Prisma {
     activityLevel?: StringFieldUpdateOperationsInput | string
     equipment?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
+    hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5993,6 +6024,7 @@ export namespace Prisma {
     activityLevel?: StringFieldUpdateOperationsInput | string
     equipment?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
+    hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6298,6 +6330,11 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ProfileCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -6309,6 +6346,7 @@ export namespace Prisma {
     activityLevel?: SortOrder
     equipment?: SortOrder
     dietaryPreferences?: SortOrder
+    hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6330,6 +6368,7 @@ export namespace Prisma {
     activityLevel?: SortOrder
     equipment?: SortOrder
     dietaryPreferences?: SortOrder
+    hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6345,6 +6384,7 @@ export namespace Prisma {
     activityLevel?: SortOrder
     equipment?: SortOrder
     dietaryPreferences?: SortOrder
+    hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6369,6 +6409,14 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type WorkoutCreateNestedManyWithoutUserInput = {
@@ -6557,6 +6605,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type UserUpdateOneRequiredWithoutProfileNestedInput = {
     create?: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutProfileInput
@@ -6728,6 +6780,11 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -6742,6 +6799,14 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type WorkoutCreateWithoutUserInput = {
@@ -6782,6 +6847,7 @@ export namespace Prisma {
     activityLevel: string
     equipment: string
     dietaryPreferences?: string | null
+    hasVisitedDashboard?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6796,6 +6862,7 @@ export namespace Prisma {
     activityLevel: string
     equipment: string
     dietaryPreferences?: string | null
+    hasVisitedDashboard?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6854,6 +6921,7 @@ export namespace Prisma {
     activityLevel?: StringFieldUpdateOperationsInput | string
     equipment?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
+    hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6868,6 +6936,7 @@ export namespace Prisma {
     activityLevel?: StringFieldUpdateOperationsInput | string
     equipment?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
+    hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

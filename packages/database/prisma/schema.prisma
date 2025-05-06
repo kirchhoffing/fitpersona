@@ -63,6 +63,7 @@ model Profile {
   activityLevel     String
   equipment         String
   dietaryPreferences String?
+  hasVisitedDashboard Boolean @default(false)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 } 

@@ -14,46 +14,47 @@ Monorepo architecture is used for better modularization, scalability, and team c
 
 ## 🚀 Tech Stack
 
-- **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, TypeScript, TanStack Query
-- **Backend**: Express + TypeScript (ts-node + esbuild), Zod for validation
-- **Database**: PostgreSQL (via Docker), Prisma ORM
-- **Authentication**: Custom email/password (bcryptjs, SSR-safe, no native bindings)
-
-- **Deployment**: Vercel (frontend + API routes), Supabase or Railway (PostgreSQL hosting)
-- **Package Manager**: pnpm
-- **Internationalization**: next-intl (multi-language support)
-- **Development Tools**: Docker, ESLint, Prettier, TypeScript
-- **Testing**: Jest, React Testing Library (planned)
+* **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, TypeScript, TanStack Query
+* **Backend**: Express + TypeScript (ts-node + esbuild), Zod for validation
+* **Database**: PostgreSQL (via Docker), Prisma ORM
+* **Authentication**: Custom email/password (bcryptjs, SSR-safe, no native bindings)
+* **Deployment**: Vercel (frontend + API routes), Supabase or Railway (PostgreSQL hosting)
+* **Package Manager**: pnpm
+* **Internationalization**: next-intl (multi-language support)
+* **Development Tools**: Docker, ESLint, Prettier, TypeScript
+* **Testing**: Jest, React Testing Library (planned)
 
 ---
 
 ## 🛠️ Features & Architecture
 
 ### 🧑‍💼 User Profile & Authentication
-- Email/password registration and login (bcryptjs, SSR compatible)
-- Registration form now collects **name** field
-- User's name is displayed in the global layout/header after login
-- Multi-step onboarding form with state persistence
-- Type-safe Zod validation for all user inputs
-- Secure session-based authentication
-- User preferences and settings management
+
+* Email/password registration and login (bcryptjs, SSR compatible)
+* Registration form collects **name** field, shown in the global layout after login
+* Multi-step onboarding form with state persistence
+* Type-safe Zod validation for all user inputs
+* Secure session-based authentication
+* User preferences and settings management
+* If a user completes onboarding and reaches the dashboard once, this state is tracked in `apps/web/src/app/api/user/onboarding-status/route.ts`. On subsequent logins, the homepage button changes from **Get Started** to **Dashboard**, avoiding redundant onboarding.
 
 ---
 
-### 🚦 Onboarding & Step System
-- **Multi-step onboarding flow** guides users through profile creation, preferences, and fitness goals
-- **Step 7** now only offers "Home" and "Gym" as workout location options ("Bodyweight" removed)
-- **Step 8 and Step 9 order swapped:** users now select workout days before dietary/health preferences
-- **Days per week selection** is now a button-based UI (1-7), not a number input
-- Each onboarding step is managed by a centralized step system (step IDs, progress, and state are tracked)
-- Steps are fully localized using translation keys from language JSON files
-- Step logic is modular for easy addition of new steps or questions
-- Onboarding data is persisted and resumable
-- Health conditions, risk factors, and all user-facing strings are sourced from translation files
-- Dashboard layout recently reorganized: info/profile section now appears at the top, followed by a single calorie display, and the workout program at the bottom (no duplicate calorie estimation)
+### ⎦ Onboarding & Step System
+
+* Modular multi-step onboarding flow: profile, preferences, goals
+* Workout location options simplified to "Home" and "Gym"
+* Order of workout days and dietary steps updated for better UX
+* Days per week now selected via buttons (1–7), not input
+* All step logic is centralized and fully localized (JSON keys)
+* Onboarding state is resumable
+* Health/risk factors and user strings sourced from i18n files
+* Dashboard layout simplified: profile info → calorie display → workout program (no duplicate calorie estimate)
 
 ### 🧬 Database Schema
+
 **Profile Model**:
+
 ```prisma
 model Profile {
   id            String   @id @default(cuid())
@@ -63,7 +64,7 @@ model Profile {
   birthYear     Int?
   height        Float?
   weight        Float?
-  goal          String?  // lose_weight, gain_muscle, maintain_fitness
+  goal          String?
   activityLevel String?
   equipment     String[]
   dietary       String[]
@@ -74,19 +75,8 @@ model Profile {
 }
 ```
 
-**Exercise Database**:
-- Centralized in `packages/exercises/src/exercise-data.ts`
-- All referenced exercises in workout programs must be present here as distinct entries
-- To avoid type errors, ensure the MuscleGroup type in both `packages/exercises/src/types.ts` and `apps/web/src/types/exercise.ts` are kept in sync (recently fixed by adding 'lats' to the web app)
-  goal          String?  // lose_weight, gain_muscle, maintain_fitness
-  activityLevel String?
-  equipment     String[]
-  dietary       String[]
-  preferences   Json?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 **User Model**:
+
 ```prisma
 model User {
   id        String   @id @default(cuid())
@@ -100,73 +90,52 @@ model User {
 }
 ```
 
+**Exercise Database**:
+
+* Centralized in `packages/exercises/src/exercise-data.ts`
+* Exercises referenced in programs must exist as distinct entries
+* Ensure `MuscleGroup` types in `exercises/src/types.ts` and `web/src/types/exercise.ts` stay in sync
+
 ### Workout Programs
-- Predefined 3-Day Full Body, Push/Pull/Legs, HIIT, and Bodyweight Home workout templates
-- All exercises are now listed as distinct entries in the database (e.g., "Pull-up" and "Lat Pulldown" are separate, not combined)
-- Recently added missing exercises referenced in workout programs, including: incline-bench-press, dumbbell-shoulder-press, lateral-raise, overhead-triceps-extension, seated-cable-row, barbell-curl, hammer-curl, leg-press, calf-raise, cable-biceps-curl
-- Fixed 'cobra-stretch' to be categorized as 'core' (was 'stretch')
-- Localized workout names & descriptions (next-intl)
-- **All exercise names, muscle groups, and health risk conditions are fully localized via JSON language files** (no hardcoded UI strings)
-- Progress tracking integration
-- Program assignment based on onboarding data and central mapping logic (see below)
-- Exercise library with detailed instructions
-- Workout history and progress tracking
-- "watchVideo" translation key added for exercise video links
-- **New health-aware workout modifier:** Workouts are now automatically customized based on user health risks
-  - Each intermediate-level exercise now includes an `alternatives: string[]` array of zero-risk beginner backup exercises
-  - The system automatically replaces exercises that could pose health risks with safer alternatives
-  - A smart selection algorithm finds the best alternative that targets similar muscle groups
-  - See `packages/workouts/modifiers/README.md` for documentation on how it works and how to add new alternatives
-- To add a new workout program, import it in `packages/workouts/workoutProgramMap.ts` and add a new mapping object to the `programRules` array. You can use specific values or `'any'` as a wildcard for `goal`, `workoutLocation`, and `daysPerWeek`.
-- The selection logic automatically tries the most specific match first, then falls back to rules with `'any'` wildcards as needed (for example, `{ goal: 'any', workoutLocation: 'any', daysPerWeek: 5, program: fiveDayPPLWorkout }` covers all 5-day cases).
-- There is no longer any hardcoded or special-case logic for 5+ days. All fallback and matching is handled by the data-driven rules and a clear priority system.
-- See the `WorkoutCriteria` type for available matching fields.
+
+* Includes Full Body, PPL, HIIT, and Bodyweight Home templates
+* Each exercise is distinct (e.g., Pull-up ≠ Lat Pulldown)
+* Added missing exercises like incline-bench-press, leg-press, calf-raise, etc.
+* Fixed exercise category bugs (e.g., cobra-stretch to 'core')
+* Exercises and programs are fully localized (JSON)
+* Programs assigned based on onboarding + centralized logic
+* Progress tracking and exercise history available
+* Exercises can include `alternatives: string[]` for health-aware auto-replacement
+* Replacement algorithm prioritizes safe alternatives for same muscle group (see `modifiers/README.md`)
+* Add new programs via `workoutProgramMap.ts` and `programRules[]`, with fallback via `any` wildcards
+* No hardcoded rules for multi-day splits—handled via clean, data-driven logic
 
 ---
 
 ### 🏋️‍♂️ Exercises Page
-- Dedicated multilingual page listing all exercises with images, names, muscle groups, and risk conditions.
-- All exercise-related strings (names, muscle groups, risk conditions, section titles) are fully localized via JSON language files.
-- Users can search and filter exercises by name or muscle group in their selected language.
-- UI is styled with Tailwind CSS for a modern, accessible experience.
-- Navigation from the home page is locale-aware and uses a localized button label.
+
+* Multilingual searchable/filterable exercise list (names, groups, risks)
+* All strings are fully localized (no hardcoded labels)
+* Tailwind-styled, locale-aware navigation
 
 ### 🥗 Nutrition Features
-- Personalized meal plans based on goals
-- Dietary restriction support (dietary preferences are localized)
-- Calorie and macro tracking
-- Recipe suggestions and meal planning
+
+* Personalized meal plans from user goal + preferences
+* Localized dietary restriction support
+* Calorie/macro tracking, meal suggestions
 
 ---
 
 ## 🌍 Internationalization
 
-### Translation Key Structure and Recent Fixes
-- All onboarding and dashboard fields use translation keys from `apps/web/src/messages/{locale}.json`.
-- **Workout location keys updated:** Now only `onboarding.steps.equipment.home` and `onboarding.steps.equipment.gym` are used ("body_weight" and "home_equipment" removed)
-- **Step order and translation alignment:** Step 8 and 9 swapped, translation files updated for all languages
-- **Days per week translation:** Button labels and instructions are now localized for the new button UI
-- **JSON issues:** Fixed trailing commas and invalid JSON in `de.json` and `tr.json`
-- Dietary preferences keys: `onboarding.steps.health.{preference}` (e.g., `back_pain`, `diabetes`, etc.).
-- Dashboard fallback: `dashboard.none` for empty dietary preferences.
-- WorkoutProgram: `WorkoutProgram.watchVideo` for "Watch Video" links.
-
-### Notes
-- All user-facing strings in the dashboard and onboarding are now locale-aware and never display raw translation keys
-- If a translation is missing, the key will be added to the corresponding JSON file for consistency
-- Dashboard and workout program UI are fully localized and updated to reflect the new section order
-
-- **Languages Supported**:
-  - English (default)
-  - Turkish
-  - German
-
-- **Implementation**:
-  - Translations stored in: `apps/web/src/messages/{locale}.json`
-  - Routing based on: `app/[locale]/` directory
-  - Language switcher with flag icons: `public/flags/`
-  - Dynamic content localization
-  - Date and number formatting per locale
+* Translation keys in `apps/web/src/messages/{locale}.json`
+* Routing via `app/[locale]/`
+* JSON issues (e.g., invalid commas) fixed
+* Workout location keys simplified: `home` and `gym`
+* Button-based day selection fully localized
+* Missing keys added during runtime for consistency
+* Languages supported: English (default), Turkish, German
+* Locale-aware UI: language switcher, date/number formats, fallback handling
 
 ---
 
@@ -175,66 +144,26 @@ model User {
 ```plaintext
 fitpersona/
 ├── apps/
-│   ├── web/                         # Next.js frontend app
-│   │   ├── public/
-│   │   │   └── flags/               # Flag icons for language switcher
-│   │   ├── prisma/
-│   │   │   ├── migrations/
-│   │   │   └── schema.prisma        # Prisma schema for web app
+│   ├── web/
+│   │   ├── public/flags/
+│   │   ├── prisma/schema.prisma
 │   │   ├── src/
-│   │   │   ├── app/
-│   │   │   │   ├── [locale]/        # Locale-based routes (dashboard, onboarding, exercises, etc)
-│   │   │   │   ├── api/             # API routes (Next.js)
-│   │   │   │   ├── auth/            # Auth pages
-│   │   │   │   ├── onboarding/      # Onboarding pages
-│   │   │   │   └── profile/         # Profile pages
-│   │   │   ├── components/
-│   │   │   │   ├── layout/          # Layout components
-│   │   │   │   ├── profile/         # Profile UI components
-│   │   │   │   ├── onboarding/      # Onboarding UI (including steps/)
-│   │   │   │   ├── workouts/        # Workout UI components
-│   │   │   │   └── ui/              # Shared UI components (badge, button, card)
-│   │   │   ├── config/              # App-level config
-│   │   │   ├── i18n/                # i18n config and helpers
-│   │   │   ├── lib/
-│   │   │   │   ├── workouts/        # Exercise/workout logic (exercise-data.ts, 3dayFullBody.ts, etc)
-│   │   │   │   └── ...
-│   │   │   ├── messages/            # Translation JSON files (en.json, tr.json, de.json)
-│   │   │   ├── schemas/             # Zod schemas
-│   │   │   ├── store/               # State management
-│   │   │   └── types/               # Local TypeScript types
-│   │   ├── .env                     # Env vars for web app
-│   │   ├── package.json
-│   │   ├── tailwind.config.js
-│   │   └── tsconfig.json
-│   └── api/                         # Express backend app
-│       ├── src/
-│       │   ├── routes/              # API route handlers
-│       │   └── workouts/            # Workout logic files
-│       ├── .env
-│       └── package.json
-├── packages/
-│   ├── database/
-│   │   ├── prisma/
-│   │   │   ├── migrations/
-│   │   │   └── schema.prisma        # Shared Prisma schema
-│   │   ├── src/
-│   │   │   └── client.ts            # PrismaClient setup
-│   │   ├── package.json
-│   ├── exercises/
-│   │   ├── src/
-│   │   │   ├── exercise-data.ts     # Central exercise data
-│   │   │   ├── index.ts
-│   │   │   └── types.ts             # Exercise types
-│   │   ├── package.json
-├── types/
-│   └── next-intl.d.ts               # Global TypeScript types for i18n
-├── scripts/                         # (Reserved for custom scripts)
-├── pnpm-workspace.yaml              # Monorepo workspace
-├── package.json                     # Root package.json
-├── tsconfig.json                    # TypeScript configuration
-├── docker-compose.yml               # Docker Compose config
-└── .gitignore                       # Git ignore rules
+│   │   │   ├── app/[locale]/
+│   │   │   ├── components/{layout, onboarding, workouts, ui}/
+│   │   │   ├── lib/workouts/
+│   │   │   ├── messages/
+│   │   │   ├── schemas/
+│   │   │   ├── store/
+│   │   │   └── types/
+│   │   ├── package.json, tailwind.config.js, tsconfig.json
+│   └── api/
+│       ├── src/routes/, workouts/
+│       ├── .env, package.json
+├── packages/{database, exercises}/
+├── types/next-intl.d.ts
+├── scripts/ (reserved)
+├── docker-compose.yml
+└── pnpm-workspace.yaml, tsconfig.json, .gitignore
 ```
 
 ---
@@ -242,124 +171,56 @@ fitpersona/
 ## 🔄 Development Guidelines
 
 ### Local Development
-- Docker for PostgreSQL database
-- Hot reloading for both frontend and backend
-- Environment variables management
-- TypeScript strict mode enabled
 
-### Code Quality & Testing
-- ESLint and Prettier for code quality
-- TypeScript for type safety
-- Unit and integration tests
-- Git hooks for pre-commit checks
+* Docker for PostgreSQL
+* Hot reloading (frontend + backend)
+* Environment variables from `.env`
+* TypeScript strict mode
 
-### Version Control
-- Branch strategy: main, develop, feature/*, fix/*, hotfix/*
-- Conventional commits
-- Atomic commits with clear messages
+### Code Quality
+
+* ESLint + Prettier enforced
+* Git hooks for pre-commit checks
+* Conventional commits, atomic changes
 
 ### Deployment
-- Vercel for frontend and API routes
-- Supabase/Railway for PostgreSQL
-- Automated deployments and previews
-- Prisma for database migrations
+
+* Vercel for web + API
+* Supabase or Railway for DB
+* Prisma for migrations
 
 ---
 
-## 🤖 AI Assistant Guidelines
+## 🤖 AI Assistant Usage & Best Practices
 
-### Context Maintenance
-- Always read this OVERVIEW.md file at the start of each new chat session
-- Maintain awareness of the monorepo structure and package relationships
-- Consider internationalization requirements for all new features
-- Follow TypeScript best practices and maintain type safety
+### Context Awareness
 
-### Development Practices
-- Use pnpm for package management
-- Follow the established folder structure
-- Maintain separation of concerns between apps and packages
-- Consider both frontend and backend implications of changes
+* Read OVERVIEW\.md at session start
+* Understand monorepo layout and package boundaries
+* Respect i18n, auth, and type safety principles
 
-### Feature Implementation
-- Consider internationalization from the start
-- Implement proper validation using Zod
-- Follow the established authentication patterns
-- Maintain type safety across the stack
+### Code Practices
 
-## 🛠️ Development Environment Setup
+* Use pnpm, follow folder structure
+* Avoid duplication, reuse helpers/hooks
+* Always validate with Zod
+* Maintain null-checks, error handling, and loading states
+* Add JSDoc for complex logic
 
-### Prerequisites
-- Node.js 18+ and pnpm
-- Docker and Docker Compose
-- PostgreSQL client (optional)
+### Review & Security
 
-### Initial Setup
-1. Clone the repository
-2. Install dependencies: `pnpm install`
-3. Copy `.env.example` to `.env` and fill in required values
-4. Start PostgreSQL: `docker-compose up -d`
-5. Run database migrations: `pnpm prisma migrate dev`
-6. Start development servers:
-   - Frontend: `pnpm dev:web`
-   - Backend: `pnpm dev:api`
+* Check for vulnerabilities
+* Ensure performance considerations
+* Validate i18n coverage
+* Avoid console logs and dead code
 
-### Environment Variables
-- `DATABASE_URL`: PostgreSQL connection string
-- `NEXTAUTH_SECRET`: NextAuth.js secret
-- `NEXTAUTH_URL`: Base URL for authentication
-- `SMTP_*`: Email configuration for magic links
+---
 
-## 🔒 Security & Performance
-
-### Security Measures
-- Magic link authentication
-- Role-based access control (RBAC)
-- Session management with secure cookies
-- Rate limiting on API endpoints
-- Data encryption at rest
-- Input sanitization and validation
-- CORS configuration
-- Regular security audits
-
-### Performance Optimization
-- Image optimization
-- Code splitting and lazy loading
-- Client-side caching
-- Bundle size monitoring
-- Database query optimization
-- Response caching
-- Connection pooling
-
-## 🧪 Testing & API
-
-### Testing Requirements
-- Unit tests: 80% coverage for critical business logic
-- Integration tests: 60% coverage for API routes
-- E2E tests for critical user flows
-- Tools: Jest, React Testing Library, Supertest, Playwright
-
-### When to Write Unit Tests
-- Complex calculations and transformations
-- Business logic functions
-- Data validation and sanitization
-- Utility functions with multiple edge cases
-- State management logic
-
-### When Not to Write Unit Tests
-- Simple UI components
-- Basic prop passing
-- API route handlers (use integration tests instead)
-- Simple state updates
-- Configuration files
-
-### API Structure
-- `/api/auth/*`: Authentication endpoints
-- `/api/profile`: User profile management
-- `/api/workouts`: Workout program endpoints
-- `/api/nutrition`: Nutrition plan endpoints
+## 🧪 API Structure & Patterns
 
 ### Example Response
-```typescript
+
+```ts
 // GET /api/profile
 Response: {
   id: string;
@@ -375,62 +236,9 @@ Response: {
 }
 ```
 
-## 📦 Dependencies & Contributing
-
-### Major Dependencies
-- Next.js: ^14.0.0
-- React: ^18.2.0
-- TypeScript: ^5.0.0
-- Prisma: ^5.0.0
-- NextAuth.js: ^4.0.0
-- TanStack Query: ^5.0.0
-
-### Update Policy
-- Security updates: Immediate
-- Minor updates: Monthly
-- Major updates: Quarterly with testing
-
-### Contributing Process
-1. Create feature branch from `develop`
-2. Follow conventional commits
-3. Update documentation if needed
-4. Add tests for new features
-5. Request review from at least one maintainer
-
-### Code Review Checklist
-- [ ] TypeScript types are correct
-- [ ] Tests are added/updated
-- [ ] Documentation is updated
-- [ ] No console.log statements
-- [ ] Code follows style guide
-- [ ] Performance impact considered
-
-## 🚨 Error Handling Patterns
-
-### Frontend Error Handling
-- Use error boundaries for React components
-- Implement toast notifications for user feedback
-- Handle API errors with TanStack Query error states
-- Validate forms with Zod schemas
-
-### Backend Error Handling
-- Use custom error classes for different error types
-- Implement global error middleware
-- Return consistent error response format:
-```typescript
-{
-  error: {
-    code: string;
-    message: string;
-    details?: unknown;
-  }
-}
-```
-
-## 🔄 Common Patterns
-
 ### API Route Pattern
-```typescript
+
+```ts
 // apps/api/src/routes/example.ts
 import { validateRequest } from '@/lib/validation';
 import { handleError } from '@/lib/error';
@@ -447,7 +255,8 @@ export const handler = async (req: Request, res: Response) => {
 ```
 
 ### Component Pattern
-```typescript
+
+```ts
 // apps/web/src/components/Example.tsx
 import { useTranslation } from 'next-intl';
 import { useQuery } from '@tanstack/react-query';
@@ -466,30 +275,4 @@ export const Example = () => {
 };
 ```
 
-## 🤖 AI Assistant Best Practices
-
-### Code Generation
-- Always use TypeScript with strict mode
-- Follow the established folder structure
-- Use existing utility functions and hooks
-- Consider internationalization in all new code
-- Add proper error handling and loading states
-
-### Code Review
-- Check for potential security vulnerabilities
-- Verify type safety and null checks
-- Ensure proper error handling
-- Validate internationalization support
-- Check performance implications
-
-### Documentation
-- Add JSDoc comments for complex functions
-- Document edge cases and error scenarios
-- Include examples for complex logic
-- Update relevant documentation files
-
-### Testing
-- Add unit tests for new functions
-- Include integration tests for API routes
-- Test error scenarios and edge cases
-- Verify internationalization support
+---

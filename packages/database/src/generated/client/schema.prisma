@@ -52,17 +52,18 @@ model Exercise {
 }
 
 model Profile {
-  id                 String   @id @default(cuid())
-  userId             String   @unique
-  user               User     @relation(fields: [userId], references: [id])
-  gender             String
-  birthYear          Int
-  height             Int
-  weight             Float
-  goal               String
-  activityLevel      String
-  equipment          String
-  dietaryPreferences String?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  user                User     @relation(fields: [userId], references: [id])
+  gender              String
+  birthYear           Int
+  height              Int
+  weight              Float
+  goal                String
+  activityLevel       String
+  equipment           String
+  dietaryPreferences  String?
+  hasVisitedDashboard Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
