@@ -31,33 +31,47 @@ export function Step10() {
       const formData = useOnboardingStore.getState()
       console.log('Onboarding data to save:', formData)
       
-      // BYPASS THE API: Store data directly in localStorage
-      // This is a temporary workaround until the API issue is fixed
-      localStorage.setItem('fitpersona_profile', JSON.stringify({
-        gender: formData.gender || 'other',
-        birthYear: new Date().getFullYear() - (formData.age || 30),
+      // Format data for API submission
+      const profileData = {
+        gender: formData.gender || 'male',
+        birthYear: formData.age ? new Date().getFullYear() - formData.age : new Date().getFullYear() - 30,
         height: formData.height || 170,
         weight: formData.weight || 70,
+        fitnessGoals: [formData.goal || 'maintain_fitness'],
         goal: formData.goal || 'maintain_fitness',
-        activityLevel: formData.activityLevel || 'moderate',
-        equipment: formData.workoutLocation || 'home',
+        activityLevel: formData.activityLevel || 'sedentary',
+        workoutLocation: formData.workoutLocation || 'home',
+        equipment: formData.workoutLocation || 'home', // For API compatibility
         dietaryPreferences: formData.dietaryPreferences || [],
         daysPerWeek: data.daysPerWeek || 3
-      }))
+      }
+      
+      console.log('Sending profile data to API:', profileData)
+      
+      // Submit to the API
+      const response = await fetch('/api/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profileData),
+      })
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`)
+      }
+      
+      console.log('Profile data successfully saved to database')
       
       // Get the current locale from the URL
       const locale = window.location.pathname.split('/')[1] || 'en'
       console.log('Current locale for redirect:', locale)
       
       // Redirect to dashboard with locale
-      console.log('Profile saved to localStorage, redirecting to dashboard')
       window.location.href = `/${locale}/dashboard`
     } catch (error) {
-      console.error('Error saving onboarding data:', error)
-      
-      // Even if there's an error, try to redirect anyway
-      const locale = window.location.pathname.split('/')[1] || 'en'
-      window.location.href = `/${locale}/dashboard`
+      console.error('Error saving onboarding data to API:', error)
+      alert('There was an error saving your profile data. Please try again.')
     }
   }
 

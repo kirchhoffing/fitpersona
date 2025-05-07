@@ -20,15 +20,38 @@ import { Step10 } from '@/components/onboarding/steps/Step10'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import { getSession } from 'next-auth/react'
 
 export default function OnboardingPage() {
-  const { currentStep } = useOnboardingStore()
+  const { currentStep, resetForm } = useOnboardingStore()
   const router = useRouter()
   const t = useTranslations('onboarding')
+  
+  // Always reset the form and start from Step 1 on initial page load
+  useEffect(() => {
+    // Ensure we're always starting from step 1 on page load
+    resetForm()
+  }, [])
 
   // Handle form submission
   const handleSubmit = async () => {
     const formData = useOnboardingStore.getState()
+    
+    // Format data to match expected API and database structure
+    const profileData = {
+      gender: formData.gender || 'male',
+      birthYear: formData.age ? new Date().getFullYear() - formData.age : null,
+      height: formData.height,
+      weight: formData.weight,
+      fitnessGoals: formData.goal ? [formData.goal] : ['maintain_fitness'],
+      activityLevel: formData.activityLevel || 'sedentary', 
+      workoutLocation: formData.workoutLocation || 'home',
+      equipment: formData.workoutLocation || 'home', // For API compatibility
+      dietaryPreferences: formData.dietaryPreferences || [],
+      daysPerWeek: formData.daysPerWeek || 3
+    }
+    
+    console.log('Sending profile data to API:', profileData);
     
     try {
       const response = await fetch('/api/profile', {
@@ -36,7 +59,7 @@ export default function OnboardingPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(profileData),
       })
 
       if (!response.ok) {
@@ -45,7 +68,13 @@ export default function OnboardingPage() {
 
       // Reset form and redirect to dashboard
       useOnboardingStore.getState().resetForm()
-      router.push('/dashboard')
+      
+      // Get the current locale from the router
+      const locale = window.location.pathname.split('/')[1];
+      console.log('Current locale for redirect:', locale);
+      
+      // Properly redirect to the localized dashboard
+      router.push(`/${locale}/dashboard`)
     } catch (error) {
       console.error('Error submitting form:', error)
       // Handle error (show error message to user)

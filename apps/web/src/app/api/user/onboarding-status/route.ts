@@ -52,13 +52,50 @@ export async function POST() {
       );
     }
 
-    // Instead of directly using hasVisitedDashboard field, use a workaround
-    // Store the dashboard visit information in localStorage
-    // This is a temporary solution until we can fix the Prisma client issue
+    // First, check if there's already a profile for this user ID
+    const existingProfile = await prisma.profile.findUnique({
+      where: { userId: session.user.id }
+    });
     
-    // Return success even though we're not updating the database
-    // The homepage will check localStorage for this information
-    return NextResponse.json({ success: true });
+    let updatedProfile;
+    
+    if (existingProfile) {
+      // Profile exists, just update the hasVisitedDashboard field
+      console.log(`Found profile for user ${session.user.id}. Marking dashboard as visited.`);
+      
+      updatedProfile = await prisma.profile.update({
+        where: { userId: session.user.id },
+        data: { hasVisitedDashboard: true },
+      });
+    } else {
+      // Instead of creating a default profile with incorrect data, we'll check if the user has a proper profile first
+      const user = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        include: { profile: true }
+      });
+      
+      if (user && !user.profile) {
+        console.log(`User ${session.user.id} exists but has no profile. Returning status to let frontend handle it.`);
+        // We'll let the front-end handle creating the profile with proper onboarding data
+        return NextResponse.json({
+          success: true,
+          hasVisitedDashboard: false,
+          profileExists: false
+        });
+      } else {
+        console.warn(`No user or profile found for userId ${session.user.id}. User might need to reauthenticate.`);
+        return NextResponse.json({
+          success: false,
+          error: 'User record not found',
+          hasVisitedDashboard: false
+        }, { status: 404 });
+      }
+    }
+    
+    return NextResponse.json({ 
+      success: true,
+      hasVisitedDashboard: updatedProfile.hasVisitedDashboard 
+    });
   } catch (error) {
     // More detailed error logging
     console.error('Error marking dashboard as visited:', error);

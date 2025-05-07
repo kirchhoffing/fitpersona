@@ -1,8 +1,10 @@
 "use client";
+
 import { useLocale, useTranslations } from 'next-intl'
 import { useOnboardingStore } from '@/store/onboardingStore'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Goal, ActivityLevel, WorkoutLocation, Gender } from '@/store/onboardingStore'
 
@@ -64,8 +66,8 @@ export default function DashboardPage() {
 
   const [profileData, setProfileData] = useState<ProfileDataType | null>(null);
 
-  // Debug values from useOnboardingStore
-  console.log('useOnboardingStore values:', { gender, age, height, weight, goal, activityLevel, workoutLocation });
+  // State for tracking dashboard loading and visit status
+  const [dashboardVisitMarked, setDashboardVisitMarked] = useState(false);
 
   // Add loading state to prevent immediate logout during session initialization
   const [isLoading, setIsLoading] = useState(true);
@@ -74,113 +76,72 @@ export default function DashboardPage() {
   useEffect(() => {
     console.log('Dashboard page mounted, loading profile...');
     
-    // Mark that the user has visited the dashboard
-    const markDashboardVisited = async () => {
+    const loadProfileData = async () => {
       try {
-        // Call the API (even though it's not updating the database right now)
-        await fetch('/api/user/onboarding-status', {
+        setIsLoading(true);
+        
+        // 1. First, mark that the user has visited the dashboard
+        const dashboardResponse = await fetch('/api/user/onboarding-status', {
           method: 'POST',
         });
         
-        // Store the dashboard visit information in localStorage as a workaround
-        localStorage.setItem('fitpersona_dashboard_visited', 'true');
+        if (!dashboardResponse.ok) {
+          console.error('Failed to mark dashboard as visited');
+        } else {
+          console.log('Marked dashboard as visited in database');
+          setDashboardVisitMarked(true);
+        }
         
-        console.log('Marked dashboard as visited (localStorage workaround)');
+        // 2. Get the profile data from the database
+        const profileResponse = await fetch('/api/profile', {
+          method: 'GET',
+        });
+        
+        if (!profileResponse.ok) {
+          // If we couldn't get the profile (e.g., 404 Not Found)
+          throw new Error('Failed to fetch profile from database');
+        }
+        
+        // Successfully fetched profile from database
+        const dbProfileData = await profileResponse.json();
+        console.log('Fetched profile data from database:', dbProfileData);
+        
+        // Update the state with database profile data
+        setProfileData(dbProfileData);
+        
+        // Update the onboarding store with the profile data
+        const store = useOnboardingStore.getState();
+        if (dbProfileData.gender) store.setGender(dbProfileData.gender);
+        if (dbProfileData.birthYear) store.setAge(new Date().getFullYear() - dbProfileData.birthYear);
+        if (dbProfileData.height) store.setHeight(dbProfileData.height);
+        if (dbProfileData.weight) store.setWeight(dbProfileData.weight);
+        if (dbProfileData.goal) store.setGoal(dbProfileData.goal);
+        if (dbProfileData.activityLevel) store.setActivityLevel(dbProfileData.activityLevel);
+        if (dbProfileData.workoutLocation) store.setWorkoutLocation(dbProfileData.workoutLocation);
+        if (dbProfileData.dietaryPreferences) {
+          const prefs = typeof dbProfileData.dietaryPreferences === 'string' 
+            ? dbProfileData.dietaryPreferences.split(',').filter(Boolean) 
+            : dbProfileData.dietaryPreferences;
+          store.setDietaryPreferences(prefs);
+        }
       } catch (error) {
-        console.error('Error marking dashboard as visited:', error);
-        // Still try to set localStorage even if the API call fails
-        localStorage.setItem('fitpersona_dashboard_visited', 'true');
+        console.error('Error loading profile data from database:', error);
+        setAuthError(true); // Show authentication error message
+      } finally {
+        setIsLoading(false);
       }
     };
     
-    try {
-      // First try to get data from localStorage (our temporary workaround)
-      const storedProfile = localStorage.getItem('fitpersona_profile');
-      
-      if (storedProfile) {
-        // We have data in localStorage
-        const profileData = JSON.parse(storedProfile);
-        console.log('Loaded profile data from localStorage:', profileData);
-        
-        setProfileData(profileData);
-        
-        // Update the store with the profile data
-        const store = useOnboardingStore.getState();
-        if (profileData.gender) store.setGender(profileData.gender);
-        if (profileData.birthYear) store.setAge(new Date().getFullYear() - profileData.birthYear);
-        if (profileData.height) store.setHeight(profileData.height);
-        if (profileData.weight) store.setWeight(profileData.weight);
-        if (profileData.goal) store.setGoal(profileData.goal);
-        if (profileData.activityLevel) store.setActivityLevel(profileData.activityLevel);
-        if (profileData.equipment) store.setWorkoutLocation(profileData.equipment);
-        if (profileData.dietaryPreferences) store.setDietaryPreferences(profileData.dietaryPreferences);
-        
-        // Mark that the user has visited the dashboard
-        markDashboardVisited();
-        
-        setIsLoading(false);
-      } else {
-        // Fallback to API if nothing in localStorage
-        console.log('No profile in localStorage, trying API...');
-        
-        // Add a small delay to allow session to initialize
-        const timeoutId = setTimeout(() => {
-          fetch('/api/profile')
-            .then(res => {
-              console.log('Profile API response status:', res.status);
-              if (res.status === 401) {
-                // Don't set auth error, just use default data
-                return Promise.reject('Unauthorized');
-              }
-              
-              // Handle 404 (profile not found) gracefully by using default data
-              if (res.status === 404) {
-                console.log('Profile not found (404), using default data');
-                return null; // Return null to indicate no profile exists yet
-              }
-              
-              return res.ok ? res.json() : Promise.reject(`API request failed with status ${res.status}`);
-            })
-            .then(data => {
-              console.log('Fetched profile data from API:', data);
-              
-              // If data is null (404 response), we're using defaults - no need to update state
-              if (data) {
-                setProfileData(data);
-                const store = useOnboardingStore.getState();
-                if (data.gender) store.setGender(data.gender);
-                if (data.birthYear) store.setAge(new Date().getFullYear() - data.birthYear);
-                if (data.height) store.setHeight(data.height);
-                if (data.weight) store.setWeight(data.weight);
-                if (data.goal) store.setGoal(data.goal);
-                if (data.activityLevel) store.setActivityLevel(data.activityLevel);
-                if (data.equipment) store.setWorkoutLocation(data.equipment);
-                if (data.dietaryPreferences) store.setDietaryPreferences(data.dietaryPreferences);
-                
-                // Mark that the user has visited the dashboard
-                markDashboardVisited();
-              }
-              
-              setIsLoading(false);
-            })
-            .catch(error => {
-              console.log('Using default profile data due to API error');
-              // Use default data from the store
-              setIsLoading(false);
-            });
-        }, 500);
-        
-        return () => clearTimeout(timeoutId);
-      }
-    } catch (error) {
-      console.error('Error loading profile data:', error);
-      setIsLoading(false);
-    }
+    // Load profile data immediately when component mounts
+    loadProfileData();
+    
+    // No cleanup needed for API calls
+    return () => {};
   }, []);
 
   const onUpdate = async () => {
     if (isEditing) {
-      // Save changes to local state
+      // Save changes to local state - use raw values, not translation keys
       setGender(editValues.gender as Gender)
       setAge(editValues.age ? Number(editValues.age) : null)
       setHeight(editValues.height ? Number(editValues.height) : null)
@@ -190,26 +151,45 @@ export default function DashboardPage() {
       setWorkoutLocation(editValues.workoutLocation as WorkoutLocation)
       setDietaryPreferences(typeof editValues.dietaryPreferences === 'string' ? editValues.dietaryPreferences.split(',').map(s => s.trim()).filter(Boolean) : (Array.isArray(editValues.dietaryPreferences) ? editValues.dietaryPreferences : []))
       
+      // Create object for API only - no localStorage usage
+      const profileUpdateData = {
+        gender: editValues.gender, // Use raw value (male, female, other)
+        birthYear: new Date().getFullYear() - Number(editValues.age),
+        height: Number(editValues.height),
+        weight: Number(editValues.weight),
+        fitnessGoals: [editValues.goal], // Raw value (lose_weight, gain_muscle, etc)
+        goal: editValues.goal, 
+        activityLevel: editValues.activityLevel, // Raw value (sedentary, active, etc)
+        workoutLocation: editValues.workoutLocation, // Raw value (home, gym)
+        equipment: editValues.workoutLocation, // For API compatibility
+        dietaryPreferences: Array.isArray(editValues.dietaryPreferences) 
+          ? editValues.dietaryPreferences 
+          : (editValues.dietaryPreferences?.split(',').map(s => s.trim()).filter(Boolean) || [])
+      };
+      
+      console.log('Saving profile data to database:', profileUpdateData);
+      
       // Persist to backend
-      await fetch('/api/profile', {
+      const response = await fetch('/api/profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          gender: editValues.gender,
-          birthYear: new Date().getFullYear() - Number(editValues.age),
-          height: Number(editValues.height),
-          weight: Number(editValues.weight),
-          fitnessGoals: [editValues.goal],
-          activityLevel: editValues.activityLevel,
-          equipment: editValues.workoutLocation,
-          dietaryPreferences: Array.isArray(editValues.dietaryPreferences) ? editValues.dietaryPreferences : (editValues.dietaryPreferences?.split(',').map(s => s.trim()).filter(Boolean) || [])
-        })
-      })
-      // Optionally: refetch profileData here
-      setIsEditing(false)
+        body: JSON.stringify(profileUpdateData)
+      });
+      
+      if (response.ok) {
+        console.log('Profile successfully updated in database');
+        
+        // Update profile data state from response
+        const updatedProfile = await response.json();
+        setProfileData(updatedProfile);
+      } else {
+        console.error('Failed to update profile in database');
+      }
+      
+      setIsEditing(false);
     } else {
       // Enter edit mode
-      setIsEditing(true)
+      setIsEditing(true);
     }
   }
 
@@ -239,7 +219,7 @@ export default function DashboardPage() {
         try {
           setResetInProgress(true);
           
-          // 1. Call the API to reset backend data
+          // 1. Call the API to reset backend data - this is the only operation needed
           const response = await fetch('/api/user/reset', {
             method: 'POST',
             headers: {
@@ -251,15 +231,10 @@ export default function DashboardPage() {
             throw new Error('Failed to reset profile');
           }
           
-          // 2. Clear local storage data
-          localStorage.removeItem('fitpersona_profile');
-          localStorage.removeItem('fitpersona_dashboard_visited');
-          localStorage.removeItem('fitpersona_onboarding_state');
-          
-          // 3. Reset the store state
+          // 2. Reset the store state
           resetForm();
           
-          // 4. Show a temporary notification (since we don't have a toast library)
+          // 3. Show a temporary notification (since we don't have a toast library)
           const notification = document.createElement('div');
           notification.textContent = 'Your profile has been reset';
           notification.style.position = 'fixed';
@@ -277,8 +252,12 @@ export default function DashboardPage() {
             document.body.removeChild(notification);
           }, 3000);
           
-          // 5. Redirect to the home page
-          router.push('/');
+          // 4. Reset the onboarding store to start from step 1
+          useOnboardingStore.getState().resetForm();
+          
+          // 5. Redirect to the onboarding page with correct locale
+          const locale = window.location.pathname.split('/')[1] || 'en';
+          router.push(`/${locale}/onboarding`);
         } catch (error) {
           console.error('Error resetting profile:', error);
           alert('Failed to reset your profile. Please try again.');
@@ -348,15 +327,15 @@ export default function DashboardPage() {
                     onChange={(e) => setEditValues({...editValues, gender: e.target.value as Gender})}
                     className="bg-gray-700 text-white p-2 rounded"
                   >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                    <option value="male">{tOnboarding('gender.male')}</option>
+                    <option value="female">{tOnboarding('gender.female')}</option>
+                    <option value="other">{tOnboarding('gender.other')}</option>
                   </select>
                 ) : (
                   <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
                     {profileData
-                      ? tOnboarding(`gender.${profileData.gender}`)
-                      : (gender ? tOnboarding(`gender.${gender}`) : '')}
+                      ? (profileData.gender ? tOnboarding(`gender.${profileData.gender}`) : tOnboarding('gender.male'))
+                      : (gender ? tOnboarding(`gender.${gender}`) : tOnboarding('gender.male'))}
                   </span>
                 )}
               </div>

@@ -17,25 +17,39 @@ export default function HomePage() {
   // Extract current locale from pathname
   const currentLocale = pathname.split('/')[1];
 
-  // Check if user has completed onboarding and visited the dashboard
+  // Check if user has completed onboarding and visited dashboard
   useEffect(() => {
     if (session?.user) {
       setIsLoading(true);
       
-      // SIMPLIFIED APPROACH: Just use localStorage for both states
-      // Check if user has visited dashboard
-      const hasVisitedDashboardFromStorage = localStorage.getItem('fitpersona_dashboard_visited') === 'true';
+      // Only use API to check status - no localStorage
+      const checkStatus = async () => {
+        try {
+          // Fetch the authoritative status from the API
+          const response = await fetch('/api/user/onboarding-status');
+          if (response.ok) {
+            const data = await response.json();
+            console.log('Status from API:', data);
+            
+            // Update states with server data
+            setIsOnboardingComplete(data.completed);
+            setHasVisitedDashboard(data.visitedDashboard);
+          } else {
+            // If the API call fails, default to not completed
+            console.error('Failed to fetch onboarding status');
+            setIsOnboardingComplete(false);
+            setHasVisitedDashboard(false);
+          }
+        } catch (error) {
+          console.error('Error checking onboarding status:', error);
+          setIsOnboardingComplete(false);
+          setHasVisitedDashboard(false);
+        } finally {
+          setIsLoading(false);
+        }
+      };
       
-      // Check if user has a profile (which means onboarding is complete)
-      const hasProfile = localStorage.getItem('fitpersona_profile') !== null;
-      
-      console.log('Profile exists (localStorage):', hasProfile);
-      console.log('Dashboard visited (localStorage):', hasVisitedDashboardFromStorage);
-      
-      // Set states based on localStorage values
-      setIsOnboardingComplete(hasProfile);
-      setHasVisitedDashboard(hasVisitedDashboardFromStorage);
-      setIsLoading(false);
+      checkStatus();
     } else {
       setIsOnboardingComplete(false);
       setHasVisitedDashboard(false);

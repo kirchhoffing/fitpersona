@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@fitpersona/database/src/client';
 
-// POST: Reset the user's profile and onboarding status
+// POST: Reset user data
 export async function POST() {
   try {
     // Get the current user's session
@@ -16,26 +16,34 @@ export async function POST() {
       );
     }
 
-    const userId = session.user.id;
-
-    // Delete the user's profile data
-    await prisma.profile.deleteMany({
-      where: { userId }
+    // Delete the user's profile
+    await prisma.profile.delete({
+      where: { userId: session.user.id },
+    }).catch(e => {
+      // If profile doesn't exist, that's fine
+      console.log('No profile to delete');
     });
-
-    // Create a new blank profile with required fields and default values
+    
+    // Delete any workouts
+    await prisma.workout.deleteMany({
+      where: { userId: session.user.id },
+    });
+    
+    // Create a new profile with default values and hasVisitedDashboard set to false
     await prisma.profile.create({
       data: {
-        userId,
-        gender: 'male', // Default gender
+        userId: session.user.id,
+        gender: 'male',
         birthYear: new Date().getFullYear() - 30, // Default age of 30
-        height: 170, // Default height in cm
+        height: 175, // Default height in cm
         weight: 70, // Default weight in kg
-        goal: 'lose_weight', // Default goal
-        activityLevel: 'sedentary', // Default activity level
-        workoutLocation: 'home', // Default workout location
-        hasVisitedDashboard: false // Reset the dashboard visit status
+        goal: 'maintain_fitness',
+        activityLevel: 'sedentary',
+        workoutLocation: 'home',
+        hasVisitedDashboard: false
       }
+    }).catch(e => {
+      console.error('Error creating default profile:', e);
     });
 
     // Also clear any localStorage items that might be storing user data
