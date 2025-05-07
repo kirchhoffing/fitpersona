@@ -288,6 +288,7 @@ export default function DashboardPage() {
     goal: cdGoal,
     workoutLocation: wLocation,
     activityLevel: cdActivityLevel,
+    daysPerWeek: 3 // Default to 3 days per week if not specified by user
   };
   const selectedProgram = selectWorkoutProgram(workoutCriteria);
 
@@ -517,8 +518,13 @@ export default function DashboardPage() {
           activityLevel={cdActivityLevel}
           goal={cdGoal}
         />
-        {/* Dynamic Workout Program Section - now at bottom */}
-        <WorkoutProgramDisplay program={selectedProgram} locale={locale} />
+        
+        {/* Dynamic Workout Program Section - now at bottom with enhanced visibility */}
+        <div id="workout-program" className="mt-8 scroll-mt-16">
+          <h2 className="text-2xl text-white font-bold mb-4">Your Personalized Workout Program</h2>
+          <p className="text-gray-300 mb-6">Based on your profile, we've created a customized workout program to help you achieve your fitness goals.</p>
+          <WorkoutProgramDisplay program={selectedProgram} locale={locale} />
+        </div>
       </div>
       )}
     </div>

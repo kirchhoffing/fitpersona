@@ -67,8 +67,24 @@ export function Step10() {
       const locale = window.location.pathname.split('/')[1] || 'en'
       console.log('Current locale for redirect:', locale)
       
-      // Redirect to dashboard with locale
-      window.location.href = `/${locale}/dashboard`
+      // Show a brief message about workout program creation
+      const notification = document.createElement('div');
+      notification.textContent = 'Creating your personalized workout program...';
+      notification.style.position = 'fixed';
+      notification.style.bottom = '20px';
+      notification.style.right = '20px';
+      notification.style.backgroundColor = '#10B981';
+      notification.style.color = 'white';
+      notification.style.padding = '12px 20px';
+      notification.style.borderRadius = '4px';
+      notification.style.zIndex = '9999';
+      document.body.appendChild(notification);
+      
+      // Wait a moment to show the notification before redirecting
+      setTimeout(() => {
+        // Redirect to dashboard with locale and fragment to focus on workout program
+        window.location.href = `/${locale}/dashboard#workout-program`;
+      }, 1500);
     } catch (error) {
       console.error('Error saving onboarding data to API:', error)
       alert('There was an error saving your profile data. Please try again.')
@@ -78,6 +94,7 @@ export function Step10() {
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-white mb-6">{t('title')}</h2>
+      <p className="text-gray-300 mb-6">This is the final step! Based on your profile and workout frequency, we'll create a personalized workout program for you.</p>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-3">
