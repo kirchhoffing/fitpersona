@@ -61,7 +61,7 @@ model Profile {
   weight              Float
   goal                String
   activityLevel       String
-  equipment           String
+  workoutLocation     String
   dietaryPreferences  String?
   hasVisitedDashboard Boolean  @default(false)
   createdAt           DateTime @default(now())

@@ -94,14 +94,16 @@
         "title": "Aktivite Seviyeniz nedir?",
         "sedentary": "Sedanter",
         "sedentary_description": "Çoğunlukla oturarak çalışıyorum ve çok az egzersiz yapıyorum",
-        "lightly_active": "Hafif Aktif",
-        "lightly_active_description": "Haftada 1-3 gün hafif egzersiz veya günlük yürüyüş",
+        "light": "Hafif Aktif",
+        "light_description": "Haftada 1-3 gün hafif egzersiz veya günlük yürüyüş",
+        "moderate": "Orta Düzeyde Aktif",
+        "moderate_description": "Haftada 3-5 gün orta yoğunlukta egzersiz",
         "active": "Aktif",
-        "active_description": "Haftada 3-5 gün orta yoğunlukta egzersiz yapıyorum",
+        "active_description": "Haftada 4-5 gün düzenli egzersiz",
         "very_active": "Çok Aktif",
         "very_active_description": "Haftada 6-7 gün yoğun egzersiz veya fiziksel iş"
       },
-      "equipment": {
+      "workoutLocation": {
         "title": "Antrenman yerinizi seçin",
         "home": "Ev",
         "home_description": "Evde antrenman yapacağım",
@@ -182,7 +184,6 @@
     "goal": "Hedef",
     "activityLevel": "Aktivite Seviyesi",
     "workoutLocation": "Antrenman Yeri",
-    "availableEquipment": "Mevcut Ekipman",
     "dietaryPreferences": "Beslenme Tercihleri",
     "none": "Yok",
     "update": "Güncelle",
@@ -198,59 +199,6 @@
   "profile": {
     "create": {
       "title": "Profil Oluştur",
-      "gender": {
-        "label": "Cinsiyet",
-        "male": "Erkek",
-        "female": "Kadın"
-      },
-      "age": {
-        "label": "Yaş"
-      },
-      "weight": {
-        "label": "Kilo (kg)"
-      },
-      "height": {
-        "label": "Boy (cm)"
-      },
-      "goal": {
-        "label": "Hedef",
-        "lose_weight": "Kilo Vermek",
-        "gain_muscle": "Kas Kazanmak",
-        "maintain": "Korumak"
-      },
-      "activityLevel": {
-        "label": "Aktivite Seviyesi",
-        "title": "Aktivite Seviyeniz nedir?",
-        "sedentary": "Hareketsiz",
-        "light": "Az Hareketli",
-        "moderate": "Orta Düzeyde Hareketli",
-        "active": "Hareketli",
-        "very_active": "Çok Hareketli"
-      },
-      "workoutLocation": {
-        "label": "Antrenman Yeri",
-        "home": "Ev",
-        "gym": "Spor Salonu"
-      },
-      "equipment": {
-        "label": "Mevcut Ekipmanlar",
-        "dumbbells": "Dambıl",
-        "resistance_bands": "Direnç Bandı",
-        "yoga_mat": "Yoga Matı",
-        "pull_up_bar": "Barfiks Barı",
-        "kettlebell": "Kettlebell",
-        "jump_rope": "İp Atlama",
-        "none": "Hiçbiri"
-      },
-      "medicalConditions": {
-        "label": "Sağlık Durumları",
-        "hypertension": "Hipertansiyon",
-        "diabetes": "Diyabet",
-        "heart_disease": "Kalp Hastalığı",
-        "joint_problems": "Eklem Problemleri",
-        "back_pain": "Sırt Ağrısı",
-        "none": "Hiçbiri"
-      },
       "submit": "Profil Oluştur"
     }
   },

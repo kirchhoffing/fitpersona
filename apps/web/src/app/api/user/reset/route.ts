@@ -33,7 +33,7 @@ export async function POST() {
         weight: 70, // Default weight in kg
         goal: 'lose_weight', // Default goal
         activityLevel: 'sedentary', // Default activity level
-        equipment: 'body_weight', // Default equipment
+        workoutLocation: 'home', // Default workout location
         hasVisitedDashboard: false // Reset the dashboard visit status
       }
     });

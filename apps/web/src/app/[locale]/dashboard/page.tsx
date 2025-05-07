@@ -463,7 +463,7 @@ export default function DashboardPage() {
                   </select>
                 ) : (
                   <span className="cursor-pointer hover:text-blue-400" onClick={() => setIsEditing(true)}>
-                    {workoutLocation ? tOnboarding(`equipment.${workoutLocation}`) : t('none')}
+                    {workoutLocation ? tOnboarding(`workoutLocation.${workoutLocation}`) : t('none')}
                   </span>
                 )}
               </div>

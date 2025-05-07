@@ -4180,7 +4180,7 @@ export namespace Prisma {
     weight: number | null
     goal: string | null
     activityLevel: string | null
-    equipment: string | null
+    workoutLocation: string | null
     dietaryPreferences: string | null
     hasVisitedDashboard: boolean | null
     createdAt: Date | null
@@ -4196,7 +4196,7 @@ export namespace Prisma {
     weight: number | null
     goal: string | null
     activityLevel: string | null
-    equipment: string | null
+    workoutLocation: string | null
     dietaryPreferences: string | null
     hasVisitedDashboard: boolean | null
     createdAt: Date | null
@@ -4212,7 +4212,7 @@ export namespace Prisma {
     weight: number
     goal: number
     activityLevel: number
-    equipment: number
+    workoutLocation: number
     dietaryPreferences: number
     hasVisitedDashboard: number
     createdAt: number
@@ -4242,7 +4242,7 @@ export namespace Prisma {
     weight?: true
     goal?: true
     activityLevel?: true
-    equipment?: true
+    workoutLocation?: true
     dietaryPreferences?: true
     hasVisitedDashboard?: true
     createdAt?: true
@@ -4258,7 +4258,7 @@ export namespace Prisma {
     weight?: true
     goal?: true
     activityLevel?: true
-    equipment?: true
+    workoutLocation?: true
     dietaryPreferences?: true
     hasVisitedDashboard?: true
     createdAt?: true
@@ -4274,7 +4274,7 @@ export namespace Prisma {
     weight?: true
     goal?: true
     activityLevel?: true
-    equipment?: true
+    workoutLocation?: true
     dietaryPreferences?: true
     hasVisitedDashboard?: true
     createdAt?: true
@@ -4377,7 +4377,7 @@ export namespace Prisma {
     weight: number
     goal: string
     activityLevel: string
-    equipment: string
+    workoutLocation: string
     dietaryPreferences: string | null
     hasVisitedDashboard: boolean
     createdAt: Date
@@ -4412,7 +4412,7 @@ export namespace Prisma {
     weight?: boolean
     goal?: boolean
     activityLevel?: boolean
-    equipment?: boolean
+    workoutLocation?: boolean
     dietaryPreferences?: boolean
     hasVisitedDashboard?: boolean
     createdAt?: boolean
@@ -4429,7 +4429,7 @@ export namespace Prisma {
     weight?: boolean
     goal?: boolean
     activityLevel?: boolean
-    equipment?: boolean
+    workoutLocation?: boolean
     dietaryPreferences?: boolean
     hasVisitedDashboard?: boolean
     createdAt?: boolean
@@ -4446,7 +4446,7 @@ export namespace Prisma {
     weight?: boolean
     goal?: boolean
     activityLevel?: boolean
-    equipment?: boolean
+    workoutLocation?: boolean
     dietaryPreferences?: boolean
     hasVisitedDashboard?: boolean
     createdAt?: boolean
@@ -4474,7 +4474,7 @@ export namespace Prisma {
       weight: number
       goal: string
       activityLevel: string
-      equipment: string
+      workoutLocation: string
       dietaryPreferences: string | null
       hasVisitedDashboard: boolean
       createdAt: Date
@@ -4881,7 +4881,7 @@ export namespace Prisma {
     readonly weight: FieldRef<"Profile", 'Float'>
     readonly goal: FieldRef<"Profile", 'String'>
     readonly activityLevel: FieldRef<"Profile", 'String'>
-    readonly equipment: FieldRef<"Profile", 'String'>
+    readonly workoutLocation: FieldRef<"Profile", 'String'>
     readonly dietaryPreferences: FieldRef<"Profile", 'String'>
     readonly hasVisitedDashboard: FieldRef<"Profile", 'Boolean'>
     readonly createdAt: FieldRef<"Profile", 'DateTime'>
@@ -5281,7 +5281,7 @@ export namespace Prisma {
     weight: 'weight',
     goal: 'goal',
     activityLevel: 'activityLevel',
-    equipment: 'equipment',
+    workoutLocation: 'workoutLocation',
     dietaryPreferences: 'dietaryPreferences',
     hasVisitedDashboard: 'hasVisitedDashboard',
     createdAt: 'createdAt',
@@ -5606,7 +5606,7 @@ export namespace Prisma {
     weight?: FloatFilter<"Profile"> | number
     goal?: StringFilter<"Profile"> | string
     activityLevel?: StringFilter<"Profile"> | string
-    equipment?: StringFilter<"Profile"> | string
+    workoutLocation?: StringFilter<"Profile"> | string
     dietaryPreferences?: StringNullableFilter<"Profile"> | string | null
     hasVisitedDashboard?: BoolFilter<"Profile"> | boolean
     createdAt?: DateTimeFilter<"Profile"> | Date | string
@@ -5623,7 +5623,7 @@ export namespace Prisma {
     weight?: SortOrder
     goal?: SortOrder
     activityLevel?: SortOrder
-    equipment?: SortOrder
+    workoutLocation?: SortOrder
     dietaryPreferences?: SortOrderInput | SortOrder
     hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
@@ -5643,7 +5643,7 @@ export namespace Prisma {
     weight?: FloatFilter<"Profile"> | number
     goal?: StringFilter<"Profile"> | string
     activityLevel?: StringFilter<"Profile"> | string
-    equipment?: StringFilter<"Profile"> | string
+    workoutLocation?: StringFilter<"Profile"> | string
     dietaryPreferences?: StringNullableFilter<"Profile"> | string | null
     hasVisitedDashboard?: BoolFilter<"Profile"> | boolean
     createdAt?: DateTimeFilter<"Profile"> | Date | string
@@ -5660,7 +5660,7 @@ export namespace Prisma {
     weight?: SortOrder
     goal?: SortOrder
     activityLevel?: SortOrder
-    equipment?: SortOrder
+    workoutLocation?: SortOrder
     dietaryPreferences?: SortOrderInput | SortOrder
     hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
@@ -5684,7 +5684,7 @@ export namespace Prisma {
     weight?: FloatWithAggregatesFilter<"Profile"> | number
     goal?: StringWithAggregatesFilter<"Profile"> | string
     activityLevel?: StringWithAggregatesFilter<"Profile"> | string
-    equipment?: StringWithAggregatesFilter<"Profile"> | string
+    workoutLocation?: StringWithAggregatesFilter<"Profile"> | string
     dietaryPreferences?: StringNullableWithAggregatesFilter<"Profile"> | string | null
     hasVisitedDashboard?: BoolWithAggregatesFilter<"Profile"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Profile"> | Date | string
@@ -5926,7 +5926,7 @@ export namespace Prisma {
     weight: number
     goal: string
     activityLevel: string
-    equipment: string
+    workoutLocation: string
     dietaryPreferences?: string | null
     hasVisitedDashboard?: boolean
     createdAt?: Date | string
@@ -5943,7 +5943,7 @@ export namespace Prisma {
     weight: number
     goal: string
     activityLevel: string
-    equipment: string
+    workoutLocation: string
     dietaryPreferences?: string | null
     hasVisitedDashboard?: boolean
     createdAt?: Date | string
@@ -5958,7 +5958,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     goal?: StringFieldUpdateOperationsInput | string
     activityLevel?: StringFieldUpdateOperationsInput | string
-    equipment?: StringFieldUpdateOperationsInput | string
+    workoutLocation?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
     hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5975,7 +5975,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     goal?: StringFieldUpdateOperationsInput | string
     activityLevel?: StringFieldUpdateOperationsInput | string
-    equipment?: StringFieldUpdateOperationsInput | string
+    workoutLocation?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
     hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5991,7 +5991,7 @@ export namespace Prisma {
     weight: number
     goal: string
     activityLevel: string
-    equipment: string
+    workoutLocation: string
     dietaryPreferences?: string | null
     hasVisitedDashboard?: boolean
     createdAt?: Date | string
@@ -6006,7 +6006,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     goal?: StringFieldUpdateOperationsInput | string
     activityLevel?: StringFieldUpdateOperationsInput | string
-    equipment?: StringFieldUpdateOperationsInput | string
+    workoutLocation?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
     hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6022,7 +6022,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     goal?: StringFieldUpdateOperationsInput | string
     activityLevel?: StringFieldUpdateOperationsInput | string
-    equipment?: StringFieldUpdateOperationsInput | string
+    workoutLocation?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
     hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6344,7 +6344,7 @@ export namespace Prisma {
     weight?: SortOrder
     goal?: SortOrder
     activityLevel?: SortOrder
-    equipment?: SortOrder
+    workoutLocation?: SortOrder
     dietaryPreferences?: SortOrder
     hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
@@ -6366,7 +6366,7 @@ export namespace Prisma {
     weight?: SortOrder
     goal?: SortOrder
     activityLevel?: SortOrder
-    equipment?: SortOrder
+    workoutLocation?: SortOrder
     dietaryPreferences?: SortOrder
     hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
@@ -6382,7 +6382,7 @@ export namespace Prisma {
     weight?: SortOrder
     goal?: SortOrder
     activityLevel?: SortOrder
-    equipment?: SortOrder
+    workoutLocation?: SortOrder
     dietaryPreferences?: SortOrder
     hasVisitedDashboard?: SortOrder
     createdAt?: SortOrder
@@ -6845,7 +6845,7 @@ export namespace Prisma {
     weight: number
     goal: string
     activityLevel: string
-    equipment: string
+    workoutLocation: string
     dietaryPreferences?: string | null
     hasVisitedDashboard?: boolean
     createdAt?: Date | string
@@ -6860,7 +6860,7 @@ export namespace Prisma {
     weight: number
     goal: string
     activityLevel: string
-    equipment: string
+    workoutLocation: string
     dietaryPreferences?: string | null
     hasVisitedDashboard?: boolean
     createdAt?: Date | string
@@ -6919,7 +6919,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     goal?: StringFieldUpdateOperationsInput | string
     activityLevel?: StringFieldUpdateOperationsInput | string
-    equipment?: StringFieldUpdateOperationsInput | string
+    workoutLocation?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
     hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6934,7 +6934,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     goal?: StringFieldUpdateOperationsInput | string
     activityLevel?: StringFieldUpdateOperationsInput | string
-    equipment?: StringFieldUpdateOperationsInput | string
+    workoutLocation?: StringFieldUpdateOperationsInput | string
     dietaryPreferences?: NullableStringFieldUpdateOperationsInput | string | null
     hasVisitedDashboard?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

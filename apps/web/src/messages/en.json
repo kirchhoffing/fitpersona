@@ -94,19 +94,22 @@
         "title": "What is your activity level?",
         "sedentary": "Sedentary",
         "sedentary_description": "I mostly work sitting down and do very little exercise",
-        "lightly_active": "Lightly Active",
-        "lightly_active_description": "Light exercise or daily walks 1-3 days per week",
+        "light": "Lightly Active",
+        "light_description": "Light exercise or daily walks 1-3 days per week",
+        "moderate": "Moderately Active",
+        "moderate_description": "Moderate intensity exercise 3-5 days per week",
         "active": "Active",
-        "active_description": "Moderate intensity exercise 3-5 days per week",
+        "active_description": "Regular exercise 4-5 days per week",
         "very_active": "Very Active",
         "very_active_description": "Intense exercise or physical work 6-7 days per week"
       },
-      "equipment": {
-        "title": "Choose your workout location",
+      "workoutLocation": {
+        "label": "Workout Location",
         "home": "Home",
-        "home_description": "I will work out at home",
         "gym": "Gym",
-        "gym_description": "I will work out at a gym"
+        "home_description": "Train at home with minimal equipment",
+        "gym_description": "Train at a fully equipped gym",
+        "title": "Where will you be working out?"
       },
       "fitnessLevel": {
         "title": "What is your level?",
@@ -182,7 +185,6 @@
     "goal": "Goal",
     "activityLevel": "Activity Level",
     "workoutLocation": "Workout Location",
-    "availableEquipment": "Available Equipment",
     "dietaryPreferences": "Dietary Preferences",
     "none": "None",
     "update": "Update",
@@ -198,59 +200,6 @@
   "profile": {
     "create": {
       "title": "Create Profile",
-      "gender": {
-        "label": "Gender",
-        "male": "Male",
-        "female": "Female"
-      },
-      "age": {
-        "label": "Age"
-      },
-      "weight": {
-        "label": "Weight (kg)"
-      },
-      "height": {
-        "label": "Height (cm)"
-      },
-      "goal": {
-        "label": "Goal",
-        "lose_weight": "Lose Weight",
-        "gain_muscle": "Gain Muscle",
-        "maintain": "Maintain"
-      },
-      "activityLevel": {
-        "label": "Activity Level",
-        "title": "What is your activity level?",
-        "sedentary": "Sedentary",
-        "light": "Lightly Active",
-        "moderate": "Moderately Active",
-        "active": "Active",
-        "very_active": "Very Active"
-      },
-      "workoutLocation": {
-        "label": "Workout Location",
-        "home": "Home",
-        "gym": "Gym"
-      },
-      "equipment": {
-        "label": "Available Equipment",
-        "dumbbells": "Dumbbells",
-        "resistance_bands": "Resistance Bands",
-        "yoga_mat": "Yoga Mat",
-        "pull_up_bar": "Pull‑up Bar",
-        "kettlebell": "Kettlebell",
-        "jump_rope": "Jump Rope",
-        "none": "None"
-      },
-      "medicalConditions": {
-        "label": "Medical Conditions",
-        "hypertension": "Hypertension",
-        "diabetes": "Diabetes",
-        "heart_disease": "Heart Disease",
-        "joint_problems": "Joint Problems",
-        "back_pain": "Back Pain",
-        "none": "None"
-      },
       "submit": "Create Profile"
     }
   },

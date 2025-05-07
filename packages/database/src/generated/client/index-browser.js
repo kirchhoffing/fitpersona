@@ -162,7 +162,7 @@ exports.Prisma.ProfileScalarFieldEnum = {
   weight: 'weight',
   goal: 'goal',
   activityLevel: 'activityLevel',
-  equipment: 'equipment',
+  workoutLocation: 'workoutLocation',
   dietaryPreferences: 'dietaryPreferences',
   hasVisitedDashboard: 'hasVisitedDashboard',
   createdAt: 'createdAt',

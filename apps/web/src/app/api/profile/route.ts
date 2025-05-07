@@ -12,7 +12,7 @@ type ProfileData = {
   weight: number
   fitnessGoals: string[]
   activityLevel: string
-  availableEquipment: string[]
+  workoutLocation: string
   dietaryPreferences: string[]
 }
 
@@ -76,9 +76,7 @@ export async function POST(req: Request) {
       weight: body.weight ? Number(body.weight) : 70,
       goal: body.fitnessGoals && body.fitnessGoals.length > 0 ? body.fitnessGoals[0] : 'maintain_fitness',
       activityLevel: body.activityLevel || 'moderate',
-      equipment: body.availableEquipment && body.availableEquipment.length > 0 
-        ? body.availableEquipment.join(',') 
-        : 'home',
+      workoutLocation: body.workoutLocation || 'home',
       dietaryPreferences: body.dietaryPreferences && body.dietaryPreferences.length > 0 
         ? body.dietaryPreferences.join(',') 
         : '',
