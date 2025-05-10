@@ -6,7 +6,7 @@ This document summarizes the **current scope, tech stack, features, and folder s
 
 ## 🔧 Project Summary
 
-FitPersona is a full-stack TypeScript application designed to create **personalized fitness and nutrition plans**. It collects user preferences, physical metrics, and goals to generate individualized recommendations.
+FitPersona is a full-stack TypeScript application designed to create **personalized fitness and nutrition plans**. It collects user preferences, physical metrics, and goals to generate individualized recommendations. The application specializes in adapting workout programs to accommodate user injuries and limitations, ensuring safe and effective exercise routines.
 
 Monorepo architecture is used for better modularization, scalability, and team collaboration.
 
@@ -110,6 +110,21 @@ model User {
 * Add new programs via `workoutProgramMap.ts` and `programRules[]`, with fallback via `any` wildcards
 * No hardcoded rules for multi-day splits—handled via clean, data-driven logic
 
+### 🩹 Injury Adaptation System
+
+* **Data Collection**: During onboarding, users are asked about health conditions and injuries through a dedicated step
+* **Storage**: Injury data is stored in the Profile model under the `preferences` JSON field as an array of condition identifiers
+* **Adaptation Logic**:
+  * Each exercise in the database includes a `riskyFor` array listing conditions that make it potentially unsafe
+  * When generating workout programs, the system cross-references user conditions with exercise risk factors
+  * Risky exercises are automatically replaced with safe alternatives targeting the same muscle groups
+  * Alternatives are specified in each exercise's `alternatives` array and prioritized by muscle group match
+* **Fallback Behavior**:
+  * If no direct alternative exists for a risky exercise, the system searches for any safe exercise targeting the same primary muscle group
+  * For conflicting conditions (e.g., contradictory limitations), the system prioritizes safety by implementing all restrictions
+  * If no suitable alternative can be found, the exercise is omitted with a notification to the user
+* **Implementation**: The exercise replacement algorithm is implemented in `apps/web/src/lib/workouts/modifiers/health-aware-replacer.ts`
+
 ---
 
 ### 🏋️‍♂️ Exercises Page
@@ -191,6 +206,35 @@ fitpersona/
 
 ---
 
+## ⚠️ Known Limitations & Edge Cases
+
+* **Exercise Database Completeness**: The alternatives database may not cover all possible injury combinations
+* **Personalization Depth**: The current algorithm focuses on binary exercise exclusion rather than modification intensity
+* **Conflicting Conditions**: For users with multiple conflicting conditions, the most restrictive option is always chosen
+* **Session State**: After login, there's a brief period when session state is initializing which can cause authentication checks to incorrectly redirect users
+* **Type Definitions**: Exercise type definitions exist in both `packages/exercises/src/types.ts` and `apps/web/src/types/exercise.ts` and must be kept in sync manually
+* **Profile Model**: The `equipment` and `dietary` fields in the Profile model are defined as String arrays but expected as Strings in some parts of the codebase
+
+## 📈 Future Work & Roadmap
+
+### Version 1.x (Current)
+* Basic injury-aware exercise replacement
+* Core workout program templates
+* Fundamental nutrition recommendations
+
+### Version 2.0 (Planned)
+* Enhanced injury adaptation with exercise modification (not just replacement)
+* Machine learning-based program optimization
+* Integration with wearable fitness trackers
+* Expanded exercise database with video demonstrations
+* Progressive overload tracking and automatic intensity adjustment
+
+### Version 3.0 (Roadmap)
+* Social features and community challenges
+* Professional trainer marketplace
+* Real-time workout guidance with form analysis
+* Nutrition tracking with barcode scanning
+
 ## 🤖 AI Assistant Usage & Best Practices
 
 ### Context Awareness
@@ -198,6 +242,7 @@ fitpersona/
 * Read OVERVIEW\.md at session start
 * Understand monorepo layout and package boundaries
 * Respect i18n, auth, and type safety principles
+* Be aware of the injury adaptation system when modifying workout-related code
 
 ### Code Practices
 

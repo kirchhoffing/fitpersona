@@ -30,7 +30,7 @@ export const onboardingSchema = z.object({
   }),
 
   // Step 6: Activity Level
-  activityLevel: z.enum(['sedentary', 'lightly_active', 'active', 'very_active'] as const, {
+  activityLevel: z.enum(['sedentary', 'light', 'active', 'very_active'] as const, {
     required_error: 'Lütfen aktivite düzeyinizi seçin',
   }),
 
@@ -74,7 +74,7 @@ export const stepSchemas = {
     goal: z.enum(['lose_weight', 'gain_muscle', 'maintain_fitness']),
   }),
   6: z.object({
-    activityLevel: z.enum(['sedentary', 'lightly_active', 'active', 'very_active']),
+    activityLevel: z.enum(['sedentary', 'light', 'active', 'very_active']),
   }),
   7: z.object({
     workoutLocation: z.enum(['home', 'gym']),

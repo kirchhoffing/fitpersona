@@ -1,10 +1,10 @@
 import { create } from 'zustand'
-import { type StateCreator } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 // Form state types
 export type Gender = 'male' | 'female' | 'other'
 export type Goal = 'lose_weight' | 'gain_muscle' | 'maintain_fitness'
-export type ActivityLevel = 'sedentary' | 'lightly_active' | 'active' | 'very_active'
+export type ActivityLevel = 'sedentary' | 'light' | 'active' | 'very_active'
 export type WorkoutLocation = 'home' | 'gym'
 export type FitnessLevel = 'beginner' | 'intermediate' | 'advanced'
 
@@ -65,9 +65,10 @@ const initialState = {
   totalSteps: 10,
 }
 
-type OnboardingStore = StateCreator<OnboardingFormState>
-
-export const useOnboardingStore = create<OnboardingFormState>((set) => ({
+// Create a store with persistence
+export const useOnboardingStore = create(
+  persist<OnboardingFormState>(
+    (set) => ({
   ...initialState,
   setGender: (gender: Gender) => set((state) => ({ ...state, gender })),
   setAge: (age: number | null) => set((state) => ({ ...state, age })),
@@ -83,4 +84,19 @@ export const useOnboardingStore = create<OnboardingFormState>((set) => ({
   nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, state.totalSteps) })),
   prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
   resetForm: () => set(initialState),
-}))
+}),
+{
+  name: 'onboarding-storage',
+  storage: createJSONStorage(() => {
+    // Use a safe storage that works with SSR
+    if (typeof window !== 'undefined') {
+      return localStorage;
+    }
+    return {
+      getItem: () => null,
+      setItem: () => {},
+      removeItem: () => {}
+    };
+  })
+})
+);

@@ -17,7 +17,7 @@ export function CalorieDisplay({ gender, age, height, weight, activityLevel, goa
   // Map UI values to calculation values
   const mappedGoal = goal === "gain_muscle" ? "gain" : goal === "lose_weight" ? "lose" : "maintain";
   let mappedActivity = "sedentary";
-  if (activityLevel === "lightly_active") mappedActivity = "light";
+  if (activityLevel === "light") mappedActivity = "light";
   else if (activityLevel === "active") mappedActivity = "moderate";
   else if (activityLevel === "very_active") mappedActivity = "active";
 

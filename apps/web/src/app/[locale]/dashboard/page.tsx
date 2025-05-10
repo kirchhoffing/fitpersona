@@ -56,7 +56,7 @@ export default function DashboardPage() {
     height: number;
     weight: number;
     goal: 'lose_weight' | 'gain_muscle' | 'maintain_fitness';
-    activityLevel: 'sedentary' | 'lightly_active' | 'active' | 'very_active';
+    activityLevel: 'sedentary' | 'light' | 'active' | 'very_active';
     equipment?: string;
     dietaryPreferences?: string | string[];
     userId?: string;
@@ -420,7 +420,7 @@ export default function DashboardPage() {
                     className="bg-gray-700 text-white p-2 rounded"
                   >
                     <option value="sedentary">Sedentary</option>
-                    <option value="lightly_active">Lightly Active</option>
+                    <option value="light">Lightly Active</option>
                     <option value="active">Active</option>
                     <option value="very_active">Very Active</option>
                   </select>

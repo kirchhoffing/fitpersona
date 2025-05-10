@@ -10,19 +10,14 @@ type FormData = { dietaryPreferences: string[] }
 export function Step9() {
   const { dietaryPreferences, setDietaryPreferences, nextStep } = useOnboardingStore()
   const t = useTranslations('onboarding.steps.health')
+  // Only showing physical conditions, removed allergies and internal illnesses
 
   const healthConditions = [
     { id: 'back_pain',       label: t('back_pain') },
     { id: 'neck_pain',       label: t('neck_pain') },
     { id: 'knee_problem',    label: t('knee_problem') },
     { id: 'shoulder_pain',   label: t('shoulder_pain') },
-    { id: 'diabetes',        label: t('diabetes') },
-    { id: 'heart_condition', label: t('heart_condition') },
-    { id: 'high_blood_pressure', label: t('high_blood_pressure') },
-    { id: 'asthma',          label: t('asthma') },
-    { id: 'gluten_allergy',  label: t('gluten_allergy') },
-    { id: 'lactose_intolerance', label: t('lactose_intolerance') },
-    { id: 'nut_allergy',     label: t('nut_allergy') },
+    { id: 'wrist_pain',      label: t('wrist_pain') },
     { id: 'pregnancy',       label: t('pregnancy') },
   ]
 

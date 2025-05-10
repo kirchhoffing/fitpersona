@@ -7,7 +7,7 @@ import { StepNavigator } from '../StepNavigator'
 import { useTranslations } from 'next-intl'
 
 type FormData = {
-  activityLevel: 'sedentary' | 'lightly_active' | 'active' | 'very_active'
+  activityLevel: 'sedentary' | 'light' | 'active' | 'very_active'
 }
 
 export function Step6() {
@@ -42,10 +42,10 @@ export function Step6() {
       description: t('sedentary_description'),
     },
     {
-      value: 'lightly_active' as const,
+      value: 'light' as const,
       emoji: '🚶‍♂️',
-      title: t('lightly_active'),
-      description: t('lightly_active_description'),
+      title: t('light'),
+      description: t('light_description'),
     },
     {
       value: 'active' as const,
